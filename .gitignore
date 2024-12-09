@@ -1,0 +1,30 @@
+# Project
+minilibx*
+minilibx
+
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Libraries
+*.lib
+*.a
+
+# Executables
+*.exe
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Custom
+.vscode
+.DS_Store
+tester.sh
