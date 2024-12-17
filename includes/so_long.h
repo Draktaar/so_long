@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:11:06 by achu              #+#    #+#             */
-/*   Updated: 2024/12/15 18:19:20 by achu             ###   ########.fr       */
+/*   Updated: 2024/12/17 16:22:14 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,11 @@
 # include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
+#include "../lib/printf/ft_printf.h"
 
 enum {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
-	ON_MOUSEDOWN = 4,
-	ON_MOUSEUP = 5,
-	ON_MOUSEMOVE = 6,
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17
 };
@@ -37,13 +34,17 @@ enum e_keybind {
 };
 
 typedef enum s_type{
-	EMPTY = 0,
-	WALL = 1,
+	EMPTY = '0',
+	WALL = '1',
 	COLLECTIBLE = 'C',
 	EXIT = 'E',
 	PLAYER = 'P',
-	ENEMY = 'M',
 }	t_type;
+
+typedef enum s_bool{
+	FALSE = 0,
+	TRUE = 1,
+}	t_bool;
 
 typedef struct s_vector2 {
 	int	x;
@@ -67,10 +68,25 @@ typedef struct s_sprite {
 	int		endian;
 }	t_sprite;
 
+//*** Gameobjects ***
 typedef struct s_player {
 	t_sprite	sprite;
 	t_vector2	pos;
 }	t_player;
+
+typedef struct s_wall {
+	t_sprite	sprite;
+}	t_wall;
+
+typedef struct s_coin {
+	t_sprite	sprite;
+	t_bool		is_collected;
+}	t_coin;
+
+typedef struct s_exit {
+	t_sprite	sprite;
+	t_bool		is_open;
+}	t_exit;
 
 typedef struct s_tile {
 	t_sprite	sprite;
@@ -80,14 +96,21 @@ typedef struct s_tile {
 
 typedef struct t_manager {
 	t_display	display;
-	t_player	player;
 	char		**map;
+
+	t_player	player;
+	t_wall		wall;
+	t_coin		coin;
+	t_exit		exit;
+
 	int			step;
-	int			collectible;
+	int			collectibles;
 }	t_manager;
 
 char	**init_map(char *file);
 int		input(int key, t_manager *game);
+void	move(t_manager *game, int x, int y);
 int		close_window(t_manager *game);
+void	parse(t_manager *game);
 
 #endif

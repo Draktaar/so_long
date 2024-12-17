@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:47:42 by achu              #+#    #+#             */
-/*   Updated: 2024/12/15 18:38:56 by achu             ###   ########.fr       */
+/*   Updated: 2024/12/17 16:05:48 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,21 @@ int	close_window(t_manager *game)
 
 int	input(int key, t_manager *game)
 {
-	if (key == A)
-		game->player.pos.x -= 10;
+	t_vector2	pos;
+	
+	pos = game->player.pos;
+	if (key == W)
+		move(game, pos.x, pos.y - 1);
+		//game->player.pos.y--;
+	else if (key == A)
+		move(game, pos.x - 1, pos.y);
+		//game->player.pos.x--;
 	else if (key == S)
-		game->player.pos.y += 10;
+		move(game, pos.x, pos.y + 1);
+		//game->player.pos.y++;
 	else if (key == D)
-		game->player.pos.x += 10;
-	else if (key == W)
-		game->player.pos.y -= 10;
+		move(game, pos.x + 1, pos.y);
+		//game->player.pos.x++;
 	else if (key == ESC)	
         mlx_destroy_window(game->display.mlx, game->display.win);
 	return (0);
