@@ -6,7 +6,7 @@
 #    By: achu <achu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/09 11:01:59 by achu              #+#    #+#              #
-#    Updated: 2024/12/17 15:53:59 by achu             ###   ########.fr        #
+#    Updated: 2024/12/17 17:02:24 by achu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ HEADERS = $(LIBFT)/libft.h $(PRINTF)/ft_printf.h $(INCLUDE)/so_long.h  $(INCLUDE
 SRC =	main.c \
 		map_parser.c \
 		input_handler.c \
-		movement.c \
+		player_movement.c \
 		gizmo.c \
 		sprite.c \
 

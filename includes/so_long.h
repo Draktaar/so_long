@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:11:06 by achu              #+#    #+#             */
-/*   Updated: 2024/12/17 16:22:14 by achu             ###   ########.fr       */
+/*   Updated: 2024/12/17 17:13:21 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ typedef struct t_manager {
 
 char	**init_map(char *file);
 int		input(int key, t_manager *game);
-void	move(t_manager *game, int x, int y);
+void	move_player(t_manager *game, t_vector2 next);
 int		close_window(t_manager *game);
 void	parse(t_manager *game);
 
