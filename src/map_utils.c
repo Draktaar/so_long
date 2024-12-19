@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gizmo.c                                            :+:      :+:    :+:   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 12:57:53 by achu              #+#    #+#             */
-/*   Updated: 2024/12/18 14:40:00 by achu             ###   ########.fr       */
+/*   Created: 2024/12/18 19:48:01 by achu              #+#    #+#             */
+/*   Updated: 2024/12/18 21:29:21 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/sprite.h"
 #include "../includes/so_long.h"
 
-void	draw_pixel(t_sprite *data, int x, int y, int color)
+size_t	ft_strdlen(char **strd)
 {
-	char	*pxl;
+	size_t	i;
 
-	pxl = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)pxl = color;
+	i = 0;
+	while (strd[i])
+		i++;
+	return (i);
 }
 
-void	gizmo_rect(t_rect rect, t_sprite *data)
+int is_valid_char(char c)
 {
-	int	x;
-	int	y;
+	if (c == '1' || c == '0' || c == 'C'  || c == 'E' || c == 'P')
+		return (1);
+	return (0);
+}
 
-	y = 0;
-	while (y < rect.size_h)
-	{
-		x = 0;
-		while (x < rect.size_w)
-		{
-			draw_pixel(data, x + rect.x, y + rect.y, rect.color);
-			x++;
-		}
-		y++;
-	}
+int	is_unique_char()
+{
+	
 }

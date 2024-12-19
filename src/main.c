@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:29:48 by achu              #+#    #+#             */
-/*   Updated: 2024/12/17 17:14:47 by achu             ###   ########.fr       */
+/*   Updated: 2024/12/18 19:35:00 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,24 +78,24 @@ int main(int argc, char const *argv[])
 	parse(&game);
 	
 	game.map = init_map("./assets/map/map.txt");
-	int	y = 0;
-	while (game.map[y])
-	{
-		int x = 0;
-		while (game.map[y][x])
-		{
-			if (game.map[y][x] == WALL)
-				mlx_put_image_to_window(game.display.mlx, game.display.win, game.wall.sprite.img, x * 64, y * 64);
-			else if (game.map[y][x] == PLAYER)
-				(mlx_put_image_to_window(game.display.mlx, game.display.win, game.player.sprite.img, x * 64, y * 64), \
-				game.player.pos.x = x, game.player.pos.y = y);
-			else if (game.map[y][x] == COLLECTIBLE)
-				mlx_put_image_to_window(game.display.mlx, game.display.win, game.coin.sprite.img, x * 64, y * 64);
-			x++;
-		}
-		y++;
-	}
-	
+	// int	y = 0;
+	// while (game.map[y])
+	// {
+	// 	int x = 0;
+	// 	while (game.map[y][x])
+	// 	{
+	// 		if (game.map[y][x] == WALL)
+	// 			mlx_put_image_to_window(game.display.mlx, game.display.win, game.wall.sprite.img, x * 64, y * 64);
+	// 		else if (game.map[y][x] == PLAYER)
+	// 			(mlx_put_image_to_window(game.display.mlx, game.display.win, game.player.sprite.img, x * 64, y * 64), \
+	// 			game.player.pos.x = x, game.player.pos.y = y);
+	// 		else if (game.map[y][x] == COLLECTIBLE)
+	// 			mlx_put_image_to_window(game.display.mlx, game.display.win, game.coin.sprite.img, x * 64, y * 64);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
+
 	//float time = 0;
 	//float duration = 1000;
 	//while (time <= duration)
@@ -105,10 +105,21 @@ int main(int argc, char const *argv[])
 	//	ft_printf("%i\n", time/duration);
 	//	time += 0.01;
 	//}
+
 	mlx_hook(game.display.win, ON_DESTROY, 1L<<0, close_window, &game);
 	mlx_key_hook(game.display.win, input, &game);
 	mlx_loop_hook(game.display.mlx, update, &game);
 	mlx_loop(game.display.mlx);
 	return 0;
 }
+
+int main(int argc, char const *argv[])
+{
+	t_manager	game;
+
+	if (argc == 2 || !argv[1])
+		
+	return 0;
+}
+
 

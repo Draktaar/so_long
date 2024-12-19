@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gizmo.c                                            :+:      :+:    :+:   */
+/*   map_checker.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 12:57:53 by achu              #+#    #+#             */
-/*   Updated: 2024/12/18 14:40:00 by achu             ###   ########.fr       */
+/*   Created: 2024/12/18 19:47:43 by achu              #+#    #+#             */
+/*   Updated: 2024/12/19 02:59:22 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/sprite.h"
+#include "libft.h"
 #include "../includes/so_long.h"
 
-void	draw_pixel(t_sprite *data, int x, int y, int color)
+int is_valid_border(char **map)
 {
-	char	*pxl;
+    int x;
+    int y;
+    int xxlen;
+    int yylen;
 
-	pxl = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)pxl = color;
-}
+    y = 0;
+    xxlen = ft_strlen(map[0]) - 1;
+    yylen = ft_strdlen(map);
+    while (y < yylen)
+    {
+        x = 0;
+        while (x < xxlen)
+        {
+            if (map[0][y])
+                
+            x++;
+        }
+        y++;
+    }
 
-void	gizmo_rect(t_rect rect, t_sprite *data)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < rect.size_h)
-	{
-		x = 0;
-		while (x < rect.size_w)
-		{
-			draw_pixel(data, x + rect.x, y + rect.y, rect.color);
-			x++;
-		}
-		y++;
-	}
 }

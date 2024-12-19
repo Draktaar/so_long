@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:11:06 by achu              #+#    #+#             */
-/*   Updated: 2024/12/17 17:13:21 by achu             ###   ########.fr       */
+/*   Updated: 2024/12/18 21:23:17 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ typedef enum s_type{
 	EXIT = 'E',
 	PLAYER = 'P',
 }	t_type;
-
-typedef enum s_bool{
-	FALSE = 0,
-	TRUE = 1,
-}	t_bool;
 
 typedef struct s_vector2 {
 	int	x;
@@ -104,7 +99,8 @@ typedef struct t_manager {
 	t_exit		exit;
 
 	int			step;
-	int			collectibles;
+	int			score;
+	int			collect;
 }	t_manager;
 
 char	**init_map(char *file);

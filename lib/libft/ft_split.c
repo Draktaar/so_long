@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:36:00 by achu              #+#    #+#             */
-/*   Updated: 2024/12/12 15:17:23 by achu             ###   ########.fr       */
+/*   Updated: 2024/12/18 19:23:53 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static char	*ft_stralloc(const char *src, char set)
 	return (str);
 }
 
-static void	clear(char **split)
+static void	clear_map(char **split)
 {
 	int	i;
 
@@ -88,7 +88,7 @@ char	**ft_split(const char *str, char set)
 		{
 			split[i] = ft_stralloc(str, set);
 			if (!split[i])
-				return (clear(split), NULL);
+				return (clear_map(split), NULL);
 			i++;
 		}
 		while (*str && !ft_ischarset(*str, set))

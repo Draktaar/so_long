@@ -1,22 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   player_movement.c                                  :+:      :+:    :+:   */
+/*   game_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 12:07:47 by achu              #+#    #+#             */
-/*   Updated: 2024/12/18 21:23:17 by achu             ###   ########.fr       */
+/*   Created: 2024/12/17 14:01:40 by achu              #+#    #+#             */
+/*   Updated: 2024/12/18 19:25:20 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
-
-void	move_player(t_manager *game, t_vector2 next)
-{
-	if ((*game).map[next.y][next.x] != WALL)
-		game->player.pos = next;
-	if ((*game).map[next.y][next.x] != COLLECTIBLE)
-		(game->map[next.y][next.x] == '0', \
-		game->collect++);
-}
