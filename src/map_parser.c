@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:30:14 by achu              #+#    #+#             */
-/*   Updated: 2025/01/07 10:31:29 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 15:44:31 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	clear_map(char **strd)
 	free(strd);
 }
 
-int	parslen(char *file)
+static int	parslen(char *file)
 {
 	int	i;
 	int	fd;

@@ -6,7 +6,7 @@
 #    By: achu <achu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/09 11:01:59 by achu              #+#    #+#              #
-#    Updated: 2024/12/17 17:02:24 by achu             ###   ########.fr        #
+#    Updated: 2025/01/07 15:35:27 by achu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,16 @@ LIBFT =  lib/libft
 PRINTF =  lib/printf
 INCLUDES = -I$(LIBDIR)
 LDFLAGS =  -L$(LIBDIR) -lmlx -lXext -lX11 -lm -lz
-HEADERS = $(LIBFT)/libft.h $(PRINTF)/ft_printf.h $(INCLUDE)/so_long.h  $(INCLUDE)/sprite.h
+HEADERS = $(LIBFT)/libft.h $(PRINTF)/ft_printf.h $(INCLUDE)/game.h  $(INCLUDE)/map.h  $(INCLUDE)/engine.h
 
 SRC =	main.c \
-		map_parser.c \
+		game_manager.c \
 		input_handler.c \
+		map_checker.c \
+		map_parser.c \
+		map_pathfinder.c \
+		map_utils.c \
 		player_movement.c \
-		gizmo.c \
 		sprite.c \
 
 OBJS = $(addprefix $(SRCDIR)/, $(SRC:.c=.o))

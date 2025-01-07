@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 22:59:08 by achu              #+#    #+#             */
-/*   Updated: 2025/01/07 10:15:47 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 15:37:05 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 
 # include "engine.h"
 
-typedef struct s_queue
-{
-    t_vector2        pos;
-    struct s_queue    *next;
-}    t_queue;
-
 typedef struct s_map
 {
     char    **map;
+    int     **visited;
     int     height;
     int     width;
 
@@ -36,7 +31,11 @@ typedef struct s_map
     int         nb_coin;
 }   t_map;
 
-int is_valid_char(char c);
-int	is_filecmp(const char *file, const char *find);
+t_map	init_map_manager();
+int	    ft_pathfinder(t_map *manager);
+int     is_valid_char(char c);
+int     is_valid_border(t_map *manager, int x, int y);
+int 	is_filecmp(const char *file, const char *find);
+size_t	ft_strdlen(char **strd);
 
 #endif

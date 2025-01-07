@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:11:06 by achu              #+#    #+#             */
-/*   Updated: 2025/01/07 10:31:44 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 16:59:22 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,9 @@ enum e_keybind {
 	A = 97,
 	S = 115,
 	D = 100,
+	//Q = ESC,
 	ESC = 65307,
 };
-
-typedef enum s_type{
-	EMPTY = '0',
-	WALL = '1',
-	COIN = 'C',
-	EXIT = 'E',
-	PLAYER = 'P',
-}	t_type;
 
 typedef struct s_display {
 	void	*mlx;
