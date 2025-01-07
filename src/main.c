@@ -6,11 +6,14 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:29:48 by achu              #+#    #+#             */
-/*   Updated: 2024/12/18 19:35:00 by achu             ###   ########.fr       */
+/*   Updated: 2024/12/20 17:05:56 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "../includes/so_long.h"
+
+int init_setup(s_game *game, int argc, char *argv[])
 
 size_t	ft_strtlen(char *str)
 {
@@ -45,9 +48,9 @@ float	lerp(float start, float end, float t)
 
 int	update(void *ptr)
 {
-	t_manager	*game;
+	t_game	*game;
 	
-	game = (t_manager *)ptr;
+	game = (s_game *)ptr;
 	mlx_clear_window(game->display.mlx, game->display.win);
 	int	y = 0;
 	while (game->map[y])
@@ -70,12 +73,12 @@ int	update(void *ptr)
 
 int main(int argc, char const *argv[])
 {
-	t_manager	game;
+	t_game	game;
 
     game.display.mlx = mlx_init();
     game.display.win = mlx_new_window(game.display.mlx , (14 - 1) * 64, 5 * 64, "so_long");
 	game.step = 0;
-	parse(&game);
+	init_img(&game);
 	
 	game.map = init_map("./assets/map/map.txt");
 	// int	y = 0;
@@ -115,11 +118,11 @@ int main(int argc, char const *argv[])
 
 int main(int argc, char const *argv[])
 {
-	t_manager	game;
+	t_game	game;
 
-	if (argc == 2 || !argv[1])
-		
-	return 0;
+	if (!init_setup(&game, argc, argv))
+		return (0);
+	return (0);
 }
 
 

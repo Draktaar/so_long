@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   map_pathfinding.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/17 11:49:25 by achu              #+#    #+#             */
-/*   Updated: 2024/12/18 19:46:28 by achu             ###   ########.fr       */
+/*   Created: 2024/12/18 14:43:34 by achu              #+#    #+#             */
+/*   Updated: 2024/12/20 17:03:04 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libft.h"
+#include "../includes/so_long.h"
 
-void	game_init(t_manager *game)
+t_bool  is_valid(char **map, t_vector2 pos)
 {
+    if ()
+    return (TRUE);
+}
 
+t_bool  solve(char **map, t_vector2 start)
+{
+    t_bool  visited[100][100];
+
+    while (!*visited)
+    {
+        if (map[visited.x][visited.y] == 'E')
+            return (TRUE);
+        if (is_valid())
+    }
 }

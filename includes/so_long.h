@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:11:06 by achu              #+#    #+#             */
-/*   Updated: 2024/12/18 21:23:17 by achu             ###   ########.fr       */
+/*   Updated: 2024/12/20 17:05:56 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct s_tile {
 	t_vector2	pos;
 }	t_tile;
 
-typedef struct t_manager {
+typedef struct s_game {
 	t_display	display;
 	char		**map;
 
@@ -101,12 +101,12 @@ typedef struct t_manager {
 	int			step;
 	int			score;
 	int			collect;
-}	t_manager;
+}	t_game;
 
 char	**init_map(char *file);
-int		input(int key, t_manager *game);
-void	move_player(t_manager *game, t_vector2 next);
-int		close_window(t_manager *game);
-void	parse(t_manager *game);
+int		input(int key, t_game *game);
+void	move_player(t_game *game, t_vector2 next);
+int		close_window(t_game *game);
+void	init_img(t_game *game);
 
 #endif

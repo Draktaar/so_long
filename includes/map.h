@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pathfinding.c                                      :+:      :+:    :+:   */
+/*   map.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/18 14:43:34 by achu              #+#    #+#             */
-/*   Updated: 2024/12/18 19:46:28 by achu             ###   ########.fr       */
+/*   Created: 2024/12/19 22:59:08 by achu              #+#    #+#             */
+/*   Updated: 2024/12/20 17:09:59 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "../includes/so_long.h"
+#ifndef MAP_H
+# define MAP_H
 
-t_bool  is_valid(char **map, t_vector2 pos)
+typedef struct s_map
 {
-    if ()
-    return (TRUE);
-}
+    char    **map;
+    int     height;
+    int     width;
 
-t_bool  solve(char **map, t_vector2 start)
-{
-    t_bool  visited[100][100];
+    int     nb_player;
+    int     nb_exit;
+    int     nb_coin;
+}   t_map;
 
-    while (!*visited)
-    {
-        if (map[visited.x][visited.y] == 'E')
-            return (TRUE);
-        if (is_valid())
-    }
-}
+int is_valid_char(char c);
+int	is_filecmp(const char *file, const char *find);
+
+#endif

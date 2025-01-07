@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 11:58:00 by achu              #+#    #+#             */
-/*   Updated: 2024/12/17 14:59:20 by achu             ###   ########.fr       */
+/*   Updated: 2024/12/20 17:06:00 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	create_image(t_display display, t_sprite *sprite, char *filepath)
 			&sprite->endian);
 }
 
-void	parse(t_manager *game)
+void	init_img(t_game *game)
 {
 	create_image(game->display, &game->player.sprite, "./assets/xpm/player.xpm");
 	create_image(game->display, &game->wall.sprite, "./assets/xpm/wall.xpm");

@@ -6,19 +6,19 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:47:42 by achu              #+#    #+#             */
-/*   Updated: 2024/12/17 17:13:40 by achu             ###   ########.fr       */
+/*   Updated: 2024/12/20 16:32:27 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-int	close_window(t_manager *game)
+int	close_window(t_game *game)
 {
     mlx_destroy_window(game->display.mlx, game->display.win);
     return (0);
 }
 
-int	input(int key, t_manager *game)
+int	input(int key, t_game *game)
 {
 	t_vector2	pos;
 	

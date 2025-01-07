@@ -6,13 +6,13 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 12:07:47 by achu              #+#    #+#             */
-/*   Updated: 2024/12/18 21:23:17 by achu             ###   ########.fr       */
+/*   Updated: 2024/12/20 16:32:53 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/so_long.h"
 
-void	move_player(t_manager *game, t_vector2 next)
+void	move_player(t_game *game, t_vector2 next)
 {
 	if ((*game).map[next.y][next.x] != WALL)
 		game->player.pos = next;
