@@ -58,6 +58,9 @@
   "C_Cpp_Runner.msvcSecureNoWarnings": false,
   "files.associations": {
     "so_long.h": "c",
-    "map": "c"
+    "map": "c",
+    "ft_printf.h": "c",
+    "random": "c",
+    "game.h": "c"
   }
 }

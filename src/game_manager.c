@@ -6,11 +6,11 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 14:01:40 by achu              #+#    #+#             */
-/*   Updated: 2024/12/20 17:04:32 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 10:30:27 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/game.h"
 
 t_display	setup_display(char **map)
 {

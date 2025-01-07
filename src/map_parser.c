@@ -6,12 +6,12 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:30:14 by achu              #+#    #+#             */
-/*   Updated: 2024/12/20 17:04:25 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 10:31:29 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "../includes/so_long.h"
+#include "../includes/game.h"
 
 static void	clear_map(char **strd)
 {

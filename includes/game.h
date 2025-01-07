@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   so_long.h                                          :+:      :+:    :+:   */
+/*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:11:06 by achu              #+#    #+#             */
-/*   Updated: 2024/12/20 17:05:56 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 10:31:44 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef GAME_H
+# define GAME_H
 
-# include <mlx.h>
+//# include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
-#include "../lib/printf/ft_printf.h"
+# include "engine.h"
+# include "../lib/printf/ft_printf.h"
 
 enum {
 	ON_KEYDOWN = 2,
@@ -36,15 +37,10 @@ enum e_keybind {
 typedef enum s_type{
 	EMPTY = '0',
 	WALL = '1',
-	COLLECTIBLE = 'C',
+	COIN = 'C',
 	EXIT = 'E',
 	PLAYER = 'P',
 }	t_type;
-
-typedef struct s_vector2 {
-	int	x;
-	int	y;
-}	t_vector2;
 
 typedef struct s_display {
 	void	*mlx;
@@ -75,12 +71,12 @@ typedef struct s_wall {
 
 typedef struct s_coin {
 	t_sprite	sprite;
-	t_bool		is_collected;
+	int			is_collected;
 }	t_coin;
 
 typedef struct s_exit {
 	t_sprite	sprite;
-	t_bool		is_open;
+	int			is_open;
 }	t_exit;
 
 typedef struct s_tile {

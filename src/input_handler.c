@@ -6,11 +6,11 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 14:47:42 by achu              #+#    #+#             */
-/*   Updated: 2024/12/20 16:32:27 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 10:30:11 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "../includes/game.h"
 
 int	close_window(t_game *game)
 {

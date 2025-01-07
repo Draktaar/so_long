@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 11:29:48 by achu              #+#    #+#             */
-/*   Updated: 2024/12/20 17:05:56 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 10:28:55 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	update(void *ptr)
 				mlx_put_image_to_window(game->display.mlx, game->display.win, game->wall.sprite.img, x * 64, y * 64);
 			else if (game->map[y][x] == PLAYER)
 				mlx_put_image_to_window(game->display.mlx, game->display.win, game->player.sprite.img, game->player.pos.x * 64, game->player.pos.y * 64);
-			else if (game->map[y][x] == COLLECTIBLE)
+			else if (game->map[y][x] == COIN)
 				mlx_put_image_to_window(game->display.mlx, game->display.win, game->coin.sprite.img, x * 64, y * 64);
 			x++;
 		}
@@ -92,7 +92,7 @@ int main(int argc, char const *argv[])
 	// 		else if (game.map[y][x] == PLAYER)
 	// 			(mlx_put_image_to_window(game.display.mlx, game.display.win, game.player.sprite.img, x * 64, y * 64), \
 	// 			game.player.pos.x = x, game.player.pos.y = y);
-	// 		else if (game.map[y][x] == COLLECTIBLE)
+	// 		else if (game.map[y][x] == COIN)
 	// 			mlx_put_image_to_window(game.display.mlx, game.display.win, game.coin.sprite.img, x * 64, y * 64);
 	// 		x++;
 	// 	}

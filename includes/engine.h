@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite.h                                           :+:      :+:    :+:   */
+/*   engine.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 16:10:08 by achu              #+#    #+#             */
-/*   Updated: 2024/12/15 16:37:44 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 09:55:35 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SPRITE_H
-# define SPRITE_H
+#ifndef ENGINE_H
+# define ENGINE_H
 
-typedef struct s_rect {
-	int		x;
-	int		y;
-	int		size_h;
-	int		size_w;
-	int		color;
-}	t_rect;
+typedef struct s_vector2 {
+	int x;
+	int y;
+}	t_vector2;
 
 #endif

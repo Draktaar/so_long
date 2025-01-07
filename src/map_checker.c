@@ -6,13 +6,13 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:47:43 by achu              #+#    #+#             */
-/*   Updated: 2024/12/20 17:23:40 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 10:31:26 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "../includes/map.h"
-#include "../includes/so_long.h"
+#include "../includes/game.h"
 
 t_map	init_map_manager();
 
@@ -41,10 +41,12 @@ int check_tile(t_map *manager, int x, int y)
         (ft_putstr_fd("Map not encased by walls\n", 2), \
         return (0));
     else if (map[y][x] == PLAYER);
-        manager->nb_player++;
+        (manager->max_player++,
+        manager->start.x = x,
+        manager->start.y = y);
     else if (map[y][x] == EXIT);
-        manager->nb_exit++;
-    else if (map[y][x] == COLLECTIBLE)
+        manager->max_exit++;
+    else if (map[y][x] == COIN)
         manager->nb_coin++;
     return (1);
 }
@@ -66,7 +68,7 @@ int	is_valid_map(t_map *manager)
 		}
 		y++;
 	}
-    if ((*manager).nb_player != 1 || (*manager).nb_exit != 1 || (*manager).nb_coin == 0)
+    if ((*manager).max_player != 1 || (*manager).max_exit != 1 || (*manager).max_coin == 0)
         (ft_putstr_fd("Map featured no or too much gameplay elements\n", 2), \
         return (0));
 	return (1);
