@@ -6,7 +6,7 @@
 #    By: achu <achu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/09 11:01:59 by achu              #+#    #+#              #
-#    Updated: 2025/01/07 15:35:27 by achu             ###   ########.fr        #
+#    Updated: 2025/01/10 15:27:31 by achu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,13 +24,13 @@ HEADERS = $(LIBFT)/libft.h $(PRINTF)/ft_printf.h $(INCLUDE)/game.h  $(INCLUDE)/m
 
 SRC =	main.c \
 		game_manager.c \
-		input_handler.c \
+		input_manager.c \
 		map_checker.c \
 		map_parser.c \
 		map_pathfinder.c \
 		map_utils.c \
 		player_movement.c \
-		sprite.c \
+		sprite_manager.c \
 
 OBJS = $(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 
