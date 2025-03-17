@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:11:06 by achu              #+#    #+#             */
-/*   Updated: 2025/03/17 17:32:52 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 16:59:22 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_sprite {
 	int		h;
 	int		w;
 	int		bits_per_pixel;
-	int		line_length;
+	int		line_len;
 	int		endian;
 }	t_sprite;
 
@@ -63,6 +63,7 @@ typedef struct s_wall {
 
 typedef struct s_coin {
 	t_sprite	sprite;
+	t_vector2	pos;
 	int			is_collected;
 }	t_coin;
 
@@ -70,12 +71,6 @@ typedef struct s_exit {
 	t_sprite	sprite;
 	int			is_open;
 }	t_exit;
-
-typedef struct s_tile {
-	t_sprite	sprite;
-	t_type		type;
-	t_vector2	pos;
-}	t_tile;
 
 typedef struct s_game {
 	t_display	display;
@@ -88,13 +83,13 @@ typedef struct s_game {
 
 	int			step;
 	int			score;
-	int			collect;
+	int			coins;
 }	t_game;
 
 char	**init_map(char *file);
 int		input(int key, t_game *game);
 void	move_player(t_game *game, t_vector2 next);
 int		close_window(t_game *game);
-void	init_img(t_game *game);
+void	init_sprite(t_game *game);
 
 #endif

@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_system.c                                     :+:      :+:    :+:   */
+/*   clear.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 14:47:42 by achu              #+#    #+#             */
-/*   Updated: 2025/01/07 15:55:10 by achu             ###   ########.fr       */
+/*   Created: 2025/01/10 16:22:56 by achu              #+#    #+#             */
+/*   Updated: 2025/01/10 16:24:15 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "../includes/game.h"
 
-int	input(int key, t_game *game)
-{
-	return (0);
+void    destroy_window(t_display w) {
+	if (w.mlx && w.win)
+		mlx_destroy_window(w.mlx, w.win);
+	if (w.mlx)
+		free(w.mlx);
 }

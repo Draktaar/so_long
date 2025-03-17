@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:47:43 by achu              #+#    #+#             */
-/*   Updated: 2025/03/17 17:45:51 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 16:23:14 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,31 +69,19 @@ int	is_valid_file(int argc, char *argv[])
 	return (1);
 }
 
-int	init_setup(int argc, char **argv)
+int	init_setup(t_map *manager, int argc, char *argv[])
 {
-	t_map	manager;
-
 	if (!is_valid_file(argc, argv))
 		return (0);
-	manager = init_map_manager();
-	manager.map = init_map(argv[1]);
-	if (!manager.map)
-		return (free(manager.map), 0);
-	manager.width = ft_strlen(manager.map[0]) - 1;
-	manager.height = ft_strlen_dbl(manager.map);
-	if (!is_valid_map(&manager))
+	(*manager) = init_mapmanager();
+	manager->map = init_map(argv[1]);
+	if (!(*manager).map)
+		return (free((*manager).map), 0);
+	manager->width = ft_strlen((*manager).map[0]) - 1;
+	manager->height = ft_strdlen((*manager).map);
+	if (!is_valid_map(manager))
 		return (0);
-	else if (!ft_pathfinder(&manager))
+	else if (!ft_pathfinder(manager))
 		return (0);
-	return (1);
-}
-
-int	main(int argc, char const *argv[])
-{
-	t_game	game;
-
-	if (!init_setup(argc, argv))
-		return (0);
-	ft_printf("%s\n", "big");
 	return (1);
 }

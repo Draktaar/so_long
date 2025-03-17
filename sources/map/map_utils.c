@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 19:48:01 by achu              #+#    #+#             */
-/*   Updated: 2025/03/17 17:38:22 by achu             ###   ########.fr       */
+/*   Updated: 2025/01/07 16:56:19 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	is_filecmp(const char *file, const char *find)
 	return (ft_perror("File not compatible, must use .ber files"), 0);
 }
 
-t_map	init_map_manager(void)
+t_map	init_mapmanager(void)
 {
 	t_map	manager;
 
