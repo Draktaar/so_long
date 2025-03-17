@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.h                                           :+:      :+:    :+:   */
+/*   ft_ptrtohex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 16:10:08 by achu              #+#    #+#             */
-/*   Updated: 2025/03/17 17:33:02 by achu             ###   ########.fr       */
+/*   Created: 2024/11/13 12:40:39 by achu              #+#    #+#             */
+/*   Updated: 2025/03/17 16:44:31 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENGINE_H
-# define ENGINE_H
+#include "stdio42.h"
 
-# include "libft.h"
-# include "stdio42.h"
+int	ft_ptrtohex(void *ptr, int fd)
+{
+	int					i;
+	unsigned long long	adress;
+	char				*hex;
 
-typedef struct s_vector2 {
-	int x;
-	int y;
-}	t_vector2;
-
-typedef enum s_type{
-	EMPTY = '0',
-	WALL = '1',
-	COIN = 'C',
-	EXIT = 'E',
-	PLAYER = 'P',
-}	t_type;
-
-#endif
+	if (ptr == 0)
+		return (ft_putstr("(nil)", fd));
+	i = 0;
+	adress = (unsigned long long)ptr;
+	hex = ft_hexalloc(adress);
+	i += ft_putstr("0x", fd);
+	i += ft_putstr(hex, fd);
+	free(hex);
+	return (i);
+}

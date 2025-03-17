@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.h                                           :+:      :+:    :+:   */
+/*   ft_strlen_trpl.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 16:10:08 by achu              #+#    #+#             */
-/*   Updated: 2025/03/17 17:33:02 by achu             ###   ########.fr       */
+/*   Created: 2025/01/28 17:42:16 by achu              #+#    #+#             */
+/*   Updated: 2025/02/21 17:44:18 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENGINE_H
-# define ENGINE_H
+#include <string.h>
 
-# include "libft.h"
-# include "stdio42.h"
+size_t	ft_strlen_trpl(char ***str)
+{
+	size_t	i;
 
-typedef struct s_vector2 {
-	int x;
-	int y;
-}	t_vector2;
-
-typedef enum s_type{
-	EMPTY = '0',
-	WALL = '1',
-	COIN = 'C',
-	EXIT = 'E',
-	PLAYER = 'P',
-}	t_type;
-
-#endif
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}

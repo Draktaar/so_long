@@ -6,18 +6,17 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 13:11:06 by achu              #+#    #+#             */
-/*   Updated: 2025/01/07 16:59:22 by achu             ###   ########.fr       */
+/*   Updated: 2025/03/17 17:32:52 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GAME_H
 # define GAME_H
 
-//# include <mlx.h>
+# include <mlx.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include "engine.h"
-# include "../lib/printf/ft_printf.h"
 
 enum {
 	ON_KEYDOWN = 2,

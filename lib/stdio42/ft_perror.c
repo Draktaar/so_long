@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.h                                           :+:      :+:    :+:   */
+/*   ft_perror.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 16:10:08 by achu              #+#    #+#             */
-/*   Updated: 2025/03/17 17:33:02 by achu             ###   ########.fr       */
+/*   Created: 2025/01/17 14:27:44 by achu              #+#    #+#             */
+/*   Updated: 2025/03/17 16:19:39 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENGINE_H
-# define ENGINE_H
+#include "stdio42.h"
 
-# include "libft.h"
-# include "stdio42.h"
+void	ft_perror(const char *s)
+{
+	int	i;
 
-typedef struct s_vector2 {
-	int x;
-	int y;
-}	t_vector2;
-
-typedef enum s_type{
-	EMPTY = '0',
-	WALL = '1',
-	COIN = 'C',
-	EXIT = 'E',
-	PLAYER = 'P',
-}	t_type;
-
-#endif
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	write(STDERR_FILENO, &*s, i);
+	write(STDERR_FILENO, "\n", 1);
+}

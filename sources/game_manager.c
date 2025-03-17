@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.h                                           :+:      :+:    :+:   */
+/*   game_manager.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 16:10:08 by achu              #+#    #+#             */
-/*   Updated: 2025/03/17 17:33:02 by achu             ###   ########.fr       */
+/*   Created: 2024/12/17 14:01:40 by achu              #+#    #+#             */
+/*   Updated: 2025/03/17 17:38:59 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENGINE_H
-# define ENGINE_H
+#include "game.h"
 
-# include "libft.h"
-# include "stdio42.h"
+t_display	setup_display(char **map)
+{
+	t_display	display;
 
-typedef struct s_vector2 {
-	int x;
-	int y;
-}	t_vector2;
-
-typedef enum s_type{
-	EMPTY = '0',
-	WALL = '1',
-	COIN = 'C',
-	EXIT = 'E',
-	PLAYER = 'P',
-}	t_type;
-
-#endif
+	display.height = ft_strlen_dbl(map);
+	display.width = ft_strlen(map[0]) - 1;
+	display.mlx = mlx_init();
+	display.win = mlx_new_window(display.mlx,
+			display.width, display.height, "so_long");
+	return (display);
+}

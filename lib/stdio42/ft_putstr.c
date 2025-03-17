@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.h                                           :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 16:10:08 by achu              #+#    #+#             */
-/*   Updated: 2025/03/17 17:33:02 by achu             ###   ########.fr       */
+/*   Created: 2024/11/13 11:35:53 by achu              #+#    #+#             */
+/*   Updated: 2025/03/17 16:16:44 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENGINE_H
-# define ENGINE_H
+#include "stdio42.h"
 
-# include "libft.h"
-# include "stdio42.h"
+int	ft_putstr(char *str, int fd)
+{
+	int	i;
 
-typedef struct s_vector2 {
-	int x;
-	int y;
-}	t_vector2;
-
-typedef enum s_type{
-	EMPTY = '0',
-	WALL = '1',
-	COIN = 'C',
-	EXIT = 'E',
-	PLAYER = 'P',
-}	t_type;
-
-#endif
+	i = 0;
+	if (str == 0)
+		return (ft_putstr("(null)", fd));
+	while (str[i])
+		i += ft_putchar(str[i], fd);
+	return (i);
+}

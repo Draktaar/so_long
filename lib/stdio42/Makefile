@@ -5,51 +5,27 @@
 #                                                     +:+ +:+         +:+      #
 #    By: achu <achu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/07 11:00:14 by achu              #+#    #+#              #
-#    Updated: 2025/03/17 16:51:18 by achu             ###   ########.fr        #
+#    Created: 2024/11/13 11:11:29 by achu              #+#    #+#              #
+#    Updated: 2025/03/17 17:32:30 by achu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-NAME = libft.a
-INCDIR = includes
+NAME = stdio42.a
 
-SRC =	ft_atoi.c \
-		ft_bzero.c \
-		ft_calloc.c \
-		ft_clear_dbl.c \
-		ft_itoa.c \
-		ft_memchr.c \
-		ft_memcmp.c \
-		ft_memcpy.c \
-		ft_memmove.c \
-		ft_memset.c \
-		ft_split.c \
-		ft_strchr.c \
-		ft_strdup.c \
-		ft_striteri.c \
-		ft_strjoin.c \
-		ft_strlcat.c \
-		ft_strlcpy.c \
-		ft_strlen.c \
-		ft_strlen_dbl.c \
-		ft_strlen_trpl.c \
-		ft_strmapi.c \
-		ft_strncmp.c \
-		ft_strnstr.c \
-		ft_strrchr.c \
-		ft_strtrim.c \
-		ft_substr.c \
-		ft_tolower.c \
-		ft_toupper.c \
-		is_alnum.c \
-		is_alpha.c \
-		is_ascii.c \
-		is_digit.c \
-		is_print.c \
-		is_space.c \
-		get_next_line.c
+SRC =	ft_putchar.c \
+		ft_putstr.c \
+		ft_ptrtohex.c \
+		ft_putdec.c \
+		ft_putint.c \
+		ft_putudec.c \
+		ft_puthexup.c \
+		ft_puthexlow.c \
+		ft_hexhelper.c \
+		ft_perror.c \
+		ft_fprintf.c \
+		ft_printf.c
 
 OBJS = $(SRC:.c=.o)
 
@@ -59,12 +35,12 @@ $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 	
 %.o: %.c
-	$(CC) $(CFLAGS) -I $(INCDIR) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 	
 clean:
 	rm -rf $(OBJS)
 
-fclean:	clean
+fclean: clean
 	rm -rf $(NAME)
 
 re: fclean all

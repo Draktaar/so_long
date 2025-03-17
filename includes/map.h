@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 22:59:08 by achu              #+#    #+#             */
-/*   Updated: 2025/01/07 15:37:05 by achu             ###   ########.fr       */
+/*   Updated: 2025/03/17 17:45:04 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ int	    ft_pathfinder(t_map *manager);
 int     is_valid_char(char c);
 int     is_valid_border(t_map *manager, int x, int y);
 int 	is_filecmp(const char *file, const char *find);
-size_t	ft_strdlen(char **strd);
 
 #endif
