@@ -14,12 +14,12 @@ CC = cc
 CFLAGS = -Wall -Wextra -g3
 NAME = so_long
 
-SRCDIR = sources
+SRCDIR = srcs
 INCDIR = includes
 
-LIBFT =		lib/libft
-STDIO42 =	lib/stdio42
-MLIBX = 	lib/minilibx
+LIBFT =		libs/libft
+STDIO42 =	libs/stdio42
+MLIBX = 	libs/minilibx
 
 LDFLAGS =  -L$(MLIBX) -lmlx -lXext -lX11 -lm -lz
 HEADERS = $(INCDIR)/engine.h $(INCDIR)/game.h $(INCDIR)/map.h $(LIBFT)/libft.h $(STDIO42)/stdio42.h

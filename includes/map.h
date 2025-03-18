@@ -17,24 +17,25 @@
 
 typedef struct s_map
 {
-    char    **map;
-    int     **visited;
-    int     height;
-    int     width;
+    int		height;
+    int		width;
+    char	**map;
+    int		**visited;
 
-    t_vector2   start;
-    int         max_player;
-    int         max_exit;
-    int         max_coin;
+    t_vector2	start;
+    int			max_player;
+    int			max_exit;
+    int			max_coin;
 
-    int         nb_exit;
-    int         nb_coin;
-}   t_map;
+    int			nb_exit;
+    int			nb_coin;
+}	t_map;
 
-t_map	init_mapmanager();
-int	    ft_pathfinder(t_map *manager);
-int     is_valid_char(char c);
-int     is_valid_border(t_map *manager, int x, int y);
-int 	is_filecmp(const char *file, const char *find);
+int	    init_map(t_map *manager, int argc, char **argv);
+int		is_valid_map(t_map *manager);
+int		is_valid_file(int argc, char **argv);
+int		is_valid_pathfinder(t_map *manager);
+char	**parse_map(char *file);
+void	clean_map(t_map *manager);
 
 #endif

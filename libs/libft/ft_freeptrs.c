@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_system.c                                     :+:      :+:    :+:   */
+/*   ft_freetab.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 14:47:42 by achu              #+#    #+#             */
-/*   Updated: 2025/01/07 15:55:10 by achu             ###   ########.fr       */
+/*   Created: 2025/03/18 00:59:34 by achu              #+#    #+#             */
+/*   Updated: 2025/03/18 01:00:12 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include <stdlib.h>
 
-int	input(int key, t_game *game)
+void	ft_freeptrs(void **ptrs)
 {
-	return (0);
+	int	i;
+
+	if (!ptrs)
+        return;
+	i = 0;
+	while (ptrs[i])
+	{
+		free(ptrs[i]);
+		i++;
+	}
+	free(ptrs);
 }

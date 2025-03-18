@@ -6,39 +6,32 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:30:14 by achu              #+#    #+#             */
-/*   Updated: 2025/03/17 17:04:09 by achu             ###   ########.fr       */
+/*   Updated: 2025/03/18 02:28:26 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "game.h"
 
-static void	clear_map(char **strd)
+// Calcul the length of the map's height
+static int	heightlen(char *file)
 {
-	int	i;
-
-	i = 0;
-	while (strd[i])
-	{
-		free(strd[i]);
-		i++;
-	}
-	free(strd);
-}
-
-static int	parslen(char *file)
-{
-	int	i;
-	int	fd;
+	int		i;
+	int		fd;
+	char	*line;
 
 	i = 0;
 	fd = open(file, O_RDONLY);
-	while (get_next_line(fd))
+	while ((line = get_next_line(fd)))
+	{
+		free(line);
 		i++;
+	}
+	close(fd);
 	return (i);
 }
 
-char	**init_map(char *file)
+// Initialize the map
+char	**parse_map(char *file)
 {
 	int		i;
 	int		fd;
@@ -46,7 +39,7 @@ char	**init_map(char *file)
 	char	**map;
 
 	i = 0;
-	len = parslen(file);
+	len = heightlen(file);
 	map = (char **)malloc((len + 1) * sizeof(char *));
 	if (!map)
 		return (NULL);
@@ -55,9 +48,10 @@ char	**init_map(char *file)
 	{
 		map[i] = get_next_line(fd);
 		if (!map[i])
-			return (clear_map(map), NULL);
+			return (ft_freeptrs((void **)map), NULL);
 		i++;
 	}
 	map[i] = 0;
+	close(fd);
 	return (map);
 }

@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   engine.h                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 16:10:08 by achu              #+#    #+#             */
-/*   Updated: 2025/01/07 16:55:49 by achu             ###   ########.fr       */
+/*   Created: 2024/12/09 11:29:48 by achu              #+#    #+#             */
+/*   Updated: 2025/01/07 14:37:57 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENGINE_H
-# define ENGINE_H
+#include "map.h"
+#include "game.h"
 
-# include "libft.h"
-# include "stdio42.h"
+int main(int argc, char **argv)
+{
+	t_map	manager;
 
-typedef struct s_vector2 {
-	int x;
-	int y;
-}	t_vector2;
+	if (!init_map(&manager, argc, argv))
+		return (1);
+	ft_printf("big");
+	clean_map(&manager);
+	return (0);
+}
 
-typedef enum s_type{
-	EMPTY = '0',
-	WALL = '1',
-	COIN = 'C',
-	EXIT = 'E',
-	PLAYER = 'P',
-}	t_type;
-
-#endif

@@ -86,7 +86,7 @@ typedef struct s_game {
 	int			coins;
 }	t_game;
 
-char	**init_map(char *file);
+char	**parse_map(char *file);
 int		input(int key, t_game *game);
 void	move_player(t_game *game, t_vector2 next);
 int		close_window(t_game *game);

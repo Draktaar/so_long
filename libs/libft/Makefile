@@ -6,7 +6,7 @@
 #    By: achu <achu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 11:00:14 by achu              #+#    #+#              #
-#    Updated: 2025/03/17 16:51:18 by achu             ###   ########.fr        #
+#    Updated: 2025/03/18 01:19:30 by achu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ INCDIR = includes
 SRC =	ft_atoi.c \
 		ft_bzero.c \
 		ft_calloc.c \
-		ft_clear_dbl.c \
+		ft_freeptrs.c \
 		ft_itoa.c \
 		ft_memchr.c \
 		ft_memcmp.c \
@@ -39,6 +39,7 @@ SRC =	ft_atoi.c \
 		ft_strncmp.c \
 		ft_strnstr.c \
 		ft_strrchr.c \
+		ft_strrend.c \
 		ft_strtrim.c \
 		ft_substr.c \
 		ft_tolower.c \

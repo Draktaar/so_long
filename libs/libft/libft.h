@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 10:58:59 by achu              #+#    #+#             */
-/*   Updated: 2025/03/17 16:51:06 by achu             ###   ########.fr       */
+/*   Updated: 2025/03/18 01:19:07 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 int		ft_atoi(const char *str);
 void	ft_bzero(void *str, size_t size);
 void	*ft_calloc(size_t count, size_t size);
-void	ft_clear_dbl(char **dbl);
+void	ft_freeptrs(void **tab);
 char	*ft_itoa(int nb);
 void	*ft_memchr(const void *str, int find, size_t size);
 int		ft_memcmp(const void *p1, const void *p2, size_t size);
@@ -46,6 +46,7 @@ char	*ft_strmapi(const char *src, char (*f)(unsigned int, char));
 int		ft_strncmp(const char *s1, const char *s2, size_t len);
 char	*ft_strnstr(const char *str, const char *find, size_t len);
 char	*ft_strrchr(const char *str, int cfind);
+int 	ft_strrend(const char *str, char *find);
 char	*ft_strtrim(const char *src, const char *set);
 char	*ft_substr(const char *src, unsigned int pos, size_t len);
 int		ft_tolower(int c);
