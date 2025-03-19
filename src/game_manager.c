@@ -13,12 +13,12 @@
 #include "map.h"
 #include "game.h"
 
-t_display	setup_display(t_map *manager)
+t_display	setup_display(int height, int width)
 {
 	t_display	display;
 
-	display.height = manager->height;
-	display.width = manager->width;
+	display.height = height;
+	display.width = width;
 	display.mlx = mlx_init();
 	display.win = mlx_new_window(display.mlx,
 			display.width * 64, display.height * 64,
@@ -26,14 +26,14 @@ t_display	setup_display(t_map *manager)
 	return (display);
 }
 
-t_game	init_gamemanager(t_map *manager)
+t_game	init_game(t_map *manager)
 {
 	t_game	temp;
 
-	temp.display = setup_display(manager);
+	temp.display = setup_display(manager->height, manager->width);
 	temp.map = (*manager).map;
 
-	init_sprite(&temp);
+	//init_sprite(&temp);
 	temp.exit.is_open = 0;
 
 	temp.step = 0;
@@ -73,7 +73,7 @@ int	start(t_map *map)
 {
 	t_game	game;
 	
-	game = init_gamemanager(map);
+	game = init_game(map);
 
 	int	y = 0;
 	while (game.map[y])
