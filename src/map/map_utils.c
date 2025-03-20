@@ -6,13 +6,13 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:14:10 by achu              #+#    #+#             */
-/*   Updated: 2025/03/18 02:27:52 by achu             ###   ########.fr       */
+/*   Updated: 2025/03/20 22:06:18 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
 
-static t_map	init_manager()
+static t_map	init_manager(void)
 {
 	t_map	manager;
 

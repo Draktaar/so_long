@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "engine.h"
 
-t_input	*init_input()
+t_input	*init_input(void)
 {
 	static t_input	keybind[MAX_ACTION];
 	int				i;
@@ -26,24 +26,24 @@ t_input	*init_input()
 		keybind[i].pressed_time = 0;
 		i++;
 	}
-    keybind[MOVE_UP].key = KEY_W;
-    keybind[MOVE_DOWN].key = KEY_S;
-    keybind[MOVE_LEFT].key = KEY_A;
-    keybind[MOVE_RIGHT].key = KEY_D;
-    keybind[JUMP].key = KEY_SPACE;
+	keybind[MOVE_UP].key = KEY_W;
+	keybind[MOVE_DOWN].key = KEY_S;
+	keybind[MOVE_LEFT].key = KEY_A;
+	keybind[MOVE_RIGHT].key = KEY_D;
+	keybind[JUMP].key = KEY_SPACE;
 	return (keybind);
 }
 
 void	update_input(t_input *keybind)
 {
-	double	current_time;
+	double	curr_time;
 	int		i;
 
 	i = 0;
-	current_time = get_time();
+	curr_time = get_frame();
 	while (i < MAX_ACTION)
 	{
-		if (keybind[i].pressed && (current_time - keybind[i].pressed_time) > 0.1)
+		if (keybind[i].pressed && (curr_time - keybind[i].pressed_time) > 0.1)
 		{
 			keybind[i].pressed = 0;
 			keybind[i].pressed_time = 0;
@@ -64,7 +64,7 @@ int	input_press(int key, t_input *keybind)
 			if (keybind[i].hold == 0)
 			{
 				keybind[i].pressed = 1;
-				keybind[i].pressed_time = get_time();
+				keybind[i].pressed_time = get_frame();
 			}
 			keybind[i].hold = 1;
 		}

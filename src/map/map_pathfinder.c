@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:43:34 by achu              #+#    #+#             */
-/*   Updated: 2025/03/19 17:55:12 by achu             ###   ########.fr       */
+/*   Updated: 2025/03/20 22:06:00 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	is_valid_path(t_map *manager, int x, int y)
 		return (0);
 	else if (!(0 < y || y < manager->width))
 		return (0);
-	else if ( manager->map[y][x] == WALL)
+	else if (manager->map[y][x] == WALL)
 		return (0);
 	else if (manager->visited[y][x] == 1)
 		return (0);
@@ -51,8 +51,9 @@ static int	solve_path(t_map *manager, int x, int y)
 	return (0);
 }
 
-// Create a visited tile for the pathfinding algo in the same size of the current map and recursively do 
-// the breadth-first search algo, if the nb of coins and exit doesn't match with there max value return false
+// Create a visited tile for the pathfinding algo in the same size of the
+// current map and recursively do the breadth-first search algo,
+// if the nb of coins and exit doesn't match with there max value return false
 int	is_valid_pathfinder(t_map *manager)
 {
 	int	i;

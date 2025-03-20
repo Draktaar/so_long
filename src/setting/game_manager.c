@@ -13,20 +13,23 @@
 #include "map.h"
 #include "game.h"
 
-int	input_release(int key, t_input *manager);
-
+// Setup window of the game, and store it inside display
 t_display	setup_display(int height, int width)
 {
 	t_display	display;
+	void		*mlx_ptr;
+	void		*win_ptr;
 
+	mlx_ptr = mlx_init();
+	win_ptr = mlx_new_window(
+			mlx_ptr,
+			width * 64,
+			height * 64,
+			WINDOW_TITLE);
+	display.mlx = mlx_ptr;
+	display.win = win_ptr;
 	display.height = height;
 	display.width = width;
-	display.mlx = mlx_init();
-	display.win = mlx_new_window(
-			display.mlx,
-			display.width * 64,
-			display.height * 64,
-			WINDOW_TITLE);
 	return (display);
 }
 
@@ -39,6 +42,14 @@ t_game	*init_game(t_map *manager)
 		exit(1);
 	mana->display = setup_display(manager->height, manager->width);
 	mana->input = init_input();
+
+	mana->late = 0;
+	mana->delta = 0;
+
+	mana->player.collider = (t_rect){
+		.pos = {150, 150},
+		.size = {100, 100}
+	};
 	mana->map = (*manager).map;
 
 	mana->step = 0;
@@ -47,23 +58,32 @@ t_game	*init_game(t_map *manager)
 	return (mana);
 }
 
-double get_time()
+double get_frame()
 {
     struct timespec ts;
     clock_gettime(CLOCK_MONOTONIC, &ts);
-    return ts.tv_sec + (ts.tv_nsec / 1.0e9);
+    return (ts.tv_sec + (ts.tv_nsec / 1.0e9));
 }
 
 static int	update(t_game *manager)
 {
+	double	curr;
+
+	curr = get_frame();
+	manager->delta = curr - manager->late;
+	manager->late = curr;
+	mlx_clear_window(manager->display.mlx, manager->display.win);
 	update_input(manager->input);
-	//mlx_clear_window(manager->display.mlx, manager->display.win);
-	// ft_printf("ESC: %i \n", manager->input[0].hold);
+	player_movement(&manager->player.collider, manager->input, manager->delta);
+	draw_rect(&manager->display, manager->player.collider);
+	mlx_do_sync(manager->display.mlx);
+	usleep(10000);
 	return (0);
 }
 
 int	start(t_game *manager)
 {
+	manager->late = get_frame();
 	mlx_loop_hook(manager->display.mlx, update, manager);
 	mlx_hook(manager->display.win, ON_KEYPRESS, MASK_KEYPRESS, input_press, manager->input);
 	mlx_hook(manager->display.win, ON_KEYRELEASE, MASK_KEYRELEASE, input_release, manager->input);

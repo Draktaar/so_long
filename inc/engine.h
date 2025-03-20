@@ -13,6 +13,11 @@
 #ifndef ENGINE_H
 # define ENGINE_H
 
+# define WINDOW_TITLE "so_long"
+
+# define RED_PIXEL 0xFF0000
+# define GREEN_PIXEL 0xFF00
+
 # define ON_KEYPRESS 2
 # define ON_KEYRELEASE 3
 # define ON_EXPOSE 12
@@ -23,10 +28,27 @@
 # define MASK_EXPOSE 1L<<15
 # define MASK_DESTROY 1L<<17
 
-# ifdef __linux__
-#  include "../lib/minilibx-linux/mlx.h"
-#  define OS "linux"
-enum e_keybind {
+# include <mlx.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <time.h>
+# include "libft.h"
+# include "stdio42.h"
+# include <stdio.h>
+
+typedef struct s_display
+{
+	void	*mlx;
+	void	*win;
+	int		height;
+	int		width;
+}	t_display;
+
+enum e_keybind
+{
 	KEY_W =		119,
 	KEY_A =		97,
 	KEY_S =		115,
@@ -34,44 +56,9 @@ enum e_keybind {
 	KEY_SPACE =	32,
 	KEY_ESC =	65307,
 };
-# elif __APPLE__
-#  include "../lib/minilibx_opengl_20191021/mlx.h"
-#  define OS "macos"
-enum e_keybind {
-	KEY_W =		13,
-	KEY_A =		0,
-	KEY_S =		1,
-	KEY_D =		2,
-	KEY_SPACE =	49,
-	KEY_ESC =	53,
-};
-# endif
 
-# include "libft.h"
-# include "stdio42.h"
-# include <stdio.h>
-
-typedef struct s_vector2 {
-	int x;
-	int y;
-}	t_vector2;
-
-typedef struct s_rect {
-	int	x_start;
-	int	y_start;
-	int	x_size;
-	int	y_size;
-}	t_rect;
-
-typedef enum s_tile{
-	EMPTY = '0',
-	WALL = '1',
-	COIN = 'C',
-	EXIT = 'E',
-	PLAYER = 'P',
-}	t_tile;
-
-typedef enum e_action {
+typedef enum e_action
+{
 	MOVE_UP,
 	MOVE_DOWN,
 	MOVE_LEFT,
@@ -80,22 +67,43 @@ typedef enum e_action {
 	MAX_ACTION,
 }	t_action;
 
-typedef struct s_input {
+typedef struct s_input
+{
 	int		key;
 	int		pressed;
 	int		hold;
 	double	pressed_time;
 }	t_input;
 
-typedef struct s_keybind {
-	t_input MOVE_UP;
-	t_input MOVE_DOWN;
-	t_input MOVE_LEFT;
-	t_input MOVE_RIGHT;
-	t_input JUMP;
-}	t_keybind;
+typedef enum s_tile
+{
+	EMPTY = '0',
+	WALL = '1',
+	COIN = 'C',
+	EXIT = 'E',
+	PLAYER = 'P',
+}	t_tile;
 
-int	input_press(int key, t_input *manager);
-int	input_release(int key, t_input *manager);
+typedef struct s_vec2
+{
+	double	x;
+	double	y;
+}	t_vec2;
+
+typedef struct s_rect
+{
+	t_vec2	pos;
+	t_vec2	size;
+}	t_rect;
+
+double	get_frame(void);
+
+t_input	*init_input(void);
+void	update_input(t_input *keybind);
+int		input_press(int key, t_input *manager);
+int		input_release(int key, t_input *manager);
+
+bool	is_point_in_rect(t_vec2 point, t_rect rect);
+bool	is_collided(t_rect a, t_rect b);
 
 #endif

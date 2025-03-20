@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:30:14 by achu              #+#    #+#             */
-/*   Updated: 2025/03/18 02:28:26 by achu             ###   ########.fr       */
+/*   Updated: 2025/03/20 22:08:02 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ static int	heightlen(char *file)
 
 	i = 0;
 	fd = open(file, O_RDONLY);
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		free(line);
 		i++;
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (i);

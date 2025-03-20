@@ -13,39 +13,36 @@
 #ifndef GAME_H
 # define GAME_H
 
-# define WINDOW_TITLE "so_long"
+# define ACCELERATION 200
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <time.h>
 # include "engine.h"
 
-typedef struct s_display {
-	void	*mlx;
-	void	*win;
-	int		height;
-	int		width;
-}	t_display;
-
-typedef struct s_sprite {
+typedef struct s_img
+{
 	void	*img;
 	char	*addr;
-	int		h;
-	int		w;
-	int		bits_per_pixel;
+	int		bpp;
 	int		line_len;
 	int		endian;
-}	t_sprite;
+	int		h;
+	int		w;
+}	t_img;
 
-//*** Gameobjects ***
-typedef struct s_player {
-	t_sprite	sprite;
-	t_vector2	pos;
+typedef struct s_player
+{
+	t_img		sprite;
+	t_vec2		velocity;
+	t_rect		collider;
 }	t_player;
 
-typedef struct s_game {
+typedef struct s_game
+{
 	t_display	display;
 	t_input		*input;
+
+	double		late;
+	double		delta;
+
 	char		**map;
 
 	t_player	player;
@@ -56,8 +53,7 @@ typedef struct s_game {
 }	t_game;
 
 int		start(t_game *manager);
-double get_time();
-t_input	*init_input();
-void	update_input(t_input *keybind);
+int		draw_rect(t_display *data, t_rect rect);
+void	player_movement(t_rect *player, t_input *keybind, double delta);
 
 #endif

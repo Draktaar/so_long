@@ -28,10 +28,10 @@ SRC =	map/map_checker.c \
 		map/map_parser.c \
 		map/map_pathfinder.c \
 		map/map_utils.c \
+		setting/input_system.c \
+		setting/game_manager.c \
+		graphic/gizmo.c \
 		player/player_controller.c \
-		game_manager.c \
-		input_system.c \
-		sprite.c \
 		main.c
 
 OBJS = $(addprefix $(SRCDIR)/, $(SRC:.c=.o))

@@ -96,7 +96,7 @@ int	is_valid_file(int argc, char **argv)
 	if (fd < 0)
 		return (ft_perror("Error: File cannot be opened"), 0);
 	else if (!ft_strrend(argv[1], ".ber"))
-		return (ft_perror("Error: File not compatible, must use .ber files"), 0);
+		return (ft_perror("Error: File not compatible, use .ber file"), 0);
 	close(fd);
 	return (1);
 }

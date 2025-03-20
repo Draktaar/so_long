@@ -12,4 +12,14 @@
 
 #include "game.h"
 
-
+void    player_movement(t_rect *player, t_input *keybind, double delta)
+{
+    if (keybind[MOVE_UP].hold)
+        player->pos.y -= ACCELERATION * delta;
+    if (keybind[MOVE_DOWN].hold)
+        player->pos.y += ACCELERATION * delta;
+    if (keybind[MOVE_LEFT].hold)
+        player->pos.x -= ACCELERATION * delta;
+    if (keybind[MOVE_RIGHT].hold)
+        player->pos.x += ACCELERATION * delta;
+}
