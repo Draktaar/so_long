@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:43:34 by achu              #+#    #+#             */
-/*   Updated: 2025/03/18 01:25:29 by achu             ###   ########.fr       */
+/*   Updated: 2025/03/19 17:55:12 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ int	is_valid_pathfinder(t_map *manager)
 	manager->visited = temp;
 	solve_path(manager, manager->start.x, manager->start.y);
 	if (manager->nb_coin != (*manager).max_coin)
-		return (ft_perror("Map cannot access all the coins"), 0);
+		return (ft_perror("Error: Pathfinder didn't found all the coins"), 0);
 	else if (manager->nb_exit != 1)
-		return (ft_perror("Map cannot access the exit"), 0);
+		return (ft_perror("Error: Pathfinder didn't found the exit"), 0);
 	return (1);
 }

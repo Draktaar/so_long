@@ -13,18 +13,17 @@
 #include "map.h"
 #include "game.h"
 
-t_game	init_game(t_map *manager);
+t_game	*init_game(t_map *manager);
 
 int main(int argc, char **argv)
 {
-	t_game	g_manager;
+	t_game	*g_manager;
 	t_map	m_manager;
 
 	if (!init_map(&m_manager, argc, argv))
 		return (1);
 	g_manager = init_game(&m_manager);
-	mlx_loop(g_manager.display.mlx);
-	ft_printf("big");
+	start(g_manager);
 	clean_map(&m_manager);
 	return (0);
 }

@@ -39,9 +39,9 @@ static int	is_valid_border(t_map *manager, int x, int y)
 static int	is_valid_tile(t_map *manager, int x, int y)
 {
 	if (!is_valid_char(manager->map[y][x]))
-		return (ft_perror("Invalid char used in the map file"), 0);
+		return (ft_perror("Error: Invalid char used in the map file"), 0);
 	else if (!is_valid_border(manager, x, y))
-		return (ft_perror("Map not encased by walls"), 0);
+		return (ft_perror("Error: Map not encased by walls"), 0);
 	else if ((*manager).map[y][x] == PLAYER)
 	{
 		manager->max_player++;
@@ -75,11 +75,11 @@ int	is_valid_map(t_map *manager)
 		y++;
 	}
 	if (manager->max_player != 1)
-		return (ft_perror("Map has more or less than one player"), 0);
+		return (ft_perror("Error: Map has more or less than one player"), 0);
 	else if (manager->max_exit != 1)
-		return (ft_perror("Map has more or less than one exit"), 0);
+		return (ft_perror("Error: Map has more or less than one exit"), 0);
 	else if (manager->max_coin == 0)
-		return (ft_perror("Map must at least contain one coin"), 0);
+		return (ft_perror("Error: Map must at least contain one coin"), 0);
 	return (1);
 }
 
@@ -89,14 +89,14 @@ int	is_valid_file(int argc, char **argv)
 	int	fd;
 
 	if (argc < 2)
-		return (ft_perror("No arguments"), 0);
+		return (ft_perror("Error: No arguments"), 0);
 	else if (argc > 2)
 		ft_printf("More than one argument, only the first will be used\n");
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
-		return (ft_perror("File cannot be opened"), 0);
+		return (ft_perror("Error: File cannot be opened"), 0);
 	else if (!ft_strrend(argv[1], ".ber"))
-		return (ft_perror("File not compatible, must use .ber files"), 0);
+		return (ft_perror("Error: File not compatible, must use .ber files"), 0);
 	close(fd);
 	return (1);
 }
