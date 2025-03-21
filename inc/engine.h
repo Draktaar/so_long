@@ -108,7 +108,10 @@ void	update_input(t_input *keybind);
 int		input_press(int key, t_input *manager);
 int		input_release(int key, t_input *manager);
 
+t_rect	ft_minkowski_diff(t_rect a, t_rect b);
 bool	is_point_in_rect(t_vec2 point, t_rect rect);
 bool	is_collided(t_rect a, t_rect b);
+bool	is_physics_collided(t_rect diff);
+t_vec2	test(t_rect diff);
 
 #endif

@@ -12,19 +12,29 @@
 
 #include "game.h"
 
-void    update_player()
+void    player_movement(t_vec2 *velocity, t_input *keybind, double delta)
 {
+    velocity->y += GRAVITY * FALL_ACCEL * delta;
+    if (keybind[MOVE_UP].hold)
+        velocity->y -= ACCEL * delta;
+    if (keybind[MOVE_DOWN].hold)
+        velocity->y += ACCEL * delta;
+    if (keybind[MOVE_LEFT].hold)
+        velocity->x -= ACCEL * delta;
+    if (keybind[MOVE_RIGHT].hold)
+        velocity->x += ACCEL * delta;
+    if (keybind[JUMP].pressed)
+        velocity->y -= JUMP;
     
 }
 
-void    player_movement(t_rect *player, t_input *keybind, double delta)
+void    update_player(t_player *player, t_input *keybind, double delta)
 {
-    if (keybind[MOVE_UP].hold)
-        player->pos.y -= ACCELERATION * delta;
-    if (keybind[MOVE_DOWN].hold)
-        player->pos.y += ACCELERATION * delta;
-    if (keybind[MOVE_LEFT].hold)
-        player->pos.x -= ACCELERATION * delta;
-    if (keybind[MOVE_RIGHT].hold)
-        player->pos.x += ACCELERATION * delta;
+    player_movement(&player->velocity, keybind, delta);
+    player->position.x += player->velocity.x * delta;
+    player->position.y += player->velocity.y * delta;
+    player->collider.pos.x = player->position.x - player->collider.size.x / 2;
+    player->collider.pos.y = player->position.y - player->collider.size.y / 2;
 }
+
+

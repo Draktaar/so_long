@@ -385,27 +385,11 @@
         //GRAVITY
         private void HandleGravity()
         {
-            if (isDashing) return;
-            if (_grounded && !_collisions.descendingSlope)
+            if (isDashing)
+                return;
+            if (_grounded)
             {
                 frameVelocity.y = 0;
-            }
-            else if (_isInAirCurrent && !ignoreAirCurrent)
-            {             
-                if(_accelCounter < _maxAirAccel)_accelCounter += _airCurrentSpeed;
-                if (lockXAxisMovement)
-                {
-                    frameVelocity = _currentAirDirection * (_airCurrentSpeed + (_accelSpeed * Time.deltaTime));
-                }
-                else if(lockXAxisAndKeepAccel)
-                {
-                    frameVelocity.x = _currentAirDirection.x * (_airCurrentSpeed + (_accelSpeed * Time.deltaTime));
-                    if (frameVelocity.y <= _maxAirSpeed && !_collisions.above) frameVelocity.y += _currentAirDirection.y * (_accelCounter * Time.deltaTime);
-                    else if (_maxAirSpeed == 0f) frameVelocity.y += _currentAirDirection.y * (_airCurrentSpeed * Time.deltaTime);
-                }
-                //else frameVelocity.y = _currentAirDirection.y * ((_airCurrentSpeed * _accelCounter) * Time.deltaTime);
-                else if (frameVelocity.y <= _maxAirSpeed && !_collisions.above) frameVelocity.y += _currentAirDirection.y * ((_accelCounter * Time.deltaTime));                
-                //Debug.Log(_accelCounter);
             }
             else
             {
@@ -413,10 +397,6 @@
                 if (_endedJumpEarly && frameVelocity.y > 0) lInAirGravity *= stats.jumpEndGravityMultiplier;
                 frameVelocity.y = Mathf.MoveTowards(frameVelocity.y, -stats.maxFallSpeed, lInAirGravity * Time.fixedDeltaTime);
             }
-        }
-        public void SetGravity(float pGravityModifier)
-        {
-            _gravityModifier = pGravityModifier;
         }
 
         //JUMP
@@ -445,10 +425,12 @@
         //DASH AND INTERACT
         private void HandleDash()
         {
-            if (_canDash) Dash();
-            else return;
             isDashing = true;
             _canDash = false;
+            if (_canDash)
+                Dash();
+            else
+                return ;
         }
 
         private void Dash()
@@ -539,10 +521,8 @@
         private void HandleDirection()
         {
             if (isDashing)
-            {
                 return;
-            }
-            else if (_playerInput.move.x == 0)
+            if (_playerInput.move.x == 0)
             {
                 float lDeceleration = _grounded ? stats.groundDecceleration : stats.airDecceleration;
                 frameVelocity.x = Mathf.MoveTowards(frameVelocity.x, 0, lDeceleration * Time.fixedDeltaTime);
@@ -588,10 +568,6 @@
             }
 
             transform.Translate(_velocity);
-        }
-        private void ChangeVisualSide()
-        {
-            _playerVisual.localScale = new Vector3(_isLookingRight ? -1 : 1, 1, 1);
         }
 
         private void ImpulseWhenTurn()
@@ -775,65 +751,6 @@
                     {
                         _lastX = -pVelocity.x;
                         EndDash();
-                    }
-                }
-            }
-        }
-
-        private void OnGround()
-        {
-            SoundManager.GetInstance.PlaySFX(SoundEvents.GetInstance.PlayerLanding, transform.position);
-            _dustTrailLanding.Play();
-        }
-
-        private void OnWalking()
-        {
-            if (!_dustTrailWalking.isPlaying)
-            {
-                _dustTrailWalking.Play();
-            }
-        }
-
-        private void ClimbSlope(ref Vector2 pVelocity, float pSlopeAngle)
-        {
-            float lMoveDistance = Mathf.Abs(pVelocity.x);
-            float lClimbVelocityY = Mathf.Sin(pSlopeAngle * Mathf.Deg2Rad) * lMoveDistance;
-
-            if (pVelocity.y <= lClimbVelocityY)
-            {
-                pVelocity.y = lClimbVelocityY;
-                pVelocity.x = Mathf.Cos(pSlopeAngle * Mathf.Deg2Rad) * lMoveDistance * Mathf.Sign(pVelocity.x);
-                _collisions.below = true;
-                _collisions.climbingSlope = true;
-                _collisions.slopeAngle = pSlopeAngle;
-            }
-        }
-
-        private void DescendSlope(ref Vector2 pVelocity)
-        {
-            float lDirectionX = Mathf.Sign(pVelocity.x);
-            Vector2 lRayOrigin = (lDirectionX == -1) ? _raycastOrigins.bottomRight : _raycastOrigins.bottomLeft;
-            RaycastHit2D lHit = Physics2D.Raycast(lRayOrigin, -Vector2.up, Mathf.Infinity, collisionMask);
-            
-            if (lHit)
-            {
-                float lSlopeAngle = Vector2.Angle(lHit.normal, Vector2.up);
-                if (lSlopeAngle != 0 && lSlopeAngle <= stats.maxDescendAngle)
-                {
-                    if (Mathf.Sign(lHit.normal.x) == lDirectionX)
-                    {
-                        if (lHit.distance - stats.skinWidth <= Mathf.Tan(lSlopeAngle * Mathf.Deg2Rad) * Mathf.Abs(pVelocity.x))
-                        {
-                            float lMoveDistance = Mathf.Abs(pVelocity.x);
-                            float lDescendVelocityY = Mathf.Sin(lSlopeAngle * Mathf.Deg2Rad) * lMoveDistance;
-                            pVelocity.x = Mathf.Cos(lSlopeAngle * Mathf.Deg2Rad) * lMoveDistance * Mathf.Sign(pVelocity.x);
-                            pVelocity.y -= lDescendVelocityY;
-
-                            _collisions.slopeAngle = lSlopeAngle;
-                            _collisions.descendingSlope = true;
-                            _collisions.below = true;
-                            if (!_groundedVisual) _groundedVisual = true;
-                        }
                     }
                 }
             }

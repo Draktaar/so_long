@@ -13,7 +13,30 @@
 #ifndef GAME_H
 # define GAME_H
 
-# define ACCELERATION 200
+// *** Movement ***
+# define MAX_SPEED 10
+# define ACCEL 250
+# define GROUND_DECCEL 120
+# define AIR_DECCEL 30
+
+// *** Jump ***
+# define JUMP_POW 2
+# define MAX_FALL 10
+# define FALL_ACCEL 10
+
+// *** Gravity ***
+# define GRAVITY 100
+# define GRAVITY_APEX 10
+
+// *** Dash ***
+# define MAX_DASH 1
+# define DASH_POW 30
+# define DASH_TIME 0.15
+# define DASH_CDR 0.3
+
+// *** QoL ***
+# define COYOTE 0.15
+# define BUFFER 0.2
 
 # include "engine.h"
 
@@ -31,6 +54,7 @@ typedef struct s_img
 typedef struct s_player
 {
 	t_img		sprite;
+	t_vec2		position;
 	t_vec2		velocity;
 	t_rect		collider;
 }	t_player;
@@ -56,6 +80,7 @@ typedef struct s_game
 int		start(t_game *manager);
 int 	draw_rect(t_display *data, t_rect rect, int color);
 int 	draw_rect_line(t_display *data, t_rect rect, int color);
-void	player_movement(t_rect *player, t_input *keybind, double delta);
+void    update_player(t_player *player, t_input *keybind, double delta);
+void	update_horizontal(t_player *player, t_rect wall);
 
 #endif

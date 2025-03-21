@@ -40,19 +40,23 @@ t_game	*init_game(t_map *manager)
 	mana = malloc(sizeof(t_game));
 	if (!mana)
 		exit(1);
-	mana->display = setup_display(manager->height, manager->width);
+	mana->display = setup_display(5, 10);
 	mana->input = init_input();
 
 	mana->late = 0;
 	mana->delta = 0;
 
+	mana->player.position = (t_vec2){
+		.x = 50,
+		.y = 150,
+	};
 	mana->player.collider = (t_rect){
-		.pos = {150, 150},
-		.size = {100, 100}
+		.pos = {0, 0},
+		.size = {50, 50}
 	};
 	mana->wall = (t_rect){
-		.pos = {325, 200},
-		.size = {75, 75}
+		.pos = {50, 250},
+		.size = {500, 500}
 	};
 	mana->map = (*manager).map;
 
@@ -77,15 +81,19 @@ static int	update(t_game *manager)
 	manager->delta = curr - manager->late;
 	manager->late = curr;
 	mlx_clear_window(manager->display.mlx, manager->display.win);
+
 	update_input(manager->input);
-	player_movement(&manager->player.collider, manager->input, manager->delta);
-	draw_rect_line(&manager->display, manager->player.collider, WHITE);
+	update_player(&manager->player, manager->input, manager->delta);
+
 	if (is_collided(manager->player.collider, manager->wall))
-		draw_rect_line(&manager->display, manager->wall, RED);
+		draw_rect_line(&manager->display, manager->player.collider, RED);
 	else
-		draw_rect_line(&manager->display, manager->wall, WHITE);
+		draw_rect_line(&manager->display, manager->player.collider, WHITE);
+	draw_rect_line(&manager->display, manager->wall, WHITE);
+
+	update_horizontal(&manager->player, manager->wall);
 	mlx_do_sync(manager->display.mlx);
-	usleep(10000);
+	//usleep(10000);
 	return (0);
 }
 
