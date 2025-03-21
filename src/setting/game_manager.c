@@ -50,6 +50,10 @@ t_game	*init_game(t_map *manager)
 		.pos = {150, 150},
 		.size = {100, 100}
 	};
+	mana->wall = (t_rect){
+		.pos = {325, 200},
+		.size = {75, 75}
+	};
 	mana->map = (*manager).map;
 
 	mana->step = 0;
@@ -75,7 +79,11 @@ static int	update(t_game *manager)
 	mlx_clear_window(manager->display.mlx, manager->display.win);
 	update_input(manager->input);
 	player_movement(&manager->player.collider, manager->input, manager->delta);
-	draw_rect(&manager->display, manager->player.collider);
+	draw_rect_line(&manager->display, manager->player.collider, WHITE);
+	if (is_collided(manager->player.collider, manager->wall))
+		draw_rect_line(&manager->display, manager->wall, RED);
+	else
+		draw_rect_line(&manager->display, manager->wall, WHITE);
 	mlx_do_sync(manager->display.mlx);
 	usleep(10000);
 	return (0);

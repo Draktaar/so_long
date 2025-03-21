@@ -12,6 +12,11 @@
 
 #include "game.h"
 
+void    update_player()
+{
+    
+}
+
 void    player_movement(t_rect *player, t_input *keybind, double delta)
 {
     if (keybind[MOVE_UP].hold)

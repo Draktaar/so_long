@@ -46,6 +46,7 @@ typedef struct s_game
 	char		**map;
 
 	t_player	player;
+	t_rect		wall;
 
 	int			step;
 	int			score;
@@ -53,7 +54,8 @@ typedef struct s_game
 }	t_game;
 
 int		start(t_game *manager);
-int		draw_rect(t_display *data, t_rect rect);
+int 	draw_rect(t_display *data, t_rect rect, int color);
+int 	draw_rect_line(t_display *data, t_rect rect, int color);
 void	player_movement(t_rect *player, t_input *keybind, double delta);
 
 #endif

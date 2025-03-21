@@ -15,8 +15,13 @@
 
 # define WINDOW_TITLE "so_long"
 
-# define RED_PIXEL 0xFF0000
-# define GREEN_PIXEL 0xFF00
+# define WHITE		0xFFFFFF
+# define RED		0xFF0000
+# define GREEN		0xFF00
+# define BLUE		0x0000FF
+# define YELLOW		0xFFFF00
+# define CYAN		0x00FFFF
+# define MAGENTA	0xFF00FF
 
 # define ON_KEYPRESS 2
 # define ON_KEYRELEASE 3
