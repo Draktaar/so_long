@@ -42,18 +42,11 @@ t_game	*init_game(t_map *manager)
 		exit(1);
 	mana->display = setup_display(5, 10);
 	mana->input = init_input();
+	mana->player = init_player();
 
 	mana->late = 0;
 	mana->delta = 0;
 
-	mana->player.position = (t_vec2){
-		.x = 50,
-		.y = 150,
-	};
-	mana->player.collider = (t_rect){
-		.pos = {0, 0},
-		.size = {50, 50}
-	};
 	mana->wall = (t_rect){
 		.pos = {50, 250},
 		.size = {500, 500}
@@ -83,15 +76,17 @@ static int	update(t_game *manager)
 	mlx_clear_window(manager->display.mlx, manager->display.win);
 
 	update_input(manager->input);
+	check_collision(&manager->player, manager->wall);
 	update_player(&manager->player, manager->input, manager->delta);
 
 	if (is_collided(manager->player.collider, manager->wall))
 		draw_rect_line(&manager->display, manager->player.collider, RED);
 	else
 		draw_rect_line(&manager->display, manager->player.collider, WHITE);
+	draw_rect_line(&manager->display, manager->player.ground_col, RED);
 	draw_rect_line(&manager->display, manager->wall, WHITE);
 
-	update_horizontal(&manager->player, manager->wall);
+	update_collision(&manager->player, manager->wall);
 	mlx_do_sync(manager->display.mlx);
 	//usleep(10000);
 	return (0);

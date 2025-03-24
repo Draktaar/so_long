@@ -14,19 +14,23 @@
 # define GAME_H
 
 // *** Movement ***
-# define MAX_SPEED 10
-# define ACCEL 250
-# define GROUND_DECCEL 120
-# define AIR_DECCEL 30
+# define ACCEL 1000 * 3
+# define TURN 700 * 3
+# define DECEL 600 * 3
+# define MAX_SPEED 90 * 3
 
 // *** Jump ***
-# define JUMP_POW 2
-# define MAX_FALL 10
-# define FALL_ACCEL 10
+# define JUMP_POW 200 * 3
+# define AIR_ACCEL 2000 * 3
+# define AIR_TURN 300 * 3
+# define AIR_DECEL 200 * 3
 
 // *** Gravity ***
-# define GRAVITY 100
+# define GRAVITY 900 * 3
 # define GRAVITY_APEX 10
+# define GROUND_FORCE 100
+# define FALL_ACCEL 10
+# define MAX_FALL 160 * 3
 
 // *** Dash ***
 # define MAX_DASH 1
@@ -38,6 +42,11 @@
 # define COYOTE 0.15
 # define BUFFER 0.2
 
+# include <mlx.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include <math.h>
+# include <time.h>
 # include "engine.h"
 
 typedef struct s_img
@@ -51,18 +60,35 @@ typedef struct s_img
 	int		w;
 }	t_img;
 
+typedef struct s_input
+{
+	bool	dash_pressed;
+	bool	jump_pressed;
+	bool	jump_hold;
+	t_vec2	move;
+}	t_input;
+
+typedef enum e_state
+{
+	IDLE,
+	WALK,
+	JUMP,
+}	t_state;
+
 typedef struct s_player
 {
-	t_img		sprite;
+	t_input		controller;
 	t_vec2		position;
 	t_vec2		velocity;
 	t_rect		collider;
+	t_rect		ground_col;
+	bool		is_grounded;
 }	t_player;
 
 typedef struct s_game
 {
 	t_display	display;
-	t_input		*input;
+	t_keybind		*input;
 
 	double		late;
 	double		delta;
@@ -78,9 +104,12 @@ typedef struct s_game
 }	t_game;
 
 int		start(t_game *manager);
+t_player	init_player(void);
 int 	draw_rect(t_display *data, t_rect rect, int color);
 int 	draw_rect_line(t_display *data, t_rect rect, int color);
-void    update_player(t_player *player, t_input *keybind, double delta);
-void	update_horizontal(t_player *player, t_rect wall);
+void	check_collision(t_player *player, t_rect wall);
+void    update_player(t_player *player, t_keybind *keybind, double delta);
+void	update_collision(t_player *player, t_rect wall);
+double	ft_abs(double val);
 
 #endif

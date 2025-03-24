@@ -5,11 +5,11 @@
 
         [SerializeField] private Transform _playerContainer = null;
 
-        [SerializeField] private float _accelSpeed = 2f ;
-        [SerializeField] private float _maxAirAccel = 75f;
-        private float _accelCounter = 0f;
-        private float _ignoreCurrentTime;
-        private float _ignoreCurrentTimePercent = 0.1f;
+        [SerializeField] private double _accelSpeed = 2f ;
+        [SerializeField] private double _maxAirAccel = 75f;
+        private double _accelCounter = 0f;
+        private double _ignoreCurrentTime;
+        private double _ignoreCurrentTimePercent = 0.1f;
 
         //Variables
         [SerializeField] public PlayerData stats;  //Player statistics to change in the editor
@@ -19,7 +19,7 @@
         public Vector2 frameVelocity = new Vector2();
         private Vector2 _velocity; // Final Velocity given the Time.deltaTime
         private Vector2 _lastVelocity = new Vector2();
-        private float _lastX;
+        private double _lastX;
 
         //Structs
         private PlayerControllerInput _playerInput;  //Optimisation for controll handling
@@ -33,7 +33,7 @@
         [SerializeField] private InputAction _jumpHoldInput;
 
         public Vector2 PlayerInput => _playerInput.move;
-        public static event Action<bool, float> GroundedChanged;
+        public static event Action<bool, double> GroundedChanged;
         public static event Action Jumped;
         public static event Action Turned;
 
@@ -42,15 +42,15 @@
         private Action DoActionNotFixed;
 
         //Time
-        private float _time;
+        private double _time;
 
         //Collisions
-        private float _frameLeftGrounded = float.MinValue;
+        private double _frameLeftGrounded = double.MinValue;
         private bool _grounded = false;
         public LayerMask collisionMask;
 
-        private float _horizontalRaySpacing;
-        private float _verticalRaySpacing;
+        private double _horizontalRaySpacing;
+        private double _verticalRaySpacing;
 
 
         //Jump
@@ -60,17 +60,17 @@
         private bool _bufferedJumpUsable;
         private bool _endedJumpEarly;
         private bool _coyoteUsable;
-        private float _timeJumpWasPressed;
+        private double _timeJumpWasPressed;
 
         private bool _isLookingRight = true;
         public bool isDashing;
         private bool _dashEndingWithTime;
         private bool _dashEndingWithGround;
-        private float _dashCountdown;
+        private double _dashCountdown;
 
         private WindTotem _windTotem = null;
 
-        private float _gravityModifier;
+        private double _gravityModifier;
 
         //AIRCURRENT RELATED
         private bool _isInAirCurrent;
@@ -79,18 +79,18 @@
         public bool lockXAxisMovement;
         public bool lockXAxisAndKeepAccel;
         private bool _airSlowdown;
-        private float _airSlowdonFriction;
-        private float _airBlowBackDirection;
+        private double _airSlowdonFriction;
+        private double _airBlowBackDirection;
         public bool enteredCurrent;
         public bool reseted;
         public bool quickChaine;
-        private float _maxAirSpeed;
+        private double _maxAirSpeed;
 
         private Vector2 _currentAirDirection;
         private Vector2 _lastAirDirection;
-        private float _airCurrentSpeed;
-        private float _lastAirSpeed;
-        private float _lastMaxAirSpeed;
+        private double _airCurrentSpeed;
+        private double _lastAirSpeed;
+        private double _lastMaxAirSpeed;
         public AirCurrent touchedCurrent = null;
         private bool HasBufferedJump => _bufferedJumpUsable && _time < _timeJumpWasPressed + stats.jumpBufferTime;
         private bool CanCoyote => _coyoteUsable && !_grounded && _time < _frameLeftGrounded + stats.coyoteTime;
@@ -101,41 +101,12 @@
 
         //Death+
         public bool isDead = false;
-        private float _percentDeathTravel;
+        private double _percentDeathTravel;
         [Range(0.1f, 3f)]
-        [SerializeField] private float _speedDeath;
+        [SerializeField] private double _speedDeath;
         [SerializeField] public Vector2 restartPos;
-        [SerializeField] private float _timeBeforeTravel = .1f;
+        [SerializeField] private double _timeBeforeTravel = .1f;
         private List<Interactif> _tempListCollectibles = new List<Interactif>();
-
-        //Visual
-        [SerializeField] private Transform _playerVisual;
-        [SerializeField] private GameObject _playerSprite;
-
-        //Dash
-        [SerializeField] private GameObject _roundSprite;
-        [SerializeField] private GameObject _trailAirstreamParent;
-        [SerializeField] private ParticleSystem _trailAirSteam_1;
-        [SerializeField] private ParticleSystem _trailAirstream2;
-        [SerializeField] private ParticleSystem _trailAirStream3;
-        [SerializeField] private ParticleSystem _dashSparkParticle;
-        [SerializeField] private ParticleSystem _dashHibouShape;
-
-        //DustTrail
-        [SerializeField] private ParticleSystem _dustTrailWalking;
-        [SerializeField] private ParticleSystem _dustTrailLanding;
-
-        //Death
-        [SerializeField] private GameObject _deathMovement;
-        [SerializeField] private GameObject _deathSoul;
-        //Collectible
-        private const string COMMON_COLLECTIBLE_CONTAINER_TAG = "Common";
-        private const string RARE_COLLECTIBLE_CONTAINER_TAG = "Rare";
-
-
-        //Animation
-        [SerializeField] private Animator _animator;
-        private bool _airAnim = false;
 
 
         //INITIALISATION
@@ -178,22 +149,6 @@
             _verticalRaySpacing = bounds.size.x / (stats.collisionPrecision - 1);
         }
 
-
-        //StateMachine for Pause
-        public void SetModeVoid()
-        {
-            DoActionFixed = DoActionVoid;
-            DoActionNotFixed = DoActionVoid;
-            _lastVelocity = frameVelocity;
-        }
-        private void DoActionVoid() { }
-        public void SetModePlay()
-        {
-            DoActionFixed = DoActionPlayFixed;
-            DoActionNotFixed = DoActionPlayNotFixed;
-            frameVelocity = _lastVelocity;
-            isDead = false;
-        }
         private void DoActionPlayFixed()
         {
             CheckCollisions();
@@ -202,91 +157,8 @@
             HandleDash();
             HandleGravity();
             HandleJump();
-            ControlAnimation();
 
             ApplyMovement();
-        }
-        private void DoActionPlayNotFixed()
-        {
-            _time += Time.deltaTime;
-            HandleInput();
-        }
-        public void SetModeDeath()
-        {
-            _animator.SetInteger("State", 0); //Idle
-            DoActionFixed = DoActionDeath;
-            _percentDeathTravel = 1 + _timeBeforeTravel;
-            GetComponent<Collider2D>().enabled = false;
-        }
-        private void DoActionDeath()
-        {
-            if (_percentDeathTravel > 1)
-            {
-                _percentDeathTravel -= Time.deltaTime;
-                if (_percentDeathTravel < 1) _percentDeathTravel = 1;
-            }
-            else
-            {
-                transform.position = GetComponent<BezierCurve>().GetPosOnBezier(_percentDeathTravel);
-
-                _percentDeathTravel -= Time.deltaTime * _speedDeath;
-                if (_percentDeathTravel < 0)
-                {
-                    isDead = false;
-                    GetComponent<Collider2D>().enabled = true;
-                    _deathMovement.SetActive(false);
-                    TrailRenderer _trailRenderer = _deathMovement.GetComponent<TrailRenderer>();
-                    _trailRenderer.emitting = false;
-                    _deathSoul.SetActive(false);
-                    _playerSprite.SetActive(true);
-                    transform.position = restartPos;
-                    SetModePlay();
-                    SoundManager.GetInstance.PlaySFX(SoundEvents.GetInstance.playerRespawn, transform.position);
-                }
-            }
-        }
-
-        //For final anim
-        public void SetModeFinalAnimA()
-        {
-            _velocity = Vector3.zero;
-            DoActionFixed = DoModeBeforeFinalAnim;
-        }
-        public void SetModeFinalAnimB()
-        {
-            _animator.SetInteger("State", 8); //Hand Up
-            DoActionFixed = DoActionVoid;
-            Invoke(nameof(SetModeFinalAnimC), .5f);
-        }
-        public void SetModeFinalAnimC()
-        {
-            _animator.SetInteger("State", 0); //Idle
-            Invoke(nameof(StartCredits), 15);
-        }
-        private void DoModeBeforeFinalAnim()
-        {
-            CheckCollisions();
-            HandleGravity();
-            ApplyMovement();
-            if (_grounded)
-            {
-                SetModeFinalAnimB();
-            }
-        }
-        private void StartCredits()
-        {
-            GameManager.GetInstance.StartCredit();
-        }
-
-
-        public void Pause()
-        {
-            if (DoActionFixed == DoActionVoid) SetModePlay();
-            else
-            {
-                if (isDead) SetModeDeath();
-                else SetModeVoid();
-            }
         }
 
         //FRAME_UPDATES
@@ -393,7 +265,7 @@
             }
             else
             {
-                float lInAirGravity = stats.fallAcceleration * stats.gravityModifier;
+                double lInAirGravity = stats.fallAcceleration * stats.gravityModifier;
                 if (_endedJumpEarly && frameVelocity.y > 0) lInAirGravity *= stats.jumpEndGravityMultiplier;
                 frameVelocity.y = Mathf.MoveTowards(frameVelocity.y, -stats.maxFallSpeed, lInAirGravity * Time.fixedDeltaTime);
             }
@@ -402,14 +274,15 @@
         //JUMP
         private void HandleJump()
         {
-            if (!_endedJumpEarly && !_grounded && _playerInput.jumpHeld && frameVelocity.y > 0) _endedJumpEarly = true;
-
-            if (!_canJump && !HasBufferedJump) return;
-
-            if (_grounded || CanCoyote || _collisions.climbingSlope) Jump();
-
+            if (!_endedJumpEarly && !_grounded && _playerInput.jumpHeld && frameVelocity.y > 0)
+                _endedJumpEarly = true;
+            if (!_canJump && !HasBufferedJump)
+                return;
+            if (_grounded || CanCoyote || _collisions.climbingSlope)
+                Jump();
             _canJump = false;
         }
+
         private void Jump()
         {
             _endedJumpEarly = false;
@@ -435,7 +308,7 @@
 
         private void Dash()
         {
-            float lScale = _isLookingRight ? 1 : -1;
+            double lScale = _isLookingRight ? 1 : -1;
             frameVelocity.y = 0;
             _lastX = frameVelocity.x;
             frameVelocity.x = stats.dashPower * lScale;
@@ -472,51 +345,6 @@
             _windTotem = null;
         }
 
-        //AIRCURRENT
-        public void SetInAirCurrent(bool pBool, Vector2 pDirection, float pAirSpeed, bool PExit, float pRefreshRate, float pMaxAirSpeed)
-        {
-            _isInAirCurrent = pBool;
-            _currentAirDirection = pDirection;
-            _airCurrentSpeed = pAirSpeed;
-            _maxAirSpeed = pMaxAirSpeed;
-            enteredCurrent = true;
-            if (PExit)
-            {
-               // ignoreAirCurrent = true;
-                //Invoke(nameof(OnAirCurrentExit), stats.airCurrentRefreshRate);
-                Invoke(nameof(ResetAirCurrent), pRefreshRate);                
-                if (_collisions.above) frameVelocity.y = 0;
-                _accelCounter = 0f;
-            }
-            else
-            {
-                ignoreAirCurrent = false;
-                _lastAirDirection = pDirection;
-                _lastAirSpeed = pAirSpeed;
-                _lastMaxAirSpeed = pMaxAirSpeed;
-            }
-        }
-
-        public void SetSlowdown(bool pBool, float pSlowFriction, float pBlowBackDirection)
-        {
-            _airSlowdown = pBool;
-            _airSlowdonFriction = pSlowFriction;
-            _airBlowBackDirection = pBlowBackDirection;
-        }
-
-        public void OnAirCurrentExit(float pRefreshRate)
-        {
-            ignoreAirCurrent = true;
-            //Invoke(nameof(OnAirCurrentExit), stats.airCurrentRefreshRate);
-            Invoke(nameof(ResetAirCurrent), pRefreshRate);
-            if (_collisions.above) frameVelocity.y = 0;
-        }
-
-        private void ResetAirCurrent()
-        {
-            ignoreAirCurrent = false;
-        }
-
         //MOVEMENT
         private void HandleDirection()
         {
@@ -524,15 +352,11 @@
                 return;
             if (_playerInput.move.x == 0)
             {
-                float lDeceleration = _grounded ? stats.groundDecceleration : stats.airDecceleration;
+                double lDeceleration = _grounded ? stats.groundDecceleration : stats.airDecceleration;
                 frameVelocity.x = Mathf.MoveTowards(frameVelocity.x, 0, lDeceleration * Time.fixedDeltaTime);
             }
             else
             {
-                if(_groundedVisual) //quand il marche et qu'il est par terre
-                {
-                    OnWalking();
-                }
                 bool lCheck = _playerInput.move.x > 0 ? true : false;
                 if (lCheck != _isLookingRight) Turned?.Invoke();
                 _isLookingRight = lCheck;
@@ -543,17 +367,7 @@
         private void ApplyMovement()
         {
             _velocity = frameVelocity * Time.deltaTime;
-            if (_airSlowdown && _playerInput.move != Vector2.zero) _velocity *= _airSlowdonFriction;
-            else if (_airSlowdown) 
-            {
-                _velocity.x += _airSlowdonFriction * _airBlowBackDirection ;
-            }
-            
             UpdateRaycastOrigins();
-            _collisions.Reset();
-            
-            _collisions.velocityOld = _velocity;
-
             if (_velocity.y < 0)
             {
                 DescendSlope(ref _velocity);
@@ -630,9 +444,9 @@
 
         private void VerticalCollisions(ref Vector2 pVelocity)
         {
-            float lDirectionY = Mathf.Sign(pVelocity.y);
-            float lRayLength = Mathf.Abs(pVelocity.y) + stats.skinWidth;
-            float lCounterHit = 0;
+            double lDirectionY = Mathf.Sign(pVelocity.y);
+            double lRayLength = Mathf.Abs(pVelocity.y) + stats.skinWidth;
+            double lCounterHit = 0;
 
             for (int i = 0; i < stats.collisionPrecision; i++)
             {
@@ -678,14 +492,14 @@
             if (lCounterHit == 0 && _groundedVisual && !_collisions.climbingSlope && !_collisions.descendingSlope) _groundedVisual = false;
             if (_collisions.climbingSlope)
             {
-                float lDirectionX = Mathf.Sign(pVelocity.x);
+                double lDirectionX = Mathf.Sign(pVelocity.x);
                 lRayLength = Mathf.Abs(pVelocity.x) + stats.skinWidth;
                 Vector2 lRayOrigin = ((lDirectionX == -1) ? _raycastOrigins.bottomLeft : _raycastOrigins.bottomRight) + Vector2.up * pVelocity.y;
                 RaycastHit2D lHit = Physics2D.Raycast(lRayOrigin, Vector2.right * lDirectionX, lRayLength, collisionMask);
 
                 if(lHit)
                 {
-                    float lSlopeAngle = Vector2.Angle(lHit.normal, Vector2.up);
+                    double lSlopeAngle = Vector2.Angle(lHit.normal, Vector2.up);
                     if (lSlopeAngle != _collisions.slopeAngle)
                     {
                         pVelocity.x = (lHit.distance - stats.skinWidth) * lDirectionX;
@@ -697,8 +511,8 @@
 
         private void HorizontalCollisions(ref Vector2 pVelocity)
         {
-            float lDirectionX = Mathf.Sign(pVelocity.x);
-            float lRayLength = Mathf.Abs(pVelocity.x) + stats.skinWidth;
+            double lDirectionX = Mathf.Sign(pVelocity.x);
+            double lRayLength = Mathf.Abs(pVelocity.x) + stats.skinWidth;
 
             for (int i = 0; i < stats.collisionPrecision; i++)
             {
@@ -709,7 +523,7 @@
 
                 if (lHit && !lHit.collider.CompareTag("InteractivObject") && !lHit.collider.CompareTag("Travers"))
                 {
-                    float lSlopeAngle = Vector2.Angle(lHit.normal, Vector2.up);
+                    double lSlopeAngle = Vector2.Angle(lHit.normal, Vector2.up);
 
                     if (i == 0 && lSlopeAngle <= stats.maxClimbAngle)
                     {
@@ -718,7 +532,7 @@
                             _collisions.descendingSlope = false;
                             pVelocity = _collisions.velocityOld;
                         }
-                        float lDistanceToSlopeSart = 0;
+                        double lDistanceToSlopeSart = 0;
                         if (lSlopeAngle != _collisions.slopeAngleOld)
                         {
                             lDistanceToSlopeSart = lHit.distance - stats.skinWidth;
@@ -794,93 +608,9 @@
            // SaveManager.ClearCountValues();
         }
 
-        public void ResetRestartPos(Vector2 pNewRestartPos)
-        {
-            restartPos = pNewRestartPos;
-            _tempListCollectibles = new List<Interactif>();
-        }
-
-        public void AddTempCollectible(Interactif pCollectible)
-        {
-            _tempListCollectibles.Add(pCollectible);
-        }
-
-        //COLLECTIBLE RELATED
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (collision.GetComponent<Collectible>())
-            {
-                string lCollectibleContainerTag = collision.transform.parent.tag;
-                int lIndex = collision.transform.GetSiblingIndex();
-                if(lCollectibleContainerTag == COMMON_COLLECTIBLE_CONTAINER_TAG)
-                {
-                    SaveManager.AddCountValue(SaveManager.CountValuesToSave.CommonCollectiblesCount);
-                    SaveManager.ChangeListValue(SaveManager.ListValuesToSave.CommonCollectibles, false, lIndex);
-                }
-                else if(lCollectibleContainerTag == RARE_COLLECTIBLE_CONTAINER_TAG)
-                {
-                    SaveManager.AddCountValue(SaveManager.CountValuesToSave.RareCollectiblesCount);
-                    SaveManager.ChangeListValue(SaveManager.ListValuesToSave.RareCollectibles, false, lIndex);
-                }
-            }
-        }        
-
         public void ResetPos(Vector2 pPos)
         {
             transform.position = pPos;
-        }
-
-        private void OnDestroy()
-        {
-            //Connexions
-            Turned -= ChangeVisualSide;
-            Turned -= ImpulseWhenTurn;
-        }
-        private void ControlAnimation()
-        {
-            if (isDashing)
-            {
-                _animator.SetInteger("State", 2); //dash
-            }
-            else if (_isInAirCurrent)
-            {
-                _airAnim = true;
-                if (_currentAirDirection.y == 0)
-                {
-                    _animator.SetInteger("State", 7); //Horizontal air curent
-                }
-                else if (_currentAirDirection.y != 0)
-                {
-                    _animator.SetInteger("State", 6); //Vertical air current
-                }
-            }
-            else if (_groundedVisual)
-            {
-                if (_airAnim)
-                {
-                    _airAnim = false;
-                    _animator.SetInteger("State", 4); //land
-                }
-                else if (_playerInput.move == Vector2.zero)
-                {
-                    _animator.SetInteger("State", 0); //idle
-                }
-                else
-                {
-                    _animator.SetInteger("State", 1); //walk
-                }
-            }
-            else
-            {
-                _airAnim = true;
-                _animator.SetInteger("State", 5); //Jump Fall
-            }
-        }
-        
-        //EDITOR
-        private void OnValidate()
-        {
-            if (stats == null) Debug.LogWarning("No stats given", this);
         }
     }
 
@@ -906,7 +636,7 @@
 
         public bool climbingSlope;
         public bool descendingSlope;
-        public float slopeAngle, slopeAngleOld;
+        public double slopeAngle, slopeAngleOld;
         public Vector2 velocityOld;
 
         public void Reset()

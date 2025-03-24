@@ -33,6 +33,7 @@ SRC =	map/map_checker.c \
 		graphic/gizmo.c \
 		player/player_controller.c \
 		player/player_collision.c \
+		player/player_movement.c \
 		main.c
 
 OBJS = $(addprefix $(SRCDIR)/, $(SRC:.c=.o))
@@ -40,6 +41,7 @@ OBJS = $(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJS)
+	xset r off
 	$(MAKE) -C $(LIBFT)
 	$(MAKE) -C $(STDIO42)
 	$(CC) $(OBJS) $(LIBFT)/libft.a $(STDIO42)/stdio42.a $(LDFLAGS) -o $(NAME)

@@ -12,29 +12,30 @@
 
 #include "engine.h"
 
-t_input	*init_input(void)
+t_keybind	*init_input(void)
 {
-	static t_input	keybind[MAX_ACTION];
+	static t_keybind	button[MAX_ACTION];
 	int				i;
 
 	i = 0;
 	while (i < MAX_ACTION)
 	{
-		keybind[i].key = 0;
-		keybind[i].hold = 0;
-		keybind[i].pressed = 0;
-		keybind[i].pressed_time = 0;
+		button[i].key = 0;
+		button[i].hold = 0;
+		button[i].pressed = 0;
+		button[i].pressed_time = 0;
 		i++;
 	}
-	keybind[MOVE_UP].key = KEY_W;
-	keybind[MOVE_DOWN].key = KEY_S;
-	keybind[MOVE_LEFT].key = KEY_A;
-	keybind[MOVE_RIGHT].key = KEY_D;
-	keybind[JUMP].key = KEY_SPACE;
-	return (keybind);
+	button[W].key = KEY_W;
+	button[S].key = KEY_S;
+	button[A].key = KEY_A;
+	button[D].key = KEY_D;
+	button[SPACE].key = KEY_SPACE;
+	button[ESC].key = KEY_ESC;
+	return (button);
 }
 
-void	update_input(t_input *keybind)
+void	update_input(t_keybind *keybind)
 {
 	double	curr_time;
 	int		i;
@@ -52,7 +53,7 @@ void	update_input(t_input *keybind)
 	}
 }
 
-int	input_press(int key, t_input *keybind)
+int	input_press(int key, t_keybind *keybind)
 {
 	int	i;
 
@@ -73,7 +74,7 @@ int	input_press(int key, t_input *keybind)
 	return (0);
 }
 
-int	input_release(int key, t_input *keybind)
+int	input_release(int key, t_keybind *keybind)
 {
 	int	i;
 
@@ -83,8 +84,6 @@ int	input_release(int key, t_input *keybind)
 		if (keybind[i].key == key)
 		{
 			keybind[i].hold = 0;
-			keybind[i].pressed = 0;
-			keybind[i].pressed_time = 0;
 		}
 		i++;
 	}
