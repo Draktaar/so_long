@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:13:16 by achu              #+#    #+#             */
-/*   Updated: 2025/03/25 00:10:44 by achu             ###   ########.fr       */
+/*   Updated: 2025/03/25 17:30:52 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ t_vec2	ft_penetration(t_rect a, t_rect b)
 
 void	check_collision(t_player *player, t_rect wall)
 {
-	if (!player->is_grounded && is_collided(player->ground_col, wall))
+	if (!player->is_ground && is_collided(player->ground_col, wall))
 	{
-		player->is_grounded = true;
+		player->is_ground = true;
 	}
-	else if (player->is_grounded && !is_collided(player->ground_col, wall))
+	else if (player->is_ground && !is_collided(player->ground_col, wall))
 	{
-		player->is_grounded = false;
+		player->is_ground = false;
 	}
 }
 

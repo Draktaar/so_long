@@ -14,27 +14,28 @@
 # define GAME_H
 
 // *** Movement ***
-# define ACCEL 1000 * 3
-# define TURN 700 * 3
-# define DECEL 600 * 3
-# define MAX_SPEED 90 * 3
+# define ACCEL 1200 * 4
+# define TURN 900 * 4
+# define DECEL 600 * 4
+# define MAX_SPEED 90 * 4
 
 // *** Jump ***
-# define JUMP_POW 200 * 3
-# define AIR_ACCEL 2000 * 3
-# define AIR_TURN 300 * 3
-# define AIR_DECEL 200 * 3
+# define JUMP_POW 175 * 4
+# define JUMP_BOOST 50 * 4
+# define JUMP_CUT 5 * 4
+# define AIR_ACCEL 1000 * 4
+# define AIR_TURN 500 * 4
+# define AIR_DECEL 250 * 4
 
 // *** Gravity ***
-# define GRAVITY 900 * 3
-# define GRAVITY_APEX 10
+# define GRAVITY 410 * 4
 # define GROUND_FORCE 100
-# define FALL_ACCEL 10
-# define MAX_FALL 160 * 3
+# define FALL_MULT 1.5
+# define MAX_FALL 160 * 4
 
 // *** Dash ***
 # define MAX_DASH 1
-# define DASH_POW 30
+# define DASH_POW 200 * 4
 # define DASH_TIME 0.15
 # define DASH_CDR 0.3
 
@@ -82,7 +83,8 @@ typedef struct s_player
 	t_vec2		velocity;
 	t_rect		collider;
 	t_rect		ground_col;
-	bool		is_grounded;
+	bool		is_ground;
+	bool		is_grab;
 }	t_player;
 
 typedef struct s_game

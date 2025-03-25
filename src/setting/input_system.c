@@ -31,6 +31,7 @@ t_keybind	*init_input(void)
 	button[A].key = KEY_A;
 	button[D].key = KEY_D;
 	button[SPACE].key = KEY_SPACE;
+	button[SHIFT].key = KEY_SHIFT;
 	button[ESC].key = KEY_ESC;
 	return (button);
 }
