@@ -52,14 +52,21 @@
 
 typedef struct s_img
 {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		h;
-	int		w;
+	t_display	win;
+	void		*img;
+	char		*addr;
+	int			h;
+	int			w;
+	int			bpp;
+	int			line_len;
+	int			endian;
 }	t_img;
+
+typedef struct s_sprite
+{
+	t_img	img;
+}	t_sprite;
+
 
 typedef struct s_input
 {
@@ -79,6 +86,7 @@ typedef enum e_state
 typedef struct s_player
 {
 	t_input		controller;
+	t_sprite	sprite;
 	t_vec2		position;
 	t_vec2		velocity;
 	t_rect		collider;
@@ -86,6 +94,12 @@ typedef struct s_player
 	bool		is_ground;
 	bool		is_grab;
 }	t_player;
+
+typedef struct s_wall
+{
+	t_sprite		sprite;
+	t_rect			collider;
+}	t_wall;
 
 typedef struct s_game
 {
@@ -95,7 +109,7 @@ typedef struct s_game
 	double		late;
 	double		delta;
 
-	char		**map;
+	t_wall		**solids;
 
 	t_player	player;
 	t_rect		wall;
@@ -109,9 +123,11 @@ int		start(t_game *manager);
 t_player	init_player(void);
 int 	draw_rect(t_display *data, t_rect rect, int color);
 int 	draw_rect_line(t_display *data, t_rect rect, int color);
-void	check_collision(t_player *player, t_rect wall);
+void	check_collision(t_player *player, t_wall *wall);
 void    update_player(t_player *player, t_keybind *keybind, double delta);
-void	update_collision(t_player *player, t_rect wall);
-double	ft_abs(double val);
+void	update_collision(t_player *player, t_wall wall);
+
+t_wall	**init_solid(t_display window, char **map);
+t_img	new_img(char *file, t_display window);
 
 #endif

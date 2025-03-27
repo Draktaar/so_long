@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:13:16 by achu              #+#    #+#             */
-/*   Updated: 2025/03/25 17:30:52 by achu             ###   ########.fr       */
+/*   Updated: 2025/03/27 01:07:41 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,34 +37,33 @@ t_vec2	ft_penetration(t_rect a, t_rect b)
 	return (overlap);
 }
 
-void	check_collision(t_player *player, t_rect wall)
+void	check_collision(t_player *player, t_wall *wall)
 {
-	if (!player->is_ground && is_collided(player->ground_col, wall))
+	if (!player->is_ground && is_collided(player->ground_col, wall->collider))
 	{
 		player->is_ground = true;
 	}
-	else if (player->is_ground && !is_collided(player->ground_col, wall))
+	else if (player->is_ground && !is_collided(player->ground_col,  wall->collider))
 	{
 		player->is_ground = false;
 	}
 }
 
-void	update_collision(t_player *player, t_rect wall)
+void	update_collision(t_player *player, t_wall solid)
 {
 	t_vec2	overlap;
-
-	if (is_collided(player->collider, wall))
+	if (is_collided(player->collider, solid.collider))
 	{
-		overlap = ft_penetration(player->collider, wall);
-        if (overlap.x < overlap.y)
+		overlap = ft_penetration(player->collider, solid.collider);
+		if (overlap.x < overlap.y)
 		{
 			player->velocity.x = 0;
-			player->position.x += overlap.x * (player->position.x < wall.pos.x ? -1 : 1);
+			player->position.x += overlap.x * (player->position.x < solid.collider.pos.x ? -1 : 1);
 		}
-        else
+		else
 		{
 			player->velocity.y = 0;
-			player->position.y += overlap.y * (player->position.y < wall.pos.y ? -1 : 1);
+			player->position.y += overlap.y * (player->position.y < solid.collider.pos.y ? -1 : 1);
 		}
 	}
 }

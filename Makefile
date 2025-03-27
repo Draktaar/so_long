@@ -31,6 +31,9 @@ SRC =	map/map_checker.c \
 		setting/input_system.c \
 		setting/game_manager.c \
 		graphic/gizmo.c \
+		graphic/render.c \
+		graphic/sprite.c \
+		level/level.c \
 		player/player_controller.c \
 		player/player_collision.c \
 		player/player_movement.c \

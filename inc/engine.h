@@ -15,6 +15,9 @@
 
 # define WINDOW_TITLE "so_long"
 
+# define PIXEL_SIZE 64
+# define IMG_WALL "assets/wall.xpm"
+
 # define WHITE		0xFFFFFF
 # define RED		0xFF0000
 # define GREEN		0xFF00
@@ -61,7 +64,6 @@ typedef struct s_keybind
 	int		key;
 	int		pressed;
 	int		hold;
-	double	pressed_time;
 }	t_keybind;
 
 typedef enum e_action

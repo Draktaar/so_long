@@ -23,6 +23,7 @@ int main(int argc, char **argv)
 	if (!init_map(&m_manager, argc, argv))
 		return (1);
 	g_manager = init_game(&m_manager);
+	//g_manager->solids = init_solid( g_manager->display, m_manager.map);
 	start(g_manager);
 	clean_map(&m_manager);
 	return (0);

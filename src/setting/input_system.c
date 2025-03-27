@@ -12,6 +12,7 @@
 
 #include "engine.h"
 
+// Initialize all input
 t_keybind	*init_input(void)
 {
 	static t_keybind	button[MAX_ACTION];
@@ -23,7 +24,6 @@ t_keybind	*init_input(void)
 		button[i].key = 0;
 		button[i].hold = 0;
 		button[i].pressed = 0;
-		button[i].pressed_time = 0;
 		i++;
 	}
 	button[W].key = KEY_W;
@@ -36,24 +36,20 @@ t_keybind	*init_input(void)
 	return (button);
 }
 
+// Update all pressed input to reset after 1 frame
 void	update_input(t_keybind *keybind)
 {
-	double	curr_time;
 	int		i;
 
 	i = 0;
-	curr_time = get_frame();
 	while (i < MAX_ACTION)
 	{
-		if (keybind[i].pressed && (curr_time - keybind[i].pressed_time) > 0.1)
-		{
-			keybind[i].pressed = 0;
-			keybind[i].pressed_time = 0;
-		}
+		keybind[i].pressed = 0;
 		i++;
 	}
 }
 
+// mlx_hook for input key pressed
 int	input_press(int key, t_keybind *keybind)
 {
 	int	i;
@@ -64,10 +60,7 @@ int	input_press(int key, t_keybind *keybind)
 		if (keybind[i].key == key)
 		{
 			if (keybind[i].hold == 0)
-			{
 				keybind[i].pressed = 1;
-				keybind[i].pressed_time = get_frame();
-			}
 			keybind[i].hold = 1;
 		}
 		i++;
@@ -75,6 +68,7 @@ int	input_press(int key, t_keybind *keybind)
 	return (0);
 }
 
+// mlx_hook for input key released
 int	input_release(int key, t_keybind *keybind)
 {
 	int	i;
@@ -83,9 +77,7 @@ int	input_release(int key, t_keybind *keybind)
 	while (i < MAX_ACTION)
 	{
 		if (keybind[i].key == key)
-		{
 			keybind[i].hold = 0;
-		}
 		i++;
 	}
 	return (0);
