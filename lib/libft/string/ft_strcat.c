@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen_dbl.c                                    :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 14:42:15 by achu              #+#    #+#             */
-/*   Updated: 2025/01/29 14:12:18 by achu             ###   ########.fr       */
+/*   Created: 2025/04/03 00:07:34 by achu              #+#    #+#             */
+/*   Updated: 2025/04/03 00:16:59 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-
-size_t	ft_strlen_dbl(char **str)
+char	*ft_strcat(char *dest, const char *src)
 {
-	size_t	i;
+	char	*temp;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	temp = dest;
+	while (*dest)
+		dest++;
+	while (*src)
+		*dest++ = *src++;
+	*dest = '\0';
+	return (temp);
 }

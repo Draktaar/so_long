@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: achu <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:08:38 by achu              #+#    #+#             */
-/*   Updated: 2024/11/05 13:08:39 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/06 01:13:14 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+// Compare to see if the string has the char [find]
 char	*ft_strrchr(const char *str, int find)
 {
 	int	i;

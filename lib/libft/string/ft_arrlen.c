@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_freetab.c                                      :+:      :+:    :+:   */
+/*   ft_arrlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/18 00:59:34 by achu              #+#    #+#             */
-/*   Updated: 2025/03/18 01:00:12 by achu             ###   ########.fr       */
+/*   Created: 2025/01/24 14:42:15 by achu              #+#    #+#             */
+/*   Updated: 2025/04/06 01:19:52 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <string.h>
 
-void	ft_freeptrs(void **ptrs)
+size_t	ft_arrlen(char **str)
 {
-	int	i;
+	size_t	i;
 
-	if (!ptrs)
-        return;
 	i = 0;
-	while (ptrs[i])
-	{
-		free(ptrs[i]);
+	while (str[i])
 		i++;
-	}
-	free(ptrs);
+	return (i);
 }

@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen_trpl.c                                   :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/28 17:42:16 by achu              #+#    #+#             */
-/*   Updated: 2025/02/21 17:44:18 by achu             ###   ########.fr       */
+/*   Created: 2025/04/02 18:21:08 by achu              #+#    #+#             */
+/*   Updated: 2025/04/05 16:49:51 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-size_t	ft_strlen_trpl(char ***str)
+void	*ft_realloc(void *ptr, size_t old_size, size_t new_size)
 {
-	size_t	i;
+	size_t	size;
+	void	*new;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	if (new_size == 0)
+		return (free(ptr), NULL);
+	if (!ptr)
+		return (malloc(new_size));
+	new = (void *)malloc(new_size);
+	if (!new)
+		return (NULL);
+	size = new_size;
+	if (old_size < new_size)
+		size = old_size;
+	ft_memcpy(new, ptr, size);
+	free(ptr);
+	return (new);
 }

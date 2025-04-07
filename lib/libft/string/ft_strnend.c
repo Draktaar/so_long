@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrend.c                                       :+:      :+:    :+:   */
+/*   ft_strnend.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 00:44:12 by achu              #+#    #+#             */
-/*   Updated: 2025/03/18 01:02:31 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/06 01:14:04 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-// Compare to see if the end of *str is *find
-int	ft_strrend(const char *str, char *find)
+// Compare to see if the end of the string is find
+int	ft_strnend(const char *str, char *find)
 {
 	size_t	i;
 	size_t	j;

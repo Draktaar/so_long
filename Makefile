@@ -45,24 +45,24 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	xset r off
-	$(MAKE) -C $(LIBFT)
-	$(MAKE) -C $(STDIO42)
-	$(CC) $(OBJS) $(LIBFT)/libft.a $(STDIO42)/stdio42.a $(LDFLAGS) -o $(NAME)
+	@$(MAKE) -C $(LIBFT)
+	@$(MAKE) -C $(STDIO42)
+	@$(CC) $(OBJS) $(LIBFT)/libft.a $(STDIO42)/stdio42.a $(LDFLAGS) -o $(NAME)
 
 $(SRCDIR)/%.o: $(SRCDIR)/%.c
-	$(CC) $(CFLAGS) -I $(INCDIR) -I $(MLIBX) -I $(LIBFT) -I $(STDIO42) -c $< -o $@
+	@$(CC) $(CFLAGS) -I $(INCDIR) -I $(MLIBX) -I $(LIBFT) -I $(STDIO42) -c $< -o $@
 
 $(OBJS): $(HEADERS)
 
 clean:
-	$(MAKE) clean -C $(LIBFT)
-	$(MAKE) clean -C $(STDIO42)
-	rm -rf $(OBJS)
+	@$(MAKE) clean -C $(LIBFT)
+	@$(MAKE) clean -C $(STDIO42)
+	@rm -rf $(OBJS)
 
 fclean: clean
-	$(MAKE) fclean -C $(LIBFT)
-	$(MAKE) fclean -C $(STDIO42)
-	rm -rf $(NAME)
+	@$(MAKE) fclean -C $(LIBFT)
+	@$(MAKE) fclean -C $(STDIO42)
+	@rm -rf $(NAME)
 
 re: fclean all
 
