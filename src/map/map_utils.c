@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:14:10 by achu              #+#    #+#             */
-/*   Updated: 2025/03/20 22:06:18 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/07 17:12:49 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	init_map(t_map *manager, int argc, char **argv)
 	if (!manager->map)
 		return (ft_perror("Map not initialize"), 0);
 	manager->width = ft_strlen(manager->map[0]) - 1;
-	manager->height = ft_strlen_dbl(manager->map);
+	manager->height = ft_arrlen(manager->map);
 	if (!is_valid_map(manager))
 		return (clean_map(manager), 0);
 	else if (!is_valid_pathfinder(manager))

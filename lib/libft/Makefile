@@ -6,7 +6,7 @@
 #    By: achu <achu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 11:00:14 by achu              #+#    #+#              #
-#    Updated: 2025/04/06 01:46:59 by achu             ###   ########.fr        #
+#    Updated: 2025/04/07 17:13:25 by achu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,16 +66,16 @@ OBJS = $(CONV_OBJS) $(MEM_OBJS) $(CHAR_OBJS) $(STR_OBJS) $(GNL_OBJS)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	@ar rcs $(NAME) $(OBJS)
 	
 %.o: %.c
-	$(CC) $(CFLAGS) -I. -c $< -o $@
+	@$(CC) $(CFLAGS) -I. -c $< -o $@
 	
 clean:
-	rm -rf $(OBJS)
+	@rm -rf $(OBJS)
 
 fclean:	clean
-	rm -rf $(NAME)
+	@rm -rf $(NAME)
 
 re: fclean all
 
