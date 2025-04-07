@@ -15,7 +15,7 @@
 
 // *** Movement ***
 # define ACCEL 1200 * 4
-# define TURN 900 * 4
+# define TURN 1200 * 4
 # define DECEL 600 * 4
 # define MAX_SPEED 90 * 4
 
@@ -52,8 +52,8 @@
 
 typedef struct s_img
 {
-	t_display	win;
-	void		*img;
+	t_display	window;
+	void		*ptr;
 	char		*addr;
 	int			h;
 	int			w;
@@ -109,7 +109,7 @@ typedef struct s_game
 	double		late;
 	double		delta;
 
-	t_wall		**solids;
+	t_wall		*solids;
 
 	t_player	player;
 	t_rect		wall;
@@ -123,11 +123,11 @@ int		start(t_game *manager);
 t_player	init_player(void);
 int 	draw_rect(t_display *data, t_rect rect, int color);
 int 	draw_rect_line(t_display *data, t_rect rect, int color);
-void	check_collision(t_player *player, t_wall *wall);
+void	check_collision(t_player *player, t_wall wall);
 void    update_player(t_player *player, t_keybind *keybind, double delta);
 void	update_collision(t_player *player, t_wall wall);
 
-t_wall	**init_solid(t_display window, char **map);
+t_wall	*init_solid(t_display window, char **map);
 t_img	new_img(char *file, t_display window);
 
 #endif

@@ -60,6 +60,8 @@ double get_frame()
     return (ts.tv_sec + (ts.tv_nsec / 1.0e9));
 }
 
+void	put_img(t_img image);
+
 static int	update(t_game *manager)
 {
 	double	curr;
@@ -70,10 +72,23 @@ static int	update(t_game *manager)
 	manager->late = curr;
 
 	mlx_clear_window(manager->display.mlx, manager->display.win);
-
 	draw_rect_line(&manager->display, manager->player.collider, WHITE);
+
+	//render
+	for (size_t i = 0; i < 40; i++)
+	{
+		check_collision(&manager->player, manager->solids[i]);
+	}
 	update_player(&manager->player, manager->input, manager->delta);
-	//update_collision(&manager->player, manager->solids);
+	for (size_t i = 0; i < 40; i++)
+	{
+		update_collision(&manager->player, manager->solids[i]);
+	}
+	//render
+	for (size_t i = 0; i < 40; i++)
+	{
+		mlx_put_image_to_window(manager->display.mlx, manager->display.win, manager->solids[i].sprite.img.ptr, manager->solids[i].collider.pos.x, manager->solids[i].collider.pos.y);
+	}
 	update_input(manager->input);
 	mlx_do_sync(manager->display.mlx);
 	return (0);
@@ -82,6 +97,7 @@ static int	update(t_game *manager)
 int	start(t_game *manager)
 {
 	manager->late = get_frame();
+
 	mlx_loop_hook(manager->display.mlx, update, manager);
 	mlx_hook(manager->display.win, ON_KEYPRESS, MASK_KEYPRESS, input_press, manager->input);
 	mlx_hook(manager->display.win, ON_KEYRELEASE, MASK_KEYRELEASE, input_release, manager->input);

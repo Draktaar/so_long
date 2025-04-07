@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:13:16 by achu              #+#    #+#             */
-/*   Updated: 2025/03/27 01:07:41 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/07 18:27:15 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ t_vec2	ft_penetration(t_rect a, t_rect b)
 	return (overlap);
 }
 
-void	check_collision(t_player *player, t_wall *wall)
+void	check_collision(t_player *player, t_wall wall)
 {
-	if (!player->is_ground && is_collided(player->ground_col, wall->collider))
+	if (!player->is_ground && is_collided(player->ground_col, wall.collider))
 	{
 		player->is_ground = true;
 	}
-	else if (player->is_ground && !is_collided(player->ground_col,  wall->collider))
+	else if (player->is_ground && !is_collided(player->ground_col,  wall.collider))
 	{
 		player->is_ground = false;
 	}

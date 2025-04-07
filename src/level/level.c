@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:00:08 by achu              #+#    #+#             */
-/*   Updated: 2025/03/27 01:12:43 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/07 17:56:34 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,46 @@ static t_wall	new_solid(t_display window, float x, float y)
 	return (wall);
 }
 
-static t_wall	*parse_line(t_display window, int y, char *map)
+static int	expand_wall(t_wall **solids, size_t *size, t_wall new)
 {
-	t_wall *line;
-	int 	x;
+	t_wall	*new_solids;
+	size_t	new_size;
 
-	line = (t_wall *)malloc(window.width * sizeof(t_wall));
-	if (!line)
-		return (NULL);
-	x = 0;
-	while (map[x])
-	{
-		if (map[x] == '1')
-			line[x] = new_solid(window, x, y);
-		else
-			line[x] = (t_wall){0};
-		x++;
-	}
-	return (line);
+	new_size = *size + 1;
+	new_solids = ft_realloc(*solids, *size * sizeof(t_wall), new_size * sizeof(t_wall));
+	if (!new_solids)
+		return (0);
+	new_solids[*size] = new;
+	(*solids) = new_solids;
+	(*size) = new_size;
+	return (1);
 }
 
-t_wall	**init_solid(t_display window, char **map)
+t_wall	*init_solid(t_display window, char **map)
 {
-	t_wall	**solids;
-	int		y;
+	t_wall	new;
+	t_wall	*solids;
+	size_t	size;
+	size_t	x;
+	size_t	y;
 
-	solids = (t_wall **)malloc(window.height * sizeof(t_wall *));
+	size = 0;
+	solids = (t_wall *)malloc(size * sizeof(t_wall));
 	if (!solids)
 		return (NULL);
 	y = 0;
 	while (map[y])
 	{
-		solids[y] = parse_line(window, y, map[y]);
-		if (!solids[y])
-			return (NULL);
+		x = 0;
+		while (map[y][x])
+		{
+			if (map[y][x] == '1')
+			{
+				new = new_solid(window, x, y);
+				expand_wall(&solids, &size, new);
+			}
+			x++;
+		}
 		y++;
 	}
 	return (solids);
