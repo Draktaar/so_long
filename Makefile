@@ -24,7 +24,8 @@ MLIBX = 	lib/minilibx-linux
 LDFLAGS =  -L$(MLIBX) -lmlx -lXext -lX11 -lm -lz
 HEADERS = $(INCDIR)/engine.h $(INCDIR)/game.h $(INCDIR)/map.h $(LIBFT)/libft.h $(STDIO42)/stdio42.h
 
-SRC =	map/map_checker.c \
+SRC =	engine/test.c \
+		map/map_checker.c \
 		map/map_parser.c \
 		map/map_pathfinder.c \
 		map/map_utils.c \

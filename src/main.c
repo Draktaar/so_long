@@ -14,12 +14,14 @@
 #include "game.h"
 
 t_game	*init_game(t_map *manager);
+void	toto();
 
 int main(int argc, char **argv)
 {
 	t_game	*g_manager;
 	t_map	m_manager;
 
+	toto();
 	if (!init_map(&m_manager, argc, argv))
 		return (1);
 	g_manager = init_game(&m_manager);

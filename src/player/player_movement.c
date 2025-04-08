@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 22:38:51 by achu              #+#    #+#             */
-/*   Updated: 2025/03/26 00:29:12 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/08 11:45:33 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	player_jump(t_player *player, double delta)
 {
 	if (player->controller.jump_pressed && player->is_ground)
 	{
-		//player->velocity.x += JUMP_BOOST * player->controller.move.x;
+		player->velocity.x += JUMP_BOOST * player->controller.move.x;
 		player->velocity.y = -JUMP_POW;
 	}
 }
