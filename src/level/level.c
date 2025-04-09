@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:00:08 by achu              #+#    #+#             */
-/*   Updated: 2025/04/07 17:56:34 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/09 22:28:30 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static t_wall	new_solid(t_display window, float x, float y)
 {
 	t_wall	wall;
 
-	wall.sprite.img = new_img(IMG_WALL, window);
+	wall.sprite.img = new_xpm(window, IMG_WALL);
 	wall.collider = (t_rect){
 		.pos = {x * PIXEL_SIZE, y * PIXEL_SIZE},
 		.size = {PIXEL_SIZE, PIXEL_SIZE}

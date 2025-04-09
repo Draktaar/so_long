@@ -13,26 +13,6 @@
 #include "map.h"
 #include "game.h"
 
-// Setup window of the game, and store it inside display
-t_display	setup_display(int height, int width)
-{
-	t_display	display;
-	void		*mlx_ptr;
-	void		*win_ptr;
-
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(
-			mlx_ptr,
-			width * 64,
-			height * 64,
-			WINDOW_TITLE);
-	display.mlx = mlx_ptr;
-	display.win = win_ptr;
-	display.height = height;
-	display.width = width;
-	return (display);
-}
-
 t_game	*init_game(t_map *manager)
 {
 	t_game	*mana;
@@ -40,7 +20,7 @@ t_game	*init_game(t_map *manager)
 	mana = malloc(sizeof(t_game));
 	if (!mana)
 		exit(1);
-	mana->display = setup_display(5, 13);
+	mana->display = setup_window(5, 13);
 	mana->input = init_input();
 	mana->player = init_player();
 
@@ -60,8 +40,6 @@ double get_frame()
     return (ts.tv_sec + (ts.tv_nsec / 1.0e9));
 }
 
-void	put_img(t_img image);
-
 static int	update(t_game *manager)
 {
 	double	curr;
@@ -72,7 +50,7 @@ static int	update(t_game *manager)
 	manager->late = curr;
 
 	mlx_clear_window(manager->display.mlx, manager->display.win);
-	draw_rect_line(&manager->display, manager->player.collider, WHITE);
+	draw_box(manager->display, manager->player.collider, WHITE);
 
 	//render
 	for (size_t i = 0; i < 40; i++)

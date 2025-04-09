@@ -58,7 +58,7 @@ typedef struct s_img
 	int			h;
 	int			w;
 	int			bpp;
-	int			line_len;
+	int			llen;
 	int			endian;
 }	t_img;
 
@@ -119,15 +119,22 @@ typedef struct s_game
 	int			coins;
 }	t_game;
 
+// Window
+t_display	setup_window(int height, int width);
+
+
 int		start(t_game *manager);
 t_player	init_player(void);
-int 	draw_rect(t_display *data, t_rect rect, int color);
-int 	draw_rect_line(t_display *data, t_rect rect, int color);
+
 void	check_collision(t_player *player, t_wall wall);
 void    update_player(t_player *player, t_keybind *keybind, double delta);
 void	update_collision(t_player *player, t_wall wall);
 
 t_wall	*init_solid(t_display window, char **map);
-t_img	new_img(char *file, t_display window);
+
+t_img	new_xpm(t_display window, char *file);
+t_img	new_img(t_display window, int h, int w);
+void	draw_box(t_display window, t_rect rect, int color);
+void	draw_square(t_display window, t_rect rect, int color);
 
 #endif

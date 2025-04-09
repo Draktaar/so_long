@@ -30,8 +30,9 @@ SRC =	engine/test.c \
 		map/map_pathfinder.c \
 		map/map_utils.c \
 		setting/input_system.c \
+		setting/window.c \
 		setting/game_manager.c \
-		graphic/gizmo.c \
+		graphic/pixel.c \
 		graphic/render.c \
 		graphic/sprite.c \
 		level/level.c \

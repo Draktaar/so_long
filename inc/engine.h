@@ -16,7 +16,7 @@
 # define WINDOW_TITLE "so_long"
 
 # define PIXEL_SIZE 64
-# define IMG_WALL "assets/wall.xpm"
+# define IMG_WALL "sprites/wall.xpm"
 
 # define WHITE		0xFFFFFF
 # define RED		0xFF0000

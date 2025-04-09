@@ -6,13 +6,13 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 17:30:40 by achu              #+#    #+#             */
-/*   Updated: 2025/04/07 18:21:54 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/09 22:27:40 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game.h"
 
-t_img	new_img(char *file, t_display window)
+t_img	new_xpm(t_display window, char *file)
 {
 	t_img image;
 
@@ -22,7 +22,19 @@ t_img	new_img(char *file, t_display window)
 	if (!image.ptr)
 		ft_perror("Error: Image could not be read\n");
 	image.addr = mlx_get_data_addr(image.ptr, &(image.bpp),
-		&(image.line_len), &(image.endian));
+		&(image.llen), &(image.endian));
+	return (image);
+}
+
+t_img	new_img(t_display window, int h, int w)
+{
+	t_img image;
+
+	image.w = w;
+	image.h = h;
+	image.ptr = mlx_new_image(window.mlx, w, h);
+	image.addr = mlx_get_data_addr(image.ptr, &(image.bpp),
+		&(image.llen), &(image.endian));
 	return (image);
 }
 
