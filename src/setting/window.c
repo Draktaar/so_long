@@ -22,8 +22,8 @@ t_display	setup_window(int height, int width)
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(
 			mlx_ptr,
-			width * 64,
-			height * 64,
+			WINDOW_WIDTH,
+			WINDOW_HEIGHT,
 			WINDOW_TITLE);
 	display.mlx = mlx_ptr;
 	display.win = win_ptr;

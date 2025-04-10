@@ -30,16 +30,16 @@ t_player	init_player(void)
 		.y = 0,
 	};
 	player.position = (t_vec2){
-		.x = 150,
-		.y = 150,
+		.x = 16,
+		.y = 16,
 	};
 	player.collider = (t_rect){
 		.pos = {0, 0},
-		.size = {25, 30}
+		.size = {8,11}
 	};
 	player.ground_col = (t_rect){
 		.pos = {0, 0},
-		.size = {25, 5}
+		.size = {8, 3}
 	};
 	player.is_ground = false;
 	return (player);

@@ -20,19 +20,21 @@ t_img	new_xpm(t_display window, char *file)
 	image.h = 0;
 	image.ptr = mlx_xpm_file_to_image(window.mlx, file, &image.w, &image.h);
 	if (!image.ptr)
-		ft_perror("Error: Image could not be read\n");
+		ft_perror("Error: Image could not be read");
 	image.addr = mlx_get_data_addr(image.ptr, &(image.bpp),
 		&(image.llen), &(image.endian));
 	return (image);
 }
 
-t_img	new_img(t_display window, int h, int w)
+t_img	new_img(t_display window, int w, int h)
 {
 	t_img image;
 
 	image.w = w;
 	image.h = h;
 	image.ptr = mlx_new_image(window.mlx, w, h);
+	if (!image.ptr)
+		ft_perror("Error: Failed to create image");
 	image.addr = mlx_get_data_addr(image.ptr, &(image.bpp),
 		&(image.llen), &(image.endian));
 	return (image);

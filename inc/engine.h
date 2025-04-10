@@ -13,9 +13,11 @@
 #ifndef ENGINE_H
 # define ENGINE_H
 
-# define WINDOW_TITLE "so_long"
+# define WINDOW_WIDTH	1280
+# define WINDOW_HEIGHT	720
+# define WINDOW_TITLE	"so_long"
 
-# define PIXEL_SIZE 64
+# define PIXEL_SIZE 8
 # define IMG_WALL "sprites/wall.xpm"
 
 # define WHITE		0xFFFFFF

@@ -12,55 +12,88 @@
 
 #include "game.h"
 
+// Put image to another image
 void	ft_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
 
+	if (x < 0 || y < 0 || x >= img->w || y >= img->h)
+		return ;
 	pixel = img->addr + (y * img->llen + x * (img->bpp / 8));
 	*(unsigned int*)pixel = color;
 }
 
-void	draw_square(t_display window, t_rect rect, int color)
+unsigned int	get_pixel(t_img *img, int x, int y)
 {
-	t_img	image;
-	int	y;
-	int x;
+	char	*pixel;
 
-	image = new_img(window, rect.size.x, rect.size.y);
-	y = rect.pos.y;
-	while (y < rect.size.y)
-	{
-		x = rect.pos.x;
-		while (x < rect.size.x)
-		{
-			ft_pixel_put(&image, x, y, color);
-			x++;
-		}
-		y++;
-	}
-	mlx_put_image_to_window(window.mlx, window.win, image.ptr, rect.pos.x, rect.pos.y);
+	if (x < 0 || y < 0 || x >= img->w || y >= img->h)
+		return (0);
+	pixel = img->addr + (y * img->llen + x * (img->bpp / 8));
+	return (*(unsigned int *)pixel);
 }
 
-void	draw_box(t_display window, t_rect rect, int color)
+void	draw_bg(t_img *game)
 {
-	t_img	image;
+	for (int y = 0; y < 180; y++)
+		for (int x = 0; x < 320; x++)
+			ft_pixel_put(game, x, y, 0x505cb2);
+}
+
+void	blit_scaled(t_img *src, t_img *dst, int scale)
+{
+	int	x, y, dx, dy;
+	unsigned int	color;
+
+	for (y = 0; y < src->h; y++)
+	{
+		for (x = 0; x < src->w; x++)
+		{
+			color = get_pixel(src, x, y);
+			for (dy = 0; dy < scale; dy++)
+				for (dx = 0; dx < scale; dx++)
+					ft_pixel_put(dst, x * scale + dx, y * scale + dy, color);
+		}
+	}
+}
+
+// Draw the entire square into the screen
+void	draw_square(t_img *image, t_rect rect, int color)
+{
 	int	y;
 	int x;
 
-	image = new_img(window, rect.size.x, rect.size.y);
-	y = 0;
-	while (y <= rect.size.y)
+	y = rect.pos.y;
+	while (y <= rect.pos.y + rect.size.y)
 	{
-		x = 0;
-		while (x <= rect.size.x)
+		x = rect.pos.x;
+		while (x <= rect.pos.x + rect.size.x)
 		{
-			if (y < 4 || y > rect.size.y - 2)
-				ft_pixel_put(&image, x, y, color);
-			else if (x < 2 || x > rect.size.x - 2)
-				ft_pixel_put(&image, x, y, color);
+			ft_pixel_put(image, x, y, color);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(window.mlx, window.win, image.ptr, rect.pos.x, rect.pos.y);
+}
+
+// Draw the border of the rect into the screen
+void	draw_rect(t_img *image, t_rect rect, int color)
+{
+	int	y;
+	int x;
+
+	y = rect.pos.y;
+	while (y <= rect.pos.y + rect.size.y)
+	{
+		x = rect.pos.x;
+		while (x <= rect.pos.x + rect.size.x)
+		{
+			if (y < rect.pos.y + 1 || y > rect.pos.y + rect.size.y - 1)
+				ft_pixel_put(image, x, y, color);
+			else if (x < rect.pos.x + 1 || x > rect.pos.x + rect.size.x - 1)
+				ft_pixel_put(image, x, y, color);
+			x++;
+		}
+		y++;
+	}
 }

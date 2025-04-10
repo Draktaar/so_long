@@ -14,28 +14,28 @@
 # define GAME_H
 
 // *** Movement ***
-# define ACCEL 1200 * 4
-# define TURN 1200 * 4
-# define DECEL 600 * 4
-# define MAX_SPEED 90 * 4
+# define ACCEL 1200
+# define TURN 1200
+# define DECEL 600
+# define MAX_SPEED 90
 
 // *** Jump ***
-# define JUMP_POW 175 * 4
-# define JUMP_BOOST 50 * 4
-# define JUMP_CUT 5 * 4
-# define AIR_ACCEL 1000 * 4
-# define AIR_TURN 500 * 4
-# define AIR_DECEL 250 * 4
+# define JUMP_POW 175
+# define JUMP_BOOST 50
+# define JUMP_CUT 5
+# define AIR_ACCEL 1000
+# define AIR_TURN 500
+# define AIR_DECEL 250
 
 // *** Gravity ***
-# define GRAVITY 410 * 4
+# define GRAVITY 410
 # define GROUND_FORCE 100
 # define FALL_MULT 1.5
-# define MAX_FALL 160 * 4
+# define MAX_FALL 160
 
 // *** Dash ***
 # define MAX_DASH 1
-# define DASH_POW 200 * 4
+# define DASH_POW 200
 # define DASH_TIME 0.15
 # define DASH_CDR 0.3
 
@@ -104,7 +104,10 @@ typedef struct s_wall
 typedef struct s_game
 {
 	t_display	display;
-	t_keybind		*input;
+	t_keybind	*input;
+	t_img		buffer;
+	t_img		screen;
+
 
 	double		late;
 	double		delta;
@@ -134,7 +137,11 @@ t_wall	*init_solid(t_display window, char **map);
 
 t_img	new_xpm(t_display window, char *file);
 t_img	new_img(t_display window, int h, int w);
-void	draw_box(t_display window, t_rect rect, int color);
-void	draw_square(t_display window, t_rect rect, int color);
+void	draw_square(t_img *image, t_rect rect, int color);
+void	draw_rect(t_img *image, t_rect rect, int color);
+unsigned int	get_pixel(t_img *img, int x, int y);
+void			ft_pixel_put(t_img *img, int x, int y, int color);
+void	draw_bg(t_img *game);
+void	blit_scaled(t_img *src, t_img *dst, int scale);
 
 #endif
