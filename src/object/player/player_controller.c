@@ -10,13 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "../inc/object/player.h"
 
 void	player_direction(t_player *player, double delta);
 void	player_gravity(t_player *player, double delta);
 void	player_dash(t_player *player, double delta);
 void	player_jump(t_player *player, double delta);
-
 
 t_player	init_player(void)
 {
@@ -29,11 +28,11 @@ t_player	init_player(void)
 		.x = 0,
 		.y = 0,
 	};
-	player.pos = (t_vec2){
+	player.position = (t_vec2){
 		.x = 16,
 		.y = 16,
 	};
-	player.col = (t_rect){
+	player.collider = (t_rect){
 		.pos = {0, 0},
 		.size = {8,11}
 	};
@@ -70,10 +69,10 @@ void	update_player(t_player *player, t_keybind *keybind, double delta)
 	player_jump(player, delta);
 	player_gravity(player, delta);
 
-	player->pos.x += player->vel.x * delta;
-	player->pos.y += player->vel.y * delta;
-	player->col.pos.x = player->pos.x - player->col.size.x / 2;
-	player->col.pos.y = player->pos.y - player->col.size.y / 2;
-	player->ground_col.pos.x = player->col.pos.x;
-	player->ground_col.pos.y = player->col.pos.y + player->col.size.y;
+	player->position.x += player->velocity.x * delta;
+	player->position.y += player->velocity.y * delta;
+	player->collider.pos.x = player->position.x - player->collider.size.x / 2;
+	player->collider.pos.y = player->position.y - player->collider.size.y / 2;
+	player->ground_col.pos.x = player->collider.pos.x;
+	player->ground_col.pos.y = player->collider.pos.y + player->collider.size.y;
 }

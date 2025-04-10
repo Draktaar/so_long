@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "../inc/object/object.h"
 
 static t_solid	new_solid(t_display window, float x, float y)
 {
@@ -42,8 +42,8 @@ static int	expand_wall(t_solid **solids, size_t *size, t_solid new)
 
 t_solid	*init_solid(t_display window, char **map)
 {
-	t_solid	new;
 	t_solid	*solids;
+	t_solid	new;
 	size_t	size;
 	size_t	x;
 	size_t	y;

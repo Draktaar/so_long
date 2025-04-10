@@ -15,53 +15,45 @@
 
 t_system	*init_game(t_map *manager)
 {
-	t_system	*mana;
+	t_system	*sys;
 
-	mana = malloc(sizeof(t_system));
-	if (!mana)
+	sys = malloc(sizeof(t_system));
+	if (!sys)
 		exit(1);
-	mana->display = setup_window(5, 13);
-	mana->buffer = new_img(mana->display, 320, 180);
-	mana->screen = new_img(mana->display, 1280, 720);
-	mana->input = init_input();
-	mana->player = init_player();
-
-	mana->late = 0;
-	mana->delta = 0;
-
-	mana->step = 0;
-	mana->score = 0;
-	mana->coins = (*manager).max_coin;
-	return (mana);
+	sys->display = setup_window();
+	sys->game = new_img(sys->display, GAME_WIDTH, GAME_HEIGHT);
+	sys->screen = new_img(sys->display, WINDOW_WIDTH, WINDOW_HEIGHT);
+	sys->input = init_input();
+	sys->last = 0;
+	sys->delta = 0;
+	sys->player = init_player();
+	return (sys);
 }
 
-double get_frame()
+double	get_frame(void)
 {
-    struct timespec ts;
-    clock_gettime(CLOCK_MONOTONIC, &ts);
-    return (ts.tv_sec + (ts.tv_nsec / 1.0e9));
+	struct timespec ts;
+	clock_gettime(CLOCK_MONOTONIC, &ts);
+	return (ts.tv_sec + (ts.tv_nsec / 1.0e9));
 }
 
 static int	update(t_system *manager)
 {
 	double	curr;
-	t_solid	*wall;
 
 	curr = get_frame();
-	manager->delta = curr - manager->late;
-	manager->late = curr;
-
-	//mlx_clear_window(manager->display.mlx, manager->display.win);
+	manager->delta = curr - manager->last;
+	manager->last = curr;
 
 	//render
 	for (size_t i = 0; i < 63; i++)
 	{
-		check_collision(&manager->player, manager->solids[i]);
+		check_ground(&manager->player, manager->solids[i].collider);
 	}
 	update_player(&manager->player, manager->input, manager->delta);
 	for (size_t i = 0; i < 63; i++)
 	{
-		update_collision(&manager->player, manager->solids[i]);
+		update_collision(&manager->player, manager->solids[i].collider);
 	}
 	update_input(manager->input);
 	render(manager);
@@ -70,7 +62,7 @@ static int	update(t_system *manager)
 
 int	start(t_system *manager)
 {
-	manager->late = get_frame();
+	manager->last = get_frame();
 
 	mlx_loop_hook(manager->display.mlx, update, manager);
 	mlx_hook(manager->display.win, ON_KEYPRESS, MASK_KEYPRESS, input_press, manager->input);

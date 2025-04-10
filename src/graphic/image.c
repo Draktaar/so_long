@@ -42,6 +42,6 @@ t_img	new_img(t_display window, int w, int h)
 
 void	destroy_img(t_img image)
 {
-	if (image.ptr && image.window.mlx) 
-       mlx_destroy_image(image.window.mlx, image.ptr);
+	if (image.ptr && image.screen.mlx) 
+       mlx_destroy_image(image.screen.mlx, image.ptr);
 }

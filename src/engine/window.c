@@ -13,7 +13,7 @@
 #include "game.h"
 
 // Setup window of the game, and store it inside display
-t_display	setup_window(int height, int width)
+t_display	setup_window(void)
 {
 	t_display	display;
 	void		*mlx_ptr;
@@ -27,8 +27,8 @@ t_display	setup_window(int height, int width)
 			WINDOW_TITLE);
 	display.mlx = mlx_ptr;
 	display.win = win_ptr;
-	display.height = height;
-	display.width = width;
+	display.width = WINDOW_WIDTH;
+	display.height = WINDOW_HEIGHT;
 	return (display);
 }
 

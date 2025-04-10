@@ -13,6 +13,8 @@
 #ifndef ENGINE_H
 # define ENGINE_H
 
+# define GAME_WIDTH		320
+# define GAME_HEIGHT	180
 # define WINDOW_WIDTH	1280
 # define WINDOW_HEIGHT	720
 # define WINDOW_TITLE	"so_long"
@@ -52,6 +54,15 @@
 # include "libft.h"
 # include "stdio42.h"
 
+typedef enum e_tile
+{
+	EMPTY = '0',
+	WALL = '1',
+	COIN = 'C',
+	EXIT = 'E',
+	PLAYER = 'P',
+}	t_tile;
+
 typedef struct s_display
 {
 	void	*mlx;
@@ -59,13 +70,6 @@ typedef struct s_display
 	int		height;
 	int		width;
 }	t_display;
-
-typedef struct s_keybind
-{
-	int		key;
-	int		pressed;
-	int		hold;
-}	t_keybind;
 
 typedef enum e_action
 {
@@ -79,24 +83,16 @@ typedef enum e_action
 	MAX_ACTION,
 }	t_action;
 
-typedef enum s_tile
+typedef struct s_keybind
 {
-	EMPTY = '0',
-	WALL = '1',
-	COIN = 'C',
-	EXIT = 'E',
-	PLAYER = 'P',
-}	t_tile;
-
-typedef struct s_vec2
-{
-	float	x;
-	float	y;
-}	t_vec2;
+	int		key;
+	int		pressed;
+	int		hold;
+}	t_keybind;
 
 typedef struct s_img
 {
-	t_display	window;
+	t_display	screen;
 	void		*ptr;
 	char		*addr;
 	int			h;
@@ -111,6 +107,12 @@ typedef struct s_sprite
 	t_img	img;
 }	t_sprite;
 
+typedef struct s_vec2
+{
+	float	x;
+	float	y;
+}	t_vec2;
+
 typedef struct s_rect
 {
 	t_vec2	pos;
@@ -123,6 +125,9 @@ t_keybind	*init_input(void);
 void	update_input(t_keybind *keybind);
 int		input_press(int key, t_keybind *manager);
 int		input_release(int key, t_keybind *manager);
+
+t_img	new_xpm(t_display window, char *file);
+t_img	new_img(t_display window, int h, int w);
 
 // *** Collision AABB ***
 bool	is_point_in_rect(t_vec2 point, t_rect rect);
