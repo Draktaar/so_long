@@ -12,7 +12,7 @@
 
 #include "game.h"
 
-// Put image to another image
+// Copy pixel from an image to another image
 void	ft_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*pixel;
@@ -23,6 +23,7 @@ void	ft_pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int*)pixel = color;
 }
 
+// Get the pixel color RGBA
 unsigned int	get_pixel(t_img *img, int x, int y)
 {
 	char	*pixel;
@@ -33,14 +34,8 @@ unsigned int	get_pixel(t_img *img, int x, int y)
 	return (*(unsigned int *)pixel);
 }
 
-void	draw_bg(t_img *game)
-{
-	for (int y = 0; y < 180; y++)
-		for (int x = 0; x < 320; x++)
-			ft_pixel_put(game, x, y, 0x505cb2);
-}
-
-void	blit_scaled(t_img *src, t_img *dst, int scale)
+// Scale the pixel from an image to another image
+void	pixel_scale(t_img *src, t_img *dst, int scale)
 {
 	int	x, y, dx, dy;
 	unsigned int	color;
@@ -54,46 +49,5 @@ void	blit_scaled(t_img *src, t_img *dst, int scale)
 				for (dx = 0; dx < scale; dx++)
 					ft_pixel_put(dst, x * scale + dx, y * scale + dy, color);
 		}
-	}
-}
-
-// Draw the entire square into the screen
-void	draw_square(t_img *image, t_rect rect, int color)
-{
-	int	y;
-	int x;
-
-	y = rect.pos.y;
-	while (y <= rect.pos.y + rect.size.y)
-	{
-		x = rect.pos.x;
-		while (x <= rect.pos.x + rect.size.x)
-		{
-			ft_pixel_put(image, x, y, color);
-			x++;
-		}
-		y++;
-	}
-}
-
-// Draw the border of the rect into the screen
-void	draw_rect(t_img *image, t_rect rect, int color)
-{
-	int	y;
-	int x;
-
-	y = rect.pos.y;
-	while (y <= rect.pos.y + rect.size.y)
-	{
-		x = rect.pos.x;
-		while (x <= rect.pos.x + rect.size.x)
-		{
-			if (y < rect.pos.y + 1 || y > rect.pos.y + rect.size.y - 1)
-				ft_pixel_put(image, x, y, color);
-			else if (x < rect.pos.x + 1 || x > rect.pos.x + rect.size.x - 1)
-				ft_pixel_put(image, x, y, color);
-			x++;
-		}
-		y++;
 	}
 }

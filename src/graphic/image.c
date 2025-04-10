@@ -40,11 +40,6 @@ t_img	new_img(t_display window, int w, int h)
 	return (image);
 }
 
-void	put_img(t_display window, t_img image)
-{
-	mlx_put_image_to_window(window.mlx, window.win, image.ptr, 50, 50);
-}
-
 void	destroy_img(t_img image)
 {
 	if (image.ptr && image.window.mlx) 

@@ -24,21 +24,25 @@ MLIBX = 	lib/minilibx-linux
 LDFLAGS =  -L$(MLIBX) -lmlx -lXext -lX11 -lm -lz
 HEADERS = $(INCDIR)/engine.h $(INCDIR)/game.h $(INCDIR)/map.h $(LIBFT)/libft.h $(STDIO42)/stdio42.h
 
-SRC =	engine/test.c \
+SRC =	engine/banner.c \
+		engine/collision.c \
+		engine/input_system.c \
+		engine/window.c \
+		engine/game.c \
 		map/map_checker.c \
 		map/map_parser.c \
 		map/map_pathfinder.c \
 		map/map_utils.c \
-		setting/input_system.c \
-		setting/window.c \
-		setting/game_manager.c \
+		graphic/debug.c \
+		graphic/image.c \
 		graphic/pixel.c \
 		graphic/render.c \
-		graphic/sprite.c \
-		level/level.c \
-		player/player_controller.c \
-		player/player_collision.c \
-		player/player_movement.c \
+		object/player/player_controller.c \
+		object/player/player_collision.c \
+		object/player/player_movement.c \
+		object/berry.c \
+		object/solid.c \
+		object/spike.c \
 		main.c
 
 OBJS = $(addprefix $(SRCDIR)/, $(SRC:.c=.o))
@@ -46,7 +50,7 @@ OBJS = $(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	xset r off
+	xset r on
 	@$(MAKE) -C $(LIBFT)
 	@$(MAKE) -C $(STDIO42)
 	@$(CC) $(OBJS) $(LIBFT)/libft.a $(STDIO42)/stdio42.a $(LDFLAGS) -o $(NAME)

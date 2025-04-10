@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_manager.c                                     :+:      :+:    :+:   */
+/*   game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,11 +13,11 @@
 #include "map.h"
 #include "game.h"
 
-t_game	*init_game(t_map *manager)
+t_system	*init_game(t_map *manager)
 {
-	t_game	*mana;
+	t_system	*mana;
 
-	mana = malloc(sizeof(t_game));
+	mana = malloc(sizeof(t_system));
 	if (!mana)
 		exit(1);
 	mana->display = setup_window(5, 13);
@@ -42,16 +42,16 @@ double get_frame()
     return (ts.tv_sec + (ts.tv_nsec / 1.0e9));
 }
 
-static int	update(t_game *manager)
+static int	update(t_system *manager)
 {
 	double	curr;
-	t_wall	*wall;
+	t_solid	*wall;
 
 	curr = get_frame();
 	manager->delta = curr - manager->late;
 	manager->late = curr;
 
-	mlx_clear_window(manager->display.mlx, manager->display.win);
+	//mlx_clear_window(manager->display.mlx, manager->display.win);
 
 	//render
 	for (size_t i = 0; i < 63; i++)
@@ -63,29 +63,12 @@ static int	update(t_game *manager)
 	{
 		update_collision(&manager->player, manager->solids[i]);
 	}
-	// for (size_t i = 0; i < 63; i++)
-	// {
-	// 	//mlx_put_image_to_window(manager->display.mlx, manager->display.win, manager->solids[i].sprite.img.ptr, manager->solids[i].collider.pos.x, manager->solids[i].collider.pos.y);
-	// 	for (int y = 0; y < manager->solids[i].collider.size.y; y++) {
-	// 		for (int x = 0; x < manager->solids[i].collider.size.y; x++) {
-	// 			int color = get_pixel(&manager->solids[i].sprite.img, x, y);
-	// 			ft_pixel_put(&manager->buffer, manager->solids[i].collider.pos.x + x,  manager->solids[i].collider.pos.y + y, color);
-	// 		}
-	// 	}
-	// }
-	// //render
-	draw_bg(&manager->buffer);
-	for (size_t i = 0; i < 63; i++)
-		draw_rect(&manager->buffer, manager->solids[i].collider, RED);
-	draw_square(&manager->buffer, manager->player.collider, WHITE);
-	blit_scaled(&manager->buffer, &manager->screen, 4);
-	mlx_put_image_to_window(manager->display.mlx, manager->display.win, manager->screen.ptr, 0, 0);
 	update_input(manager->input);
-	mlx_do_sync(manager->display.mlx);
+	render(manager);
 	return (0);
 }
 
-int	start(t_game *manager)
+int	start(t_system *manager)
 {
 	manager->late = get_frame();
 

@@ -51,7 +51,6 @@
 # include <stdbool.h>
 # include "libft.h"
 # include "stdio42.h"
-# include <stdio.h>
 
 typedef struct s_display
 {
@@ -95,6 +94,23 @@ typedef struct s_vec2
 	float	y;
 }	t_vec2;
 
+typedef struct s_img
+{
+	t_display	window;
+	void		*ptr;
+	char		*addr;
+	int			h;
+	int			w;
+	int			bpp;
+	int			llen;
+	int			endian;
+}	t_img;
+
+typedef struct s_sprite
+{
+	t_img	img;
+}	t_sprite;
+
 typedef struct s_rect
 {
 	t_vec2	pos;
@@ -108,10 +124,9 @@ void	update_input(t_keybind *keybind);
 int		input_press(int key, t_keybind *manager);
 int		input_release(int key, t_keybind *manager);
 
-t_rect	ft_minkowski_diff(t_rect a, t_rect b);
+// *** Collision AABB ***
 bool	is_point_in_rect(t_vec2 point, t_rect rect);
 bool	is_collided(t_rect a, t_rect b);
-bool	is_physics_collided(t_rect diff);
-t_vec2	test(t_rect diff);
+t_vec2	ft_penetration(t_rect a, t_rect b);
 
 #endif

@@ -31,3 +31,8 @@ t_display	setup_window(int height, int width)
 	display.width = width;
 	return (display);
 }
+
+void	destroy_window()
+{
+	
+}

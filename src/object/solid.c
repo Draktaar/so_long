@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   level.c                                            :+:      :+:    :+:   */
+/*   solid.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,11 +12,12 @@
 
 #include "game.h"
 
-static t_wall	new_solid(t_display window, float x, float y)
+static t_solid	new_solid(t_display window, float x, float y)
 {
-	t_wall	wall;
+	t_solid	wall;
 
 	wall.sprite.img = new_xpm(window, IMG_WALL);
+	wall.pos = (t_vec2){x * PIXEL_SIZE, y * PIXEL_SIZE};
 	wall.collider = (t_rect){
 		.pos = {x * PIXEL_SIZE, y * PIXEL_SIZE},
 		.size = {PIXEL_SIZE, PIXEL_SIZE}
@@ -24,13 +25,13 @@ static t_wall	new_solid(t_display window, float x, float y)
 	return (wall);
 }
 
-static int	expand_wall(t_wall **solids, size_t *size, t_wall new)
+static int	expand_wall(t_solid **solids, size_t *size, t_solid new)
 {
-	t_wall	*new_solids;
+	t_solid	*new_solids;
 	size_t	new_size;
 
 	new_size = *size + 1;
-	new_solids = ft_realloc(*solids, *size * sizeof(t_wall), new_size * sizeof(t_wall));
+	new_solids = ft_realloc(*solids, *size * sizeof(t_solid), new_size * sizeof(t_solid));
 	if (!new_solids)
 		return (0);
 	new_solids[*size] = new;
@@ -39,16 +40,16 @@ static int	expand_wall(t_wall **solids, size_t *size, t_wall new)
 	return (1);
 }
 
-t_wall	*init_solid(t_display window, char **map)
+t_solid	*init_solid(t_display window, char **map)
 {
-	t_wall	new;
-	t_wall	*solids;
+	t_solid	new;
+	t_solid	*solids;
 	size_t	size;
 	size_t	x;
 	size_t	y;
 
 	size = 0;
-	solids = (t_wall *)malloc(size * sizeof(t_wall));
+	solids = (t_solid *)malloc(size * sizeof(t_solid));
 	if (!solids)
 		return (NULL);
 	y = 0;

@@ -13,12 +13,12 @@
 #include "map.h"
 #include "game.h"
 
-t_game	*init_game(t_map *manager);
+t_system	*init_game(t_map *manager);
 void	toto();
 
 int main(int argc, char **argv)
 {
-	t_game	*g_manager;
+	t_system	*g_manager;
 	t_map	m_manager;
 
 	toto();
