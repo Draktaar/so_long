@@ -24,7 +24,7 @@ MLIBX = 	lib/minilibx-linux
 LDFLAGS =  -L$(MLIBX) -lmlx -lXext -lX11 -lm -lz
 HEADERS = $(INCDIR)/engine.h $(INCDIR)/game.h $(INCDIR)/map.h $(LIBFT)/libft.h $(STDIO42)/stdio42.h
 
-SRC =	engine/banner.c \
+SRC =	test/banner.c \
 		engine/collision.c \
 		engine/input_system.c \
 		engine/window.c \
