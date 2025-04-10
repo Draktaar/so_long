@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:09:45 by achu              #+#    #+#             */
-/*   Updated: 2025/04/10 16:40:42 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/10 17:17:45 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 // *** Dash ***
 # define MAX_DASH 1
-# define DASH_POW 200
+# define DASH_POW 250
 # define DASH_TIME 0.15
 # define DASH_CDR 0.3
 

@@ -46,12 +46,12 @@ static int	update(t_system *manager)
 	manager->last = curr;
 
 	//render
-	for (size_t i = 0; i < 63; i++)
+	for (size_t i = 0; i < 314; i++)
 	{
 		check_ground(&manager->player, manager->solids[i].collider);
 	}
 	update_player(&manager->player, manager->input, manager->delta);
-	for (size_t i = 0; i < 63; i++)
+	for (size_t i = 0; i < 314; i++)
 	{
 		update_collision(&manager->player, manager->solids[i].collider);
 	}

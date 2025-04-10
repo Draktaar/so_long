@@ -25,6 +25,7 @@ LDFLAGS =  -L$(MLIBX) -lmlx -lXext -lX11 -lm -lz
 HEADERS = $(INCDIR)/engine.h $(INCDIR)/game.h $(INCDIR)/map.h $(LIBFT)/libft.h $(STDIO42)/stdio42.h
 
 SRC =	test/banner.c \
+		test/debug.c \
 		engine/collision.c \
 		engine/input_system.c \
 		engine/window.c \
@@ -33,7 +34,6 @@ SRC =	test/banner.c \
 		map/map_parser.c \
 		map/map_pathfinder.c \
 		map/map_utils.c \
-		graphic/debug.c \
 		graphic/image.c \
 		graphic/pixel.c \
 		graphic/render.c \
