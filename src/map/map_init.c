@@ -1,15 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.c                                        :+:      :+:    :+:   */
+/*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:14:10 by achu              #+#    #+#             */
-/*   Updated: 2025/04/07 17:12:49 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/13 15:59:20 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "common.h"
 #include "map.h"
 
 static t_map	init_manager(void)
@@ -30,8 +31,8 @@ static t_map	init_manager(void)
 
 void	clean_map(t_map *manager)
 {
-	ft_freeptrs((void **)manager->map);
-	ft_freeptrs((void **)manager->visited);
+	ft_freetab((void **)manager->map);
+	ft_freetab((void **)manager->visited);
 	manager->height = 0;
 	manager->width = 0;
 	manager->max_player = 0;

@@ -6,11 +6,12 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:30:14 by achu              #+#    #+#             */
-/*   Updated: 2025/03/20 22:08:02 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/13 01:52:31 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "common.h"
+#include "map.h"
 
 // Calcul the length of the map's height
 static int	heightlen(char *file)
@@ -50,7 +51,7 @@ char	**parse_map(char *file)
 	{
 		map[i] = get_next_line(fd);
 		if (!map[i])
-			return (ft_freeptrs((void **)map), NULL);
+			return (free_arr((void **)map), NULL);
 		i++;
 	}
 	map[i] = 0;

@@ -6,11 +6,11 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:13:16 by achu              #+#    #+#             */
-/*   Updated: 2025/04/10 16:39:19 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/11 01:12:17 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/object/player.h"
+#include "player.h"
 
 void	check_ground(t_player *player, t_rect wall)
 {

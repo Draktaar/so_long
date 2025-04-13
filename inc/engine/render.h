@@ -1,44 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   object.h                                           :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 16:15:59 by achu              #+#    #+#             */
-/*   Updated: 2025/04/11 00:10:17 by achu             ###   ########.fr       */
+/*   Created: 2025/04/11 00:05:24 by achu              #+#    #+#             */
+/*   Updated: 2025/04/12 19:47:35 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OBJECT_H
-# define OBJECT_H
+#ifndef RENDER_H
+# define RENDER_H
 
-# include <stdbool.h>
 # include "engine/image.h"
 # include "engine/vec.h"
+# include "system.h"
 
-typedef struct s_berry
-{
-	t_sprite	sprite;
-	t_vec2		pos;
-	t_rect		collider;
-	bool		collected;
-}	t_berry;
+# define WHITE		    0xFFFFFF
+# define RED		    0xFF0000
+# define GREEN		    0xFF00
+# define BLUE		    0x0000FF
+# define YELLOW		    0xFFFF00
+# define CYAN		    0x00FFFF
+# define MAGENTA	    0xFF00FF
 
-typedef struct s_solid
-{
-	t_sprite	sprite;
-	t_vec2		pos;
-	t_rect		collider;
-}	t_solid;
-
-typedef struct s_spike
-{
-	t_sprite	sprite;
-	t_vec2		pos;
-	t_rect		collider;
-}	t_spike;
-
-t_solid	*init_solid(t_display window, char **map);
+void	render(t_system *game);
+void	draw_bg(t_img *game);
+void	draw_square(t_img *image, t_rect rect, int color);
+void	draw_rect(t_img *image, t_rect rect, int color);
+void    name_banner(void);
 
 #endif

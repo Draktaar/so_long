@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "engine/image.h"
 
 // Copy pixel from an image to another image
 void	ft_pixel_put(t_img *img, int x, int y, int color)

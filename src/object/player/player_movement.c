@@ -6,12 +6,12 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 22:38:51 by achu              #+#    #+#             */
-/*   Updated: 2025/04/10 16:39:13 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/11 13:04:34 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/object/player.h"
 #include <math.h>
+#include "player.h"
 
 static double	ft_approach(double current, double target, double step)
 {
@@ -63,6 +63,7 @@ void	player_gravity(t_player *player, double delta)
 
 void	player_jump(t_player *player, double delta)
 {
+	(void)delta;
 	if (player->controller.jump_pressed && player->is_ground)
 	{
 		player->velocity.x += JUMP_BOOST * player->controller.move.x;
@@ -72,6 +73,7 @@ void	player_jump(t_player *player, double delta)
 
 void	player_dash(t_player *player, double delta)
 {
+	(void)delta;
 	if (player->controller.dash_pressed)
 	{
 		player->velocity.x = player->controller.move.x * DASH_POW;

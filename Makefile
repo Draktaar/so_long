@@ -14,15 +14,29 @@ CC = cc
 CFLAGS = -Wall -Wextra -g3
 NAME = so_long
 
-SRCDIR = src
-INCDIR = inc
+SRCDIR = 	src
+INCDIR = 	inc
+OBJDIR =	inc/object
 
 LIBFT =		lib/libft
 STDIO42 =	lib/stdio42
 MLIBX = 	lib/minilibx-linux
 
 LDFLAGS =  -L$(MLIBX) -lmlx -lXext -lX11 -lm -lz
-HEADERS = $(INCDIR)/engine.h $(INCDIR)/game.h $(INCDIR)/map.h $(LIBFT)/libft.h $(STDIO42)/stdio42.h
+
+HEADERS =	$(INCDIR)/engine/window.h \
+			$(INCDIR)/engine/image.h \
+			$(INCDIR)/engine/input.h \
+			$(INCDIR)/engine/render.h \
+			$(INCDIR)/engine/vec.h \
+			$(INCDIR)/object/player.h \
+			$(INCDIR)/object/object.h \
+			$(INCDIR)/common.h \
+			$(INCDIR)/game.h \
+			$(INCDIR)/system.h \
+			$(INCDIR)/map.h \
+			$(LIBFT)/libft.h \
+			$(STDIO42)/stdio42.h
 
 SRC =	test/banner.c \
 		test/debug.c \
@@ -33,7 +47,7 @@ SRC =	test/banner.c \
 		map/map_checker.c \
 		map/map_parser.c \
 		map/map_pathfinder.c \
-		map/map_utils.c \
+		map/map_init.c \
 		graphic/image.c \
 		graphic/pixel.c \
 		graphic/render.c \
@@ -43,7 +57,7 @@ SRC =	test/banner.c \
 		object/berry.c \
 		object/solid.c \
 		object/spike.c \
-		main.c
+		so_long.c
 
 OBJS = $(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 
@@ -56,7 +70,7 @@ $(NAME): $(OBJS)
 	@$(CC) $(OBJS) $(LIBFT)/libft.a $(STDIO42)/stdio42.a $(LDFLAGS) -o $(NAME)
 
 $(SRCDIR)/%.o: $(SRCDIR)/%.c
-	@$(CC) $(CFLAGS) -I $(INCDIR) -I $(MLIBX) -I $(LIBFT) -I $(STDIO42) -c $< -o $@
+	@$(CC) $(CFLAGS) -I $(INCDIR) -I $(OBJDIR) -I $(MLIBX) -I $(LIBFT) -I $(STDIO42) -c $< -o $@
 
 $(OBJS): $(HEADERS)
 

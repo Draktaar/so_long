@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   berry.c                                            :+:      :+:    :+:   */
+/*   system.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/10 15:00:41 by achu              #+#    #+#             */
-/*   Updated: 2025/04/11 01:14:50 by achu             ###   ########.fr       */
+/*   Created: 2025/04/10 23:20:11 by achu              #+#    #+#             */
+/*   Updated: 2025/04/12 21:07:41 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "object.h"
+#ifndef SYSTEM_H
+# define SYSTEM_H
 
-// static t_berry	new_solid(t_display window, float x, float y)
-// {
-// 	t_berry	strawberry;
+# include "game.h"
+# include "map.h"
 
-// 	strawberry.sprite.img = new_xpm(window, IMG_WALL);
-// 	strawberry.pos = (t_vec2){x * PIXEL_SIZE, y * PIXEL_SIZE};
-// 	strawberry.collider = (t_rect){
-// 		.pos = {x * PIXEL_SIZE, y * PIXEL_SIZE},
-// 		.size = {PIXEL_SIZE, PIXEL_SIZE}
-// 	};
-// 	return (strawberry);
-// }
+typedef struct s_system
+{
+	t_display	display;
+	t_img		scale;
+	t_img		buffer;
+	t_keybind	*input;
+	t_map		*map;
+	t_game		*game;
+	double		last;
+	double		delta;
+}	t_system;
+
+int		start(t_system *manager);
+
+#endif

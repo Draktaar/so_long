@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/object/object.h"
+#include "common.h"
+#include "object.h"
 
 static t_solid	new_solid(t_display window, float x, float y)
 {

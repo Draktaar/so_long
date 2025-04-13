@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "engine/window.h"
+#include "common.h"
 
 // Setup window of the game, and store it inside display
 t_display	setup_window(void)
@@ -32,7 +33,9 @@ t_display	setup_window(void)
 	return (display);
 }
 
-void	destroy_window()
+void	destroy_window(t_display window)
 {
-	
+	mlx_destroy_window(window.mlx, window.win);
+	window.win = NULL;
+	exit(EXIT_SUCCESS);
 }

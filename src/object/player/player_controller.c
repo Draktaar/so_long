@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/object/player.h"
+#include "engine/input.h"
+#include "player.h"
 
 void	player_direction(t_player *player, double delta);
 void	player_gravity(t_player *player, double delta);

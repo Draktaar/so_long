@@ -6,12 +6,13 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:16 by achu              #+#    #+#             */
-/*   Updated: 2025/04/10 16:11:33 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/11 01:05:36 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdbool.h>
 #include <math.h>
-#include "engine.h"
+#include "engine/vec.h"
 
 // Return True if a vector is inside a rect
 bool	is_point_in_rect(t_vec2 point, t_rect rect)

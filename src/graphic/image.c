@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "engine/image.h"
+#include "stdio42.h"
 
 t_img	new_xpm(t_display window, char *file)
 {

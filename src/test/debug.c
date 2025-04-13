@@ -6,11 +6,13 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:43:50 by achu              #+#    #+#             */
-/*   Updated: 2025/04/10 15:44:36 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/11 00:20:24 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "engine/image.h"
+#include "engine/render.h"
+#include "engine/vec.h"
 
 void	draw_bg(t_img *game)
 {

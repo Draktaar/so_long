@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   common.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/09 11:29:48 by achu              #+#    #+#             */
-/*   Updated: 2025/01/07 14:37:57 by achu             ###   ########.fr       */
+/*   Created: 2024/12/12 16:10:08 by achu              #+#    #+#             */
+/*   Updated: 2025/01/07 16:55:49 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "map.h"
-#include "game.h"
+#ifndef COMMON_H
+# define COMMON_H
 
-t_system	*init_game(t_map *manager);
-void	toto();
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include "libft.h"
+# include "stdio42.h"
 
-int main(int argc, char **argv)
-{
-	t_system	*g_manager;
-	t_map	m_manager;
+# define PIXEL_SIZE	8
 
-	toto();
-	if (!init_map(&m_manager, argc, argv))
-		return (1);
-	g_manager = init_game(&m_manager);
-	g_manager->solids = init_solid(g_manager->display, m_manager.map);
-	start(g_manager);
-	clean_map(&m_manager);
-	return (0);
-}
-
+#endif

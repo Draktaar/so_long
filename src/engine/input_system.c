@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "engine.h"
+#include <X11/keysym.h>
+#include "engine/input.h"
 
 // Initialize all input
 t_keybind	*init_input(void)
