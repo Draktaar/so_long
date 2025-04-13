@@ -27,4 +27,6 @@ typedef struct s_game
 	uint32_t	score;
 }	t_game;
 
+t_game	*init_game(void);
+
 #endif

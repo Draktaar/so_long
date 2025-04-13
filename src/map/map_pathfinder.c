@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:43:34 by achu              #+#    #+#             */
-/*   Updated: 2025/04/13 01:52:31 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/13 16:18:47 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ bool	is_valid_pathfinder(t_map *manager)
 	bool	**temp;
 
 	i = 0;
-	temp = (bool**)calloc(manager->height + 1, sizeof(bool*));
+	temp = (bool **)calloc(manager->height + 1, sizeof(bool *));
 	if (!temp)
 		return (false);
 	while (i < manager->height)
 	{
-		temp[i] = (int *)calloc(manager->width, sizeof(int));
+		temp[i] = (bool *)calloc(manager->width, sizeof(bool));
 		if (!temp[i])
 			return (free_arr((void **)temp), false);
 		i++;

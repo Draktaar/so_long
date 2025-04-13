@@ -6,14 +6,14 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:14:10 by achu              #+#    #+#             */
-/*   Updated: 2025/04/13 16:00:23 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/13 19:13:24 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 #include "map.h"
 
-static t_map	init_manager(void)
+static t_map	init_map(void)
 {
 	t_map	manager;
 
@@ -42,11 +42,11 @@ void	clean_map(t_map *manager)
 	manager->nb_coin = 0;
 }
 
-int	init_map(t_map *manager, int argc, char **argv)
+int	setup_map(t_map *manager, int argc, char **argv)
 {
 	if (!is_valid_file(argc, argv))
 		return (0);
-	*manager = init_manager();
+	*manager = init_map();
 	manager->map = parse_map(argv[1]);
 	if (!manager->map)
 		return (ft_perror("Map not initialize"), 0);

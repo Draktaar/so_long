@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 23:20:11 by achu              #+#    #+#             */
-/*   Updated: 2025/04/12 21:07:41 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/13 19:48:05 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ typedef struct s_system
 	double		delta;
 }	t_system;
 
-int		start(t_system *manager);
+t_system	*init_system(void);
 
 #endif

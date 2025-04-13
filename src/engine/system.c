@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common.h                                           :+:      :+:    :+:   */
+/*   system.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/12 16:10:08 by achu              #+#    #+#             */
-/*   Updated: 2025/01/07 16:55:49 by achu             ###   ########.fr       */
+/*   Created: 2024/12/17 14:01:40 by achu              #+#    #+#             */
+/*   Updated: 2025/01/07 15:54:30 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COMMON_H
-# define COMMON_H
+#include <stdlib.h>
+#include "system.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdbool.h>
-# include "libft.h"
-# include "stdio42.h"
+t_system	*init_system(void)
+{
+	t_system	*sys;
 
-#endif
+	sys = (t_system*)malloc(sizeof(t_system));
+	if (!sys)
+		return (NULL);
+	sys->display = init_window();
+	sys->buffer = new_img(sys->display, GAME_WIDTH, GAME_HEIGHT);
+	sys->scale = new_img(sys->display, WINDOW_WIDTH, WINDOW_HEIGHT);
+	sys->input = init_input();
+	sys->last = 0;
+	sys->delta = 0;
+	return (sys);
+}

@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+#include <stdint.h>
 #include "engine/window.h"
-#include "common.h"
 
 // Setup window of the game, and store it inside display
-t_display	setup_window(void)
+t_display	init_window(void)
 {
 	t_display	display;
 	void		*mlx_ptr;
@@ -33,9 +34,9 @@ t_display	setup_window(void)
 	return (display);
 }
 
-void	destroy_window(t_display window)
+int32_t	destroy_window(t_display window)
 {
 	mlx_destroy_window(window.mlx, window.win);
 	window.win = NULL;
-	exit(EXIT_SUCCESS);
+	return (0);
 }

@@ -6,12 +6,12 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 14:41:16 by achu              #+#    #+#             */
-/*   Updated: 2025/04/11 01:05:36 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/13 17:17:50 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
 #include <math.h>
+#include <stdbool.h>
 #include "engine/vec.h"
 
 // Return True if a vector is inside a rect

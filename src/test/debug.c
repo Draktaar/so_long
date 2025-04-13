@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:43:50 by achu              #+#    #+#             */
-/*   Updated: 2025/04/11 00:20:24 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/13 16:26:21 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include "engine/render.h"
 #include "engine/vec.h"
 
-void	draw_bg(t_img *game)
+void	draw_bg(t_img *buffer)
 {
 	for (int y = 0; y < 180; y++)
 		for (int x = 0; x < 320; x++)
-			ft_pixel_put(game, x, y, 0x505cb2);
+			ft_pixel_put(buffer, x, y, 0x505cb2);
 }
 
 // Draw the entire square into the screen

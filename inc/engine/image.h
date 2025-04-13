@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 23:23:26 by achu              #+#    #+#             */
-/*   Updated: 2025/04/11 15:51:23 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/13 19:30:05 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include <stdint.h>
 # include "window.h"
 
-# define IMG_WALL	"sprites/wall.xpm"
+# define PIXEL_SIZE	8
+# define IMG_WALL	"assets/wall.xpm"
 
 typedef struct s_img
 {

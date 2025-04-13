@@ -44,7 +44,7 @@ typedef struct s_map
 	int			nb_coin;
 }	t_map;
 
-int		init_map(t_map *manager, int argc, char **argv);
+int		setup_map(t_map *manager, int argc, char **argv);
 bool	is_valid_map(t_map *manager);
 bool	is_valid_file(int argc, char **argv);
 bool	is_valid_pathfinder(t_map *manager);

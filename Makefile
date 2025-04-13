@@ -41,8 +41,9 @@ HEADERS =	$(INCDIR)/engine/window.h \
 SRC =	test/banner.c \
 		test/debug.c \
 		engine/collision.c \
-		engine/input_system.c \
+		engine/input.c \
 		engine/window.c \
+		engine/system.c \
 		engine/game.c \
 		map/map_checker.c \
 		map/map_parser.c \
