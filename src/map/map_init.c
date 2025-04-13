@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:14:10 by achu              #+#    #+#             */
-/*   Updated: 2025/04/13 15:59:20 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/13 16:00:23 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ static t_map	init_manager(void)
 
 void	clean_map(t_map *manager)
 {
-	ft_freetab((void **)manager->map);
-	ft_freetab((void **)manager->visited);
+	free_arr((void **)manager->map);
+	free_arr((void **)manager->visited);
 	manager->height = 0;
 	manager->width = 0;
 	manager->max_player = 0;
