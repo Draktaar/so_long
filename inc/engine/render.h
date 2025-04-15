@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 00:05:24 by achu              #+#    #+#             */
-/*   Updated: 2025/04/12 19:47:35 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/15 03:05:06 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 # include "engine/vec.h"
 # include "system.h"
 
-# define WHITE		    0xFFFFFF
-# define RED		    0xFF0000
+# define WHITE		    0xFFFFFFFF
+# define RED		    0xFFFF0000
 # define GREEN		    0xFF00
 # define BLUE		    0x0000FF
 # define YELLOW		    0xFFFF00
@@ -27,8 +27,8 @@
 
 void	render(t_system *game);
 void	draw_bg(t_img *game);
-void	draw_square(t_img *image, t_rect rect, int color);
-void	draw_rect(t_img *image, t_rect rect, int color);
+void	draw_square(t_img *image, t_rect rect, unsigned int color);
+void	draw_rect(t_img *image, t_rect rect, unsigned int color);
 void    name_banner(void);
 
 #endif

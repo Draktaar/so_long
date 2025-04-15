@@ -26,47 +26,19 @@ static t_solid	new_solid(t_display window, float x, float y)
 	return (wall);
 }
 
-static int	expand_wall(t_solid **solids, size_t *size, t_solid new)
-{
-	t_solid	*new_solids;
-	size_t	new_size;
-
-	new_size = *size + 1;
-	new_solids = ft_realloc(*solids, *size * sizeof(t_solid), new_size * sizeof(t_solid));
-	if (!new_solids)
-		return (0);
-	new_solids[*size] = new;
-	(*solids) = new_solids;
-	(*size) = new_size;
-	return (1);
-}
-
-t_solid	*init_solid(t_display window, char **map)
+t_solid	*init_solid(t_display window, t_map grid)
 {
 	t_solid	*solids;
-	t_solid	new;
-	size_t	size;
-	size_t	x;
-	size_t	y;
+	int32_t	i;
 
-	size = 0;
-	solids = (t_solid *)malloc(size * sizeof(t_solid));
+	i = 0;
+	solids = (t_solid *)malloc(grid.max_solid * sizeof(t_solid));
 	if (!solids)
 		return (NULL);
-	y = 0;
-	while (map[y])
+	while (i < grid.max_solid)
 	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (map[y][x] == '1')
-			{
-				new = new_solid(window, x, y);
-				expand_wall(&solids, &size, new);
-			}
-			x++;
-		}
-		y++;
+		solids[i] = new_solid(window, grid.solid_pos[i].x, grid.solid_pos[i].y);
+		i++;
 	}
 	return (solids);
 }

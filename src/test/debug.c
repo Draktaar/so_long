@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:43:50 by achu              #+#    #+#             */
-/*   Updated: 2025/04/13 16:26:21 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/15 03:10:05 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	draw_bg(t_img *buffer)
 {
 	for (int y = 0; y < 180; y++)
 		for (int x = 0; x < 320; x++)
-			ft_pixel_put(buffer, x, y, 0x505cb2);
+			pixel_put(buffer, x, y, 0xFF505cb2);
 }
 
 // Draw the entire square into the screen
-void	draw_square(t_img *image, t_rect rect, int color)
+void	draw_square(t_img *image, t_rect rect, unsigned int color)
 {
 	int	y;
 	int x;
@@ -33,7 +33,13 @@ void	draw_square(t_img *image, t_rect rect, int color)
 		x = rect.pos.x;
 		while (x < rect.pos.x + rect.size.x)
 		{
-			ft_pixel_put(image, x, y, color);
+			float alpha = 1.0f;
+			if ((color & 0x00FFFFFF) != 0)
+			{
+				unsigned int faded = pixel_alpha(color, alpha);
+				if (alpha > 0.0f)
+					pixel_put(image, x, y, faded);
+			}
 			x++;
 		}
 		y++;
@@ -41,7 +47,7 @@ void	draw_square(t_img *image, t_rect rect, int color)
 }
 
 // Draw the border of the rect into the screen
-void	draw_rect(t_img *image, t_rect rect, int color)
+void	draw_rect(t_img *image, t_rect rect, unsigned int color)
 {
 	int	y;
 	int x;
@@ -53,9 +59,25 @@ void	draw_rect(t_img *image, t_rect rect, int color)
 		while (x < rect.pos.x + rect.size.x)
 		{
 			if (y < rect.pos.y + 1 || y > rect.pos.y + rect.size.y - 2)
-				ft_pixel_put(image, x, y, color);
+			{
+				float alpha = 1.0f;
+				if ((color & 0x00FFFFFF) != 0)
+				{
+					unsigned int faded = pixel_alpha(color, alpha);
+					if (alpha > 0.0f)
+						pixel_put(image, x, y, faded);
+				}
+			}
 			else if (x < rect.pos.x + 1 || x > rect.pos.x + rect.size.x - 2)
-				ft_pixel_put(image, x, y, color);
+			{
+				float alpha = 1.0f;
+				if ((color & 0x00FFFFFF) != 0)
+				{
+					unsigned int faded = pixel_alpha(color, alpha);
+					if (alpha > 0.0f)
+						pixel_put(image, x, y, faded);
+				}
+			}
 			x++;
 		}
 		y++;

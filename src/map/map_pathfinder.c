@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:43:34 by achu              #+#    #+#             */
-/*   Updated: 2025/04/13 16:18:47 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/14 16:50:06 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,35 +17,35 @@ static const int	g_xdir[4] = {-1, 0, 1, 0};
 static const int	g_ydir[4] = {0, -1, 0, 1};
 
 // Return if the tile is or not a valid tile to traverse
-static bool	is_valid_path(t_map *manager, int x, int y)
+static bool	is_valid_path(t_map *grid, int x, int y)
 {
-	if (!(0 < x || x < manager->width))
+	if (!(0 < x || x < grid->width))
 		return (false);
-	else if (!(0 < y || y < manager->height))
+	else if (!(0 < y || y < grid->height))
 		return (false);
-	else if (manager->map[y][x] == WALL)
+	else if (grid->grid[y][x] == WALL)
 		return (false);
-	else if (manager->visited[y][x] == true)
+	else if (grid->visited[y][x] == true)
 		return (false);
 	return (true);
 }
 
 // Breadth-first search algo:
 // Traverse the map in search for all the element in the map
-static bool	solve_path(t_map *manager, int x, int y)
+static bool	solve_path(t_map *grid, int x, int y)
 {
 	int	i;
 
 	i = 0;
-	manager->visited[y][x] = true;
-	if (manager->map[y][x] == COIN)
-		manager->nb_coin++;
-	else if (manager->map[y][x] == EXIT)
-		manager->nb_exit++;
+	grid->visited[y][x] = true;
+	if (grid->grid[y][x] == COIN)
+		grid->found_berry++;
+	else if (grid->grid[y][x] == EXIT)
+		grid->found_exit++;
 	while (i < 4)
 	{
-		if (is_valid_path(manager, x + g_xdir[i], y + g_ydir[i]))
-			solve_path(manager, x + g_xdir[i], y + g_ydir[i]);
+		if (is_valid_path(grid, x + g_xdir[i], y + g_ydir[i]))
+			solve_path(grid, x + g_xdir[i], y + g_ydir[i]);
 		i++;
 	}
 	return (false);
@@ -54,27 +54,27 @@ static bool	solve_path(t_map *manager, int x, int y)
 // Create a visited tile for the pathfinding algo in the same size of the
 // current map and recursively do the breadth-first search algo,
 // if the nb of coins and exit doesn't match with there max value return false
-bool	is_valid_pathfinder(t_map *manager)
+bool	is_valid_pathfinder(t_map *grid)
 {
 	int		i;
 	bool	**temp;
 
 	i = 0;
-	temp = (bool **)calloc(manager->height + 1, sizeof(bool *));
+	temp = (bool **)calloc(grid->height + 1, sizeof(bool *));
 	if (!temp)
 		return (false);
-	while (i < manager->height)
+	while (i < grid->height)
 	{
-		temp[i] = (bool *)calloc(manager->width, sizeof(bool));
+		temp[i] = (bool *)calloc(grid->width, sizeof(bool));
 		if (!temp[i])
 			return (free_arr((void **)temp), false);
 		i++;
 	}
-	manager->visited = temp;
-	solve_path(manager, manager->start.x, manager->start.y);
-	if (manager->nb_coin != (*manager).max_coin)
+	grid->visited = temp;
+	solve_path(grid, grid->player_pos.x, grid->player_pos.y);
+	if (grid->found_berry != (*grid).max_berry)
 		return (ft_perror("Error: Pathfinder didn't found all the coins"), 0);
-	else if (manager->nb_exit != 1)
+	else if (grid->found_exit != 1)
 		return (ft_perror("Error: Pathfinder didn't found the exit"), 0);
 	return (true);
 }

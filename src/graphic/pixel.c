@@ -13,7 +13,7 @@
 #include "engine/image.h"
 
 // Copy pixel from an image to another image
-void	ft_pixel_put(t_img *img, int x, int y, int color)
+void	pixel_put(t_img *img, int x, int y, unsigned int color)
 {
 	char	*pixel;
 
@@ -34,6 +34,11 @@ unsigned int	get_pixel(t_img *img, int x, int y)
 	return (*(unsigned int *)pixel);
 }
 
+int	pixel_alpha(int color, float alpha)
+{
+	return ((int)(alpha * 255) << 24 | color);
+}
+
 // Scale the pixel from an image to another image
 void	pixel_scale(t_img *src, t_img *dst, int scale)
 {
@@ -47,7 +52,14 @@ void	pixel_scale(t_img *src, t_img *dst, int scale)
 			color = get_pixel(src, x, y);
 			for (dy = 0; dy < scale; dy++)
 				for (dx = 0; dx < scale; dx++)
-					ft_pixel_put(dst, x * scale + dx, y * scale + dy, color);
+					pixel_put(dst, x * scale + dx, y * scale + dy, color);
 		}
 	}
+}
+
+void draw_clear(t_img *buffer, unsigned int color)
+{
+	for (int y = 0; y < buffer->h; y++)
+		for (int x = 0; x < buffer->w; x++)
+			pixel_put(buffer, x, y, color | 0xFF000000);
 }

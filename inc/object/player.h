@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:09:45 by achu              #+#    #+#             */
-/*   Updated: 2025/04/11 12:58:10 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/14 01:51:07 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@
 # include <stdbool.h>
 # include "engine/input.h"
 # include "engine/image.h"
+# include "engine/timer.h"
 # include "engine/vec.h"
 
 typedef enum e_state
@@ -72,9 +73,19 @@ typedef struct s_player
 	t_vec2		position;
 	t_vec2		velocity;
 	t_rect		collider;
+
 	t_rect		ground_col;
 	bool		is_ground;
+
 	bool		is_wall;
+	
+	bool		is_dashing;
+	uint32_t	dash_limit;
+	t_timer		dash_duration;
+	t_timer		dash_cooldown;
+
+	t_timer		jump_buffer;
+	t_timer		coyote_time;
 }	t_player;
 
 t_player	init_player(void);

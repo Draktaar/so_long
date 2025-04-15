@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 10:58:59 by achu              #+#    #+#             */
-/*   Updated: 2025/04/13 01:52:31 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/14 16:33:05 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_bzero(void *str, size_t size);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
 void	free_arr(void **tab);
+void	free_ptr(void *ptrs);
 
 // *** Character ***
 int		is_alnum(int c);

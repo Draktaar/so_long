@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <X11/keysym.h>
 #include "engine/input.h"
 
 // Initialize all input

@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:14:10 by achu              #+#    #+#             */
-/*   Updated: 2025/04/13 19:13:24 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/14 19:09:28 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,46 +15,46 @@
 
 static t_map	init_map(void)
 {
-	t_map	manager;
+	t_map	grid;
 
-	manager.height = 0;
-	manager.width = 0;
-	manager.map = NULL;
-	manager.visited = NULL;
-	manager.max_player = 0;
-	manager.max_exit = 0;
-	manager.max_coin = 0;
-	manager.nb_exit = 0;
-	manager.nb_coin = 0;
-	return (manager);
+	grid.height = 0;
+	grid.width = 0;
+	grid.grid = NULL;
+	grid.visited = NULL;
+	grid.player_pos = (t_vec2){0, 0};
+	grid.max_player = 0;
+	grid.exit_pos = (t_vec2){0, 0};
+	grid.max_exit = 0;
+	grid.solid_pos = NULL;
+	grid.max_solid = 0;
+	grid.berry_pos = NULL;
+	grid.max_berry = 0;
+	grid.found_exit = 0;
+	grid.found_berry = 0;
+	return (grid);
 }
 
-void	clean_map(t_map *manager)
+void	clean_map(t_map *grid)
 {
-	free_arr((void **)manager->map);
-	free_arr((void **)manager->visited);
-	manager->height = 0;
-	manager->width = 0;
-	manager->max_player = 0;
-	manager->max_exit = 0;
-	manager->max_coin = 0;
-	manager->nb_exit = 0;
-	manager->nb_coin = 0;
+	free_arr((void **)grid->grid);
+	free_arr((void **)grid->visited);
+	free_ptr((void *)grid->solid_pos);
+	free_ptr((void *)grid->berry_pos);
 }
 
-int	setup_map(t_map *manager, int argc, char **argv)
+int	setup_map(t_map *grid, int argc, char **argv)
 {
 	if (!is_valid_file(argc, argv))
 		return (0);
-	*manager = init_map();
-	manager->map = parse_map(argv[1]);
-	if (!manager->map)
+	*grid = init_map();
+	grid->grid = parse_map(argv[1]);
+	if (!grid->grid)
 		return (ft_perror("Map not initialize"), 0);
-	manager->width = ft_strlen(manager->map[0]) - 1;
-	manager->height = ft_arrlen(manager->map);
-	if (!is_valid_map(manager))
-		return (clean_map(manager), 0);
-	else if (!is_valid_pathfinder(manager))
-		return (clean_map(manager), 0);
+	grid->width = ft_strlen(grid->grid[0]) - 1;
+	grid->height = ft_arrlen(grid->grid);
+	if (!is_valid_map(grid))
+		return (clean_map(grid), 0);
+	else if (!is_valid_pathfinder(grid))
+		return (clean_map(grid), 0);
 	return (1);
 }

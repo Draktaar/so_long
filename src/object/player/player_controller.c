@@ -29,6 +29,10 @@ t_player	init_player(void)
 		.x = 0,
 		.y = 0,
 	};
+	player.velocity = (t_vec2){
+		.x = 0,
+		.y = 0,
+	};
 	player.position = (t_vec2){
 		.x = 16,
 		.y = 16,
@@ -61,6 +65,7 @@ static void	player_input(t_input *controller, t_keybind *keybind)
 	controller->jump_pressed = keybind[SPACE].pressed;
 	controller->dash_pressed = keybind[SHIFT].pressed;
 }
+#include <stdio.h>
 
 void	update_player(t_player *player, t_keybind *keybind, double delta)
 {
@@ -72,6 +77,7 @@ void	update_player(t_player *player, t_keybind *keybind, double delta)
 
 	player->position.x += player->velocity.x * delta;
 	player->position.y += player->velocity.y * delta;
+	printf("x: %f\ny: %f\n\n", player->position.x, player->position.y);
 	player->collider.pos.x = player->position.x - player->collider.size.x / 2;
 	player->collider.pos.y = player->position.y - player->collider.size.y / 2;
 	player->ground_col.pos.x = player->collider.pos.x;

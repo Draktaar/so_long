@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:15:59 by achu              #+#    #+#             */
-/*   Updated: 2025/04/11 00:10:17 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/14 20:57:05 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdbool.h>
 # include "engine/image.h"
 # include "engine/vec.h"
+# include "map.h"
 
 typedef struct s_berry
 {
@@ -39,6 +40,7 @@ typedef struct s_spike
 	t_rect		collider;
 }	t_spike;
 
-t_solid	*init_solid(t_display window, char **map);
+t_solid	*init_solid(t_display window, t_map grid);
+t_berry	*init_berry(t_display window, t_map grid);
 
 #endif

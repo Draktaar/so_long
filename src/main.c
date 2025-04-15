@@ -43,15 +43,11 @@ static void	delta(t_system *sys)
 static int32_t	update(t_system *sys)
 {
 	delta(sys);
-	// for (size_t i = 0; i < 314; i++)
-	// {
-	// 	check_ground(&sys->game->player, manager->solids[i].collider);
-	// }
+	for (size_t i = 0; i < 314; i++)
+		check_ground(&sys->game->player,sys->game->solids[i].collider);
 	update_player(&sys->game->player, sys->input, sys->delta);
 	for (size_t i = 0; i < 314; i++)
-	{
 		update_collision(&sys->game->player, sys->game->solids[i].collider);
-	}
 	update_input(sys->input);
 	render(sys);
 	return (0);
@@ -61,7 +57,8 @@ static int32_t	start(t_system *sys, t_map *grid)
 {
 	sys = init_system();
 	sys->game = init_game();
-	sys->game->solids = init_solid(sys->display, grid->map);
+	sys->game->solids = init_solid(sys->display, *grid);
+	sys->game->berries = init_berry(sys->display, *grid);
 	sys->last = get_frame();
 	mlx_loop_hook(sys->display.mlx, update, sys);
 	mlx_hook(sys->display.win, ON_KEYPRESS, MASK_KEYPRESS, input_press, sys->input);
@@ -74,6 +71,7 @@ static int32_t	start(t_system *sys, t_map *grid)
 int32_t	main(int32_t argc, char **argv)
 {
 	t_system	sys;
+	t_game		game;
 	t_map		grid;
 
 	name_banner();

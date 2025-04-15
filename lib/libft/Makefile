@@ -6,7 +6,7 @@
 #    By: achu <achu@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 11:00:14 by achu              #+#    #+#              #
-#    Updated: 2025/04/13 01:53:13 by achu             ###   ########.fr        #
+#    Updated: 2025/04/14 16:30:49 by achu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ MEM_SRC =	ft_bzero.c \
 			ft_memmove.c \
 			ft_memset.c \
 			ft_realloc.c \
-			free_arr.c
+			free_arr.c \
+			free_ptr.c
 CHAR_SRC =	do_lower.c \
 			do_upper.c \
 			is_alnum.c \

@@ -21,8 +21,8 @@ t_system	*init_system(void)
 	if (!sys)
 		return (NULL);
 	sys->display = init_window();
-	sys->buffer = new_img(sys->display, GAME_WIDTH, GAME_HEIGHT);
-	sys->scale = new_img(sys->display, WINDOW_WIDTH, WINDOW_HEIGHT);
+	sys->buffer = new_img_alpha(sys->display, GAME_WIDTH, GAME_HEIGHT);
+	sys->scale = new_img_alpha(sys->display, WINDOW_WIDTH, WINDOW_HEIGHT);
 	sys->input = init_input();
 	sys->last = 0;
 	sys->delta = 0;

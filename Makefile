@@ -22,12 +22,13 @@ LIBFT =		lib/libft
 STDIO42 =	lib/stdio42
 MLIBX = 	lib/minilibx-linux
 
-LDFLAGS =  -L$(MLIBX) -lmlx -lXext -lX11 -lm -lz
+LDFLAGS =  -L$(MLIBX) -lmlx -lXext -lX11 -lXrender -lm -lz
 
 HEADERS =	$(INCDIR)/engine/window.h \
 			$(INCDIR)/engine/image.h \
 			$(INCDIR)/engine/input.h \
 			$(INCDIR)/engine/render.h \
+			$(INCDIR)/engine/timer.h \
 			$(INCDIR)/engine/vec.h \
 			$(INCDIR)/object/player.h \
 			$(INCDIR)/object/object.h \
@@ -43,6 +44,7 @@ SRC =	test/banner.c \
 		engine/collision.c \
 		engine/input.c \
 		engine/window.c \
+		engine/timer.c \
 		engine/system.c \
 		engine/game.c \
 		map/map_checker.c \
@@ -58,7 +60,7 @@ SRC =	test/banner.c \
 		object/berry.c \
 		object/solid.c \
 		object/spike.c \
-		so_long.c
+		main.c
 
 OBJS = $(addprefix $(SRCDIR)/, $(SRC:.c=.o))
 

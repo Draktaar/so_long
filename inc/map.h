@@ -29,19 +29,23 @@ typedef struct s_map
 {
 	int			height;
 	int			width;
-
-	char		**map;
+	char		**grid;
 	bool		**visited;
 
-	t_vec2		start;
-	t_vec2		exit;
+	t_vec2		player_pos;
+	int32_t		max_player;
 
-	int			max_player;
-	int			max_exit;
-	int			max_coin;
+	t_vec2		exit_pos;
+	int32_t		max_exit;
+	
+	t_vec2		*solid_pos;
+	int32_t		max_solid;
 
-	int			nb_exit;
-	int			nb_coin;
+	t_vec2		*berry_pos;
+	int32_t		max_berry;
+
+	int32_t		found_exit;
+	int32_t		found_berry;
 }	t_map;
 
 int		setup_map(t_map *manager, int argc, char **argv);

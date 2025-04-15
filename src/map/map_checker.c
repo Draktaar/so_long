@@ -30,28 +30,49 @@ static bool	is_valid_border(t_map *manager, int x, int y)
 	height = (*manager).height - 1;
 	width = (*manager).width - 1;
 	if (x == 0 || y == 0 || x == width || y == height)
-		if ((*manager).map[y][x] != WALL)
+		if ((*manager).grid[y][x] != WALL)
 			return (false);
 	return (true);
+}
+
+static	int32_t	add_object(t_vec2 **pos, int32_t *size, int x, int y)
+{
+	t_vec2	*new_pos;
+	size_t	new_size;
+
+	new_size = *size + 1;
+	new_pos = ft_realloc(*pos, *size * sizeof(t_vec2), new_size * sizeof(t_vec2));
+	if (!new_pos)
+		return (0);
+	new_pos[*size] = (t_vec2){x, y};
+	(*pos) = new_pos;
+	(*size) = new_size;
+	return (1);
 }
 
 // Check for the current tile info
 static bool	is_valid_tile(t_map *manager, int x, int y)
 {
-	if (!is_valid_char(manager->map[y][x]))
+	if (!is_valid_char(manager->grid[y][x]))
 		return (ft_perror("Error: Invalid char used in the map file"), false);
 	else if (!is_valid_border(manager, x, y))
 		return (ft_perror("Error: Map not encased by walls"), false);
-	else if ((*manager).map[y][x] == PLAYER)
+	else if (manager->grid[y][x] == PLAYER)
 	{
 		manager->max_player++;
-		manager->start.x = x;
-		manager->start.y = y;
+		manager->player_pos.x = x;
+		manager->player_pos.y = y;
 	}
-	else if (manager->map[y][x] == EXIT)
+	else if (manager->grid[y][x] == EXIT)
+	{
 		manager->max_exit++;
-	else if (manager->map[y][x] == COIN)
-		manager->max_coin++;
+		manager->exit_pos.x = x;
+		manager->exit_pos.y = y;
+	}
+	else if (manager->grid[y][x] == WALL)
+		add_object(&manager->solid_pos, &manager->max_solid, x, y);
+	else if (manager->grid[y][x] == COIN)
+		add_object(&manager->berry_pos, &manager->max_berry, x, y);
 	return (true);
 }
 
@@ -78,7 +99,7 @@ bool	is_valid_map(t_map *manager)
 		return (ft_perror("Error: Map has more or less than one player"), false);
 	else if (manager->max_exit != 1)
 		return (ft_perror("Error: Map has more or less than one exit"), false);
-	else if (manager->max_coin == 0)
+	else if (manager->max_berry == 0)
 		return (ft_perror("Error: Map must at least contain one coin"), false);
 	return (true);
 }

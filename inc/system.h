@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 23:20:11 by achu              #+#    #+#             */
-/*   Updated: 2025/04/13 19:48:05 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/13 21:27:59 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef struct s_system
 	t_img		scale;
 	t_img		buffer;
 	t_keybind	*input;
-	t_map		*map;
 	t_game		*game;
 	double		last;
 	double		delta;

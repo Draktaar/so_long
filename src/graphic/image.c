@@ -41,6 +41,20 @@ t_img	new_img(t_display window, int w, int h)
 	return (image);
 }
 
+t_img	new_img_alpha(t_display window, int w, int h)
+{
+	t_img image;
+
+	image.w = w;
+	image.h = h;
+	image.ptr = mlx_new_image_alpha(window.mlx, w, h);
+	if (!image.ptr)
+		ft_perror("Error: Failed to create image");
+	image.addr = mlx_get_data_addr(image.ptr,
+		&(image.bpp), &(image.llen), &(image.endian));
+	return (image);
+}
+
 void	destroy_img(t_img image)
 {
 	if (image.ptr && image.screen.mlx) 

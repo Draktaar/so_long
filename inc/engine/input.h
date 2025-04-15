@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 23:26:21 by achu              #+#    #+#             */
-/*   Updated: 2025/04/11 00:07:29 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/14 21:25:46 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 # define MASK_KEYRELEASE	1L<<1
 # define MASK_EXPOSE		1L<<15
 # define MASK_DESTROY		1L<<17
+
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 typedef enum e_action
 {

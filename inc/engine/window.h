@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 23:23:23 by achu              #+#    #+#             */
-/*   Updated: 2025/04/13 16:17:26 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/15 01:25:05 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 # define WINDOW_HEIGHT	720
 # define WINDOW_TITLE	"so_long"
 
-# include <mlx.h>
-# include <X11/X.h>
+# include "mlx.h"
 
 typedef struct s_display
 {
