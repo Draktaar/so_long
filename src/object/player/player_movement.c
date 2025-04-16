@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 22:38:51 by achu              #+#    #+#             */
-/*   Updated: 2025/04/16 16:50:37 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/16 17:23:00 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	player_direction(t_player *player, double delta)
 		decel = AIR_DECEL;
 	}
 	if (player->controller.move.x == 0)
-		player->velocity.x = ft_approach(player->velocity.x, 0, decel * delta);	
+		player->velocity.x = ft_approach(player->velocity.x, 0, decel * delta);
 	else if (player->controller.move.x <= 0 && player->velocity.x > 0)
 		player->velocity.x = ft_approach(player->velocity.x, 0, turn * delta);
 	else if (player->controller.move.x >= 0 && player->velocity.x < 0)
@@ -58,7 +58,7 @@ void	player_gravity(t_player *player, double delta)
 	{
 		if (!player->controller.jump_hold && player->velocity.y < 0)
 			mult = 3;
-		player->velocity.y = ft_approach(player->velocity.y, MAX_FALL, GRAVITY * mult * delta);	
+		player->velocity.y = ft_approach(player->velocity.y, MAX_FALL, GRAVITY * mult * delta);
 	}
 }
 
@@ -77,6 +77,6 @@ void	player_dash(t_player *player, double delta)
 	if (player->controller.dash_pressed)
 	{
 		player->velocity.x = player->controller.move.x * DASH_POW;
-		player->velocity.y = player->controller.move.y * DASH_POW;		
+		player->velocity.y = player->controller.move.y * DASH_POW;
 	}
 }

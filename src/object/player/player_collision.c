@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:13:16 by achu              #+#    #+#             */
-/*   Updated: 2025/04/16 17:09:07 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/16 17:24:16 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ static void	move_y(float *remainder, float amount, t_player *player, t_solid *so
 				player->position.y += sign;
 				player->collider.pos.y = player->position.y;
 				player->ground_col.pos.y = player->collider.pos.y + player->collider.size.y - 3;
-				move -= sign; 
+				move -= sign;
 			}
 			else
 			{
@@ -107,7 +107,6 @@ static void	move_y(float *remainder, float amount, t_player *player, t_solid *so
 		}
 	}
 }
-#include <stdio.h>
 
 void	update_collision(t_player *player, t_solid *solids, double delta)
 {

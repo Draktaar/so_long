@@ -25,16 +25,13 @@ t_player	init_player(void)
 	player.controller.dash_pressed = 0;
 	player.controller.jump_hold = 0;
 	player.controller.jump_pressed = 0;
-	player.controller.move = (t_vec2){ .x = 0.0f, .y = 0.0f, };
-
-	player.velocity = (t_vec2){ .x = 0.0f, .y = 0.0f, };
-	player.remainder = (t_vec2){ .x = 0.0f, .y = 0.0f, };
-	player.position = (t_vec2){ .x = 100, .y = 100, };
+	player.controller.move = (t_vec2){.x = 0.0f, .y = 0.0f,};
+	player.velocity = (t_vec2){.x = 0.0f, .y = 0.0f,};
+	player.remainder = (t_vec2){.x = 0.0f, .y = 0.0f,};
+	player.position = (t_vec2){.x = 100, .y = 100,};
 	player.collider = (t_rect){.pos = {100, 100}, .size = {8, 11}};
-
 	player.ground_col = (t_rect){.pos = {100, 100}, .size = {8, 3}};
 	player.is_ground = false;
-
 	player.dash_limit = 0;
 	player.is_dashing = false;
 	return (player);
