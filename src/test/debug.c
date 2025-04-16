@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:43:50 by achu              #+#    #+#             */
-/*   Updated: 2025/04/15 03:10:05 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/15 19:14:32 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	draw_bg(t_img *buffer)
 {
 	for (int y = 0; y < 180; y++)
 		for (int x = 0; x < 320; x++)
-			pixel_put(buffer, x, y, 0xFF505cb2);
+			pixel_put(buffer, x, y, 0xFF191919);
 }
 
 // Draw the entire square into the screen

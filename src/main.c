@@ -43,8 +43,15 @@ static void	delta(t_system *sys)
 static int32_t	update(t_system *sys)
 {
 	delta(sys);
-	for (size_t i = 0; i < 314; i++)
-		check_ground(&sys->game->player,sys->game->solids[i].collider);
+	sys->game->player.is_ground = false;
+	t_rect	bottom = sys->game->player.ground_col;
+	bottom.size.y += 1;
+	for (size_t i = 0; i < 314; i++) {
+		if (is_collided(bottom, sys->game->solids[i].collider)) {
+			sys->game->player.is_ground = true;
+			break;
+		}
+	}
 	update_player(&sys->game->player, sys->input, sys->delta);
 	for (size_t i = 0; i < 314; i++)
 		update_collision(&sys->game->player, sys->game->solids[i].collider);
@@ -57,6 +64,8 @@ static int32_t	start(t_system *sys, t_map *grid)
 {
 	sys = init_system();
 	sys->game = init_game();
+	sys->game->bg1 = new_xpm(sys->display, IMG_BG);
+	sys->game->bg0 = new_xpm(sys->display, IMG_BG0);
 	sys->game->solids = init_solid(sys->display, *grid);
 	sys->game->berries = init_berry(sys->display, *grid);
 	sys->last = get_frame();

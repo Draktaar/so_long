@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:09:45 by achu              #+#    #+#             */
-/*   Updated: 2025/04/14 01:51:07 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/15 20:26:48 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_player
 	t_vec2		start;
 	t_vec2		position;
 	t_vec2		velocity;
+	t_vec2		remainder;
 	t_rect		collider;
 
 	t_rect		ground_col;

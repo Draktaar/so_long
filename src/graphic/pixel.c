@@ -34,7 +34,7 @@ unsigned int	get_pixel(t_img *img, int x, int y)
 	return (*(unsigned int *)pixel);
 }
 
-int	pixel_alpha(int color, float alpha)
+unsigned int	pixel_alpha(int color, float alpha)
 {
 	return ((int)(alpha * 255) << 24 | color);
 }

@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:13:16 by achu              #+#    #+#             */
-/*   Updated: 2025/04/13 21:23:56 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/16 01:31:08 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,8 @@ void	update_collision(t_player *player, t_rect solid)
 			player->position.y += overlap.y * (player->position.y < solid.pos.y ? -1 : 1);
 		}
 	}
+	player->collider.pos.x = player->position.x - player->collider.size.x / 2;
+	player->collider.pos.y = player->position.y - player->collider.size.y / 2;
+	player->ground_col.pos.x = player->collider.pos.x;
+	player->ground_col.pos.y = player->collider.pos.y + player->collider.size.y - 3;
 }

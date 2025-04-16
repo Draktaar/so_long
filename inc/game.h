@@ -19,6 +19,9 @@
 
 typedef struct s_game
 {
+	t_img		bg0;
+	t_img		bg1;
+
 	t_player	player;
 	t_solid		*solids;
 	t_berry		*berries;

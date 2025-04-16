@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <math.h>
 #include "engine/input.h"
 #include "player.h"
 
@@ -33,13 +34,17 @@ t_player	init_player(void)
 		.x = 0,
 		.y = 0,
 	};
+	player.remainder = (t_vec2){
+		.x = 0,
+		.y = 0,
+	};
 	player.position = (t_vec2){
 		.x = 16,
 		.y = 16,
 	};
 	player.collider = (t_rect){
 		.pos = {0, 0},
-		.size = {8,11}
+		.size = {8, 11}
 	};
 	player.ground_col = (t_rect){
 		.pos = {0, 0},
@@ -67,19 +72,29 @@ static void	player_input(t_input *controller, t_keybind *keybind)
 }
 #include <stdio.h>
 
+static int	move_remainder(float *remainder, float amount)
+{
+	int	move;
+
+	*remainder += amount;
+	move = (int)roundf(*remainder);
+	*remainder -= move;
+	return (move);
+}
+
 void	update_player(t_player *player, t_keybind *keybind, double delta)
 {
+	int	move_x;
+	int	move_y;
+
+	printf("is_grounded: %i\n", player->is_ground);
 	player_input(&player->controller, keybind);
 	player_direction(player, delta);
 	player_dash(player, delta);
 	player_jump(player, delta);
 	player_gravity(player, delta);
-
-	player->position.x += player->velocity.x * delta;
-	player->position.y += player->velocity.y * delta;
-	printf("x: %f\ny: %f\n\n", player->position.x, player->position.y);
-	player->collider.pos.x = player->position.x - player->collider.size.x / 2;
-	player->collider.pos.y = player->position.y - player->collider.size.y / 2;
-	player->ground_col.pos.x = player->collider.pos.x;
-	player->ground_col.pos.y = player->collider.pos.y + player->collider.size.y;
+	move_x = move_remainder(&player->remainder.x, player->velocity.x * delta);
+	move_y = move_remainder(&player->remainder.y, player->velocity.y * delta);
+	player->position.x += move_x;
+	player->position.y += move_y;
 }
