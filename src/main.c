@@ -53,8 +53,7 @@ static int32_t	update(t_system *sys)
 		}
 	}
 	update_player(&sys->game->player, sys->input, sys->delta);
-	for (size_t i = 0; i < 314; i++)
-		update_collision(&sys->game->player, sys->game->solids[i].collider);
+	update_collision(&sys->game->player, sys->game->solids, sys->delta);
 	update_input(sys->input);
 	render(sys);
 	return (0);

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "engine/image.h"
-#include "stdio42.h"
+#include "common.h"
 
 t_img	new_xpm(t_display window, char *file)
 {

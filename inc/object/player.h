@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:09:45 by achu              #+#    #+#             */
-/*   Updated: 2025/04/15 20:26:48 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/16 16:21:24 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@
 // *** Dash ***
 # define MAX_DASH 1
 # define DASH_POW 250
-# define DASH_TIME 0.15
-# define DASH_CDR 0.3
+# define DASH_TIME 1.0
+# define DASH_CDR 3.0
 
 // *** QoL ***
 # define COYOTE 0.15
@@ -48,6 +48,7 @@
 # include "engine/image.h"
 # include "engine/timer.h"
 # include "engine/vec.h"
+# include "object.h"
 
 typedef enum e_state
 {
@@ -92,6 +93,6 @@ typedef struct s_player
 t_player	init_player(void);
 void		check_ground(t_player *player, t_rect wall);
 void    	update_player(t_player *player, t_keybind *keybind, double delta);
-void		update_collision(t_player *player, t_rect wall);
+void		update_collision(t_player *player, t_solid *solids, double delta);
 
 #endif

@@ -6,11 +6,12 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 22:38:51 by achu              #+#    #+#             */
-/*   Updated: 2025/04/15 19:58:23 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/16 16:50:37 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
+#include <stdbool.h>
 #include "player.h"
 
 static double	ft_approach(double current, double target, double step)
@@ -73,10 +74,9 @@ void	player_jump(t_player *player, double delta)
 
 void	player_dash(t_player *player, double delta)
 {
-	(void)delta;
 	if (player->controller.dash_pressed)
 	{
 		player->velocity.x = player->controller.move.x * DASH_POW;
-		player->velocity.y = player->controller.move.y * DASH_POW;
+		player->velocity.y = player->controller.move.y * DASH_POW;		
 	}
 }
