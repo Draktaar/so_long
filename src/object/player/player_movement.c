@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 22:38:51 by achu              #+#    #+#             */
-/*   Updated: 2025/04/16 17:23:00 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/17 02:00:49 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	player_direction(t_player *player, double delta)
 	accel = ACCEL;
 	turn = TURN;
 	decel = DECEL;
-	if (!player->is_ground)
+	if (!player->is_grounded)
 	{
 		accel = AIR_ACCEL;
 		turn = AIR_TURN;
@@ -54,7 +54,7 @@ void	player_gravity(t_player *player, double delta)
 	float	mult;
 
 	mult = FALL_MULT;
-	if (!player->is_ground)
+	if (!player->is_grounded)
 	{
 		if (!player->controller.jump_hold && player->velocity.y < 0)
 			mult = 3;
@@ -65,7 +65,7 @@ void	player_gravity(t_player *player, double delta)
 void	player_jump(t_player *player, double delta)
 {
 	(void)delta;
-	if (player->controller.jump_pressed && player->is_ground)
+	if (player->controller.jump_pressed && player->is_grounded)
 	{
 		player->velocity.x += JUMP_BOOST * player->controller.move.x;
 		player->velocity.y = -JUMP_POW;
@@ -74,9 +74,20 @@ void	player_jump(t_player *player, double delta)
 
 void	player_dash(t_player *player, double delta)
 {
-	if (player->controller.dash_pressed)
+	if (player->is_grounded)
+		player->dash_limit = 1;
+	if (player->dash_cooldown > 0.0f)
+		player->dash_cooldown -= delta;
+	if (player->dash_duration > 0.0f)
 	{
 		player->velocity.x = player->controller.move.x * DASH_POW;
 		player->velocity.y = player->controller.move.y * DASH_POW;
+		player->dash_duration -= delta;
+	}
+	if (player->controller.dash_pressed && player->dash_cooldown <= 0.0f && player->dash_limit > 0)
+	{
+		player->dash_cooldown = DASH_CDR;
+		player->dash_duration = DASH_TIME;
+		player->dash_limit -= 1;
 	}
 }

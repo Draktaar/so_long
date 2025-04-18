@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:14:10 by achu              #+#    #+#             */
-/*   Updated: 2025/04/14 19:09:28 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/18 16:32:04 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static t_map	init_map(void)
 	grid.visited = NULL;
 	grid.player_pos = (t_vec2){0, 0};
 	grid.max_player = 0;
-	grid.exit_pos = (t_vec2){0, 0};
-	grid.max_exit = 0;
+	grid.heart_pos = (t_vec2){0, 0};
+	grid.max_heart = 0;
 	grid.solid_pos = NULL;
 	grid.max_solid = 0;
 	grid.berry_pos = NULL;

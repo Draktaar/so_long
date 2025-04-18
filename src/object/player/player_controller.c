@@ -31,8 +31,10 @@ t_player	init_player(void)
 	player.position = (t_vec2){.x = 100, .y = 100,};
 	player.collider = (t_rect){.pos = {100, 100}, .size = {8, 11}};
 	player.ground_col = (t_rect){.pos = {100, 100}, .size = {8, 3}};
-	player.is_ground = false;
+	player.is_grounded = false;
 	player.dash_limit = 0;
+	player.dash_cooldown = 0;
+	player.dash_duration = 0;
 	player.is_dashing = false;
 	return (player);
 }

@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:13:16 by achu              #+#    #+#             */
-/*   Updated: 2025/04/16 17:24:16 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/18 02:05:54 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 
 void	check_ground(t_player *player, t_rect wall)
 {
-	if (!player->is_ground && is_collided(player->ground_col, wall))
+	if (!player->is_grounded && is_collided(player->ground_col, wall))
 	{
-		player->is_ground = true;
+		player->is_grounded = true;
 	}
-	else if (player->is_ground && !is_collided(player->ground_col,  wall))
+	else if (player->is_grounded && !is_collided(player->ground_col,  wall))
 	{
-		player->is_ground = false;
+		player->is_grounded = false;
 	}
 }
 
@@ -65,7 +65,7 @@ static void	move_x(float *remainder, float amount, t_player *player, t_solid *so
 				player->position.x += sign;
 				player->collider.pos.x = player->position.x;
 				player->ground_col.pos.x = player->collider.pos.x;
-				move -= sign; 
+				move -= sign;
 			}
 			else
 			{

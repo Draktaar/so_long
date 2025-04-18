@@ -57,9 +57,20 @@ void	pixel_scale(t_img *src, t_img *dst, int scale)
 	}
 }
 
-void draw_clear(t_img *buffer, unsigned int color)
+void clear_buffer(t_img *buffer, unsigned int color)
 {
-	for (int y = 0; y < buffer->h; y++)
-		for (int x = 0; x < buffer->w; x++)
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < buffer->h)
+	{
+		x = 0;
+		while (x < buffer->w)
+		{
 			pixel_put(buffer, x, y, color | 0xFF000000);
+			x++;
+		}
+		y++;
+	}
 }

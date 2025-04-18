@@ -65,9 +65,9 @@ static bool	is_valid_tile(t_map *manager, int x, int y)
 	}
 	else if (manager->grid[y][x] == EXIT)
 	{
-		manager->max_exit++;
-		manager->exit_pos.x = x;
-		manager->exit_pos.y = y;
+		manager->max_heart++;
+		manager->heart_pos.x = x;
+		manager->heart_pos.y = y;
 	}
 	else if (manager->grid[y][x] == WALL)
 		add_object(&manager->solid_pos, &manager->max_solid, x, y);
@@ -97,7 +97,7 @@ bool	is_valid_map(t_map *manager)
 	}
 	if (manager->max_player != 1)
 		return (ft_perror("Error: Map has more or less than one player"), false);
-	else if (manager->max_exit != 1)
+	else if (manager->max_heart != 1)
 		return (ft_perror("Error: Map has more or less than one exit"), false);
 	else if (manager->max_berry == 0)
 		return (ft_perror("Error: Map must at least contain one coin"), false);

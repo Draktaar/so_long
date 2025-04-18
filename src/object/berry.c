@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:00:41 by achu              #+#    #+#             */
-/*   Updated: 2025/04/15 02:00:26 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/18 17:04:31 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static t_berry	new_berry(t_display window, float x, float y)
 {
 	t_berry	strawberry;
 
-	strawberry.collected = false;
+	strawberry.is_collected = false;
 	strawberry.sprite.img = new_xpm(window, IMG_BERRY);
 	strawberry.pos = (t_vec2){x * PIXEL_SIZE, y * PIXEL_SIZE};
 	strawberry.collider = (t_rect){

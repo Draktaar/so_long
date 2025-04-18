@@ -20,7 +20,7 @@
 
 static	int32_t	destroy_this(t_system *sys)
 {
-	return (destroy_window(sys->display));
+	return (destroy_window(sys->window));
 }
 
 static double	get_frame(void)
@@ -43,12 +43,14 @@ static void	delta(t_system *sys)
 static int32_t	update(t_system *sys)
 {
 	delta(sys);
-	sys->game->player.is_ground = false;
+	update_berry(sys->game);
+	update_heart(sys->game);
+	sys->game->player.is_grounded = false;
 	t_rect	bottom = sys->game->player.ground_col;
 	bottom.size.y += 1;
 	for (size_t i = 0; i < 314; i++) {
 		if (is_collided(bottom, sys->game->solids[i].collider)) {
-			sys->game->player.is_ground = true;
+			sys->game->player.is_grounded = true;
 			break;
 		}
 	}
@@ -62,24 +64,21 @@ static int32_t	update(t_system *sys)
 static int32_t	start(t_system *sys, t_map *grid)
 {
 	sys = init_system();
-	sys->game = init_game();
-	sys->game->bg1 = new_xpm(sys->display, IMG_BG);
-	sys->game->bg0 = new_xpm(sys->display, IMG_BG0);
-	sys->game->solids = init_solid(sys->display, *grid);
-	sys->game->berries = init_berry(sys->display, *grid);
+	sys->game = init_game(sys->window, grid);
+	sys->game->bg1 = new_xpm(sys->window, IMG_BG);
+	sys->game->bg0 = new_xpm(sys->window, IMG_BG0);
 	sys->last = get_frame();
-	mlx_loop_hook(sys->display.mlx, update, sys);
-	mlx_hook(sys->display.win, ON_KEYPRESS, MASK_KEYPRESS, input_press, sys->input);
-	mlx_hook(sys->display.win, ON_KEYRELEASE, MASK_KEYRELEASE, input_release, sys->input);
-	mlx_hook(sys->display.win, ON_DESTROY, MASK_DESTROY, destroy_this, sys);
-	mlx_loop(sys->display.mlx);
+	mlx_loop_hook(sys->window.mlx, update, sys);
+	mlx_hook(sys->window.win, ON_KEYPRESS, MASK_KEYPRESS, input_press, sys->input);
+	mlx_hook(sys->window.win, ON_KEYRELEASE, MASK_KEYRELEASE, input_release, sys->input);
+	mlx_hook(sys->window.win, ON_DESTROY, MASK_DESTROY, destroy_this, sys);
+	mlx_loop(sys->window.mlx);
 	return (0);
 }
 
 int32_t	main(int32_t argc, char **argv)
 {
 	t_system	sys;
-	t_game		game;
 	t_map		grid;
 
 	name_banner();

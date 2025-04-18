@@ -20,9 +20,9 @@ t_system	*init_system(void)
 	sys = (t_system*)malloc(sizeof(t_system));
 	if (!sys)
 		return (NULL);
-	sys->display = init_window();
-	sys->buffer = new_img_alpha(sys->display, GAME_WIDTH, GAME_HEIGHT);
-	sys->scale = new_img_alpha(sys->display, WINDOW_WIDTH, WINDOW_HEIGHT);
+	sys->window = init_window();
+	sys->buffer = new_img_alpha(sys->window, GAME_WIDTH, GAME_HEIGHT);
+	sys->scale = new_img_alpha(sys->window, WINDOW_WIDTH, WINDOW_HEIGHT);
 	sys->input = init_input();
 	sys->last = 0;
 	sys->delta = 0;

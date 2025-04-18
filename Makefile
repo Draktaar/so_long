@@ -28,7 +28,6 @@ HEADERS =	$(INCDIR)/engine/window.h \
 			$(INCDIR)/engine/image.h \
 			$(INCDIR)/engine/input.h \
 			$(INCDIR)/engine/render.h \
-			$(INCDIR)/engine/timer.h \
 			$(INCDIR)/engine/vec.h \
 			$(INCDIR)/object/player.h \
 			$(INCDIR)/object/object.h \
@@ -44,7 +43,6 @@ SRC =	test/banner.c \
 		engine/collision.c \
 		engine/input.c \
 		engine/window.c \
-		engine/timer.c \
 		engine/system.c \
 		engine/game.c \
 		map/map_checker.c \
@@ -57,6 +55,7 @@ SRC =	test/banner.c \
 		object/player/player_controller.c \
 		object/player/player_collision.c \
 		object/player/player_movement.c \
+		object/heart.c \
 		object/berry.c \
 		object/solid.c \
 		object/spike.c \

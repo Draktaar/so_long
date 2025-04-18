@@ -35,8 +35,8 @@ typedef struct s_map
 	t_vec2		player_pos;
 	int32_t		max_player;
 
-	t_vec2		exit_pos;
-	int32_t		max_exit;
+	t_vec2		heart_pos;
+	int32_t		max_heart;
 	
 	t_vec2		*solid_pos;
 	int32_t		max_solid;

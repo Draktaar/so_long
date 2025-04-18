@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:09:45 by achu              #+#    #+#             */
-/*   Updated: 2025/04/16 16:21:24 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/17 02:00:49 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@
 
 // *** Dash ***
 # define MAX_DASH 1
-# define DASH_POW 250
-# define DASH_TIME 1.0
-# define DASH_CDR 3.0
+# define DASH_POW 235
+# define DASH_TIME 0.13
+# define DASH_CDR 0.2
 
 // *** QoL ***
 # define COYOTE 0.15
@@ -46,7 +46,6 @@
 # include <stdbool.h>
 # include "engine/input.h"
 # include "engine/image.h"
-# include "engine/timer.h"
 # include "engine/vec.h"
 # include "object.h"
 
@@ -76,18 +75,19 @@ typedef struct s_player
 	t_vec2		remainder;
 	t_rect		collider;
 
+	bool		is_grounded;
 	t_rect		ground_col;
-	bool		is_ground;
 
-	bool		is_wall;
+	bool		is_slide;
 	
 	bool		is_dashing;
+	t_vec2		dash_dir;
 	uint32_t	dash_limit;
-	t_timer		dash_duration;
-	t_timer		dash_cooldown;
+	float		dash_duration;
+	float		dash_cooldown;
 
-	t_timer		jump_buffer;
-	t_timer		coyote_time;
+	float		jump_buffer;
+	float		coyote_time;
 }	t_player;
 
 t_player	init_player(void);
