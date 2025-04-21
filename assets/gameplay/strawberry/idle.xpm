@@ -1,0 +1,30 @@
+/* XPM */
+static char *e3b7263d64ed48b88b9cc011eed52635SwxYVcM7ebY61VCG[] = {
+/* columns rows colors chars-per-pixel */
+"112 16 8 1 ",
+"  c None",
+". c black",
+"X c #491675",
+"o c #8A0F36",
+"O c #DE2A2A",
+"+ c #FF5F42",
+"@ c #6ABE30",
+"# c #37946E",
+/* pixels */
+"                                                                                                                ",
+"       ..              ...            ....              ..              ..             ...              ..      ",
+"      ..@.            .@.@.          .@.@@.          ...@@.          ...@@.         ...@@@..         ...@@.     ",
+"     .@.#@.          .@@@#.         .@@.#@.         .@@.##@.        .@@.##@.       .@@@.##@@.       .@@.##@.    ",
+"    .@X@@X..         .X#@X.          .X@@#@.        ..X@@X..       .#.X@@X.#.      .#.X@@X.#.      .#.X@@X.#.   ",
+"    .XoXXoX.        .XoX#oX.        .XoXXoX.        .XoXXoX.        .XoXXoX.        .XoXXoX.        .XoXXoX.    ",
+"   .oOOOO+oo.      .oOOOOOOo.      .oOOOOOOO.      .o+OOOOOo.      .o++OOOOo.      .o+OOOOoo.      .o+OOOooo.   ",
+"   .+OO+OOO+.      .O+OO+OOO.      .OO+OO+OO.      .OOO+OO+O.      .+OOO+OO+.      .O+OOO+OO.      .OO+OOO+O.   ",
+"   .oOOoO+Oo.      .OoOOoO+O.      .+OoOOoO+.      .O+OoOOoO.      .oO+OoOOo.      .OoO+OoOO.      .OOoO+OoO.   ",
+"   .OoOOOooO.      .OoOOOOoO.      .OoOOOOOo.      .OoOOOOoO.      .OooOOooO.      .OoOoOooo.      .OoOOoOoO.   ",
+"    .OooooO.        .OooooO.        .OooooO.        .OooooO.        .OooooO.        .OooooO.        .OooooO.    ",
+"     .OooO.          .OooO.          .OooO.          .OooO.          .OooO.          .OooO.          .OooO.     ",
+"      .OO.            .OO.            .OO.            .OO.            .OO.            .OO.            .OO.      ",
+"       ..              ..              ..              ..              ..              ..              ..       ",
+"                                                                                                                ",
+"                                                                                                                "
+};

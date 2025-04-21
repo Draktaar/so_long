@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 14:43:34 by achu              #+#    #+#             */
-/*   Updated: 2025/04/14 16:50:06 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/21 20:40:45 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static bool	is_valid_path(t_map *grid, int x, int y)
 		return (false);
 	else if (!(0 < y || y < grid->height))
 		return (false);
-	else if (grid->grid[y][x] == WALL)
+	else if (grid->grid[y][x] == WALL || grid->grid[y][x] == SPIKE)
 		return (false);
 	else if (grid->visited[y][x] == true)
 		return (false);

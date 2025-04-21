@@ -25,10 +25,12 @@ typedef struct s_game
 
 	t_player	player;
 	t_heart		heart;
-	t_solid		*solids;
-	uint32_t	solid_size;
 	t_berry		*berries;
-	uint32_t	berry_size;
+	uint32_t	berry_count;
+	t_solid		*solids;
+	uint32_t	solid_count;
+	t_spike		*spikes;
+	uint32_t	spike_count;
 
 	uint32_t	timer;
 	uint32_t	score;

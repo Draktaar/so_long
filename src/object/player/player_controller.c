@@ -18,7 +18,7 @@ void	player_gravity(t_player *player, double delta);
 void	player_dash(t_player *player, double delta);
 void	player_jump(t_player *player, double delta);
 
-t_player	init_player(void)
+t_player	init_player(t_display window, t_map grid)
 {
 	t_player	player;
 
@@ -26,11 +26,15 @@ t_player	init_player(void)
 	player.controller.jump_hold = 0;
 	player.controller.jump_pressed = 0;
 	player.controller.move = (t_vec2){.x = 0.0f, .y = 0.0f,};
+	player.position = (t_vec2){
+		.x = grid.player_pos.x * PIXEL_SIZE, 
+		.y = grid.player_pos.y * PIXEL_SIZE,
+	};
 	player.velocity = (t_vec2){.x = 0.0f, .y = 0.0f,};
 	player.remainder = (t_vec2){.x = 0.0f, .y = 0.0f,};
-	player.position = (t_vec2){.x = 100, .y = 100,};
-	player.collider = (t_rect){.pos = {100, 100}, .size = {8, 11}};
-	player.ground_col = (t_rect){.pos = {100, 100}, .size = {8, 3}};
+	player.collider = (t_rect){.pos = player.position, .size = {8, 11}};
+	player.is_right = false;
+	player.ground_col = (t_rect){.pos = player.position, .size = {8, 3}};
 	player.is_grounded = false;
 	player.dash_limit = 0;
 	player.dash_cooldown = 0;
@@ -59,6 +63,10 @@ static void	player_input(t_input *controller, t_keybind *keybind)
 void	update_player(t_player *player, t_keybind *keybind, double delta)
 {
 	player_input(&player->controller, keybind);
+	if (player->controller.move.x == 1)
+		player->is_right = true;
+	else if (player->controller.move.x == -1)
+		player->is_right = false;
 	player_direction(player, delta);
 	player_dash(player, delta);
 	player_jump(player, delta);

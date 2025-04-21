@@ -20,7 +20,7 @@ void	pixel_put(t_img *img, int x, int y, unsigned int color)
 	if (x < 0 || y < 0 || x >= img->w || y >= img->h)
 		return ;
 	pixel = img->addr + (y * img->llen + x * (img->bpp / 8));
-	*(unsigned int*)pixel = color;
+	*(unsigned int *)pixel = color;
 }
 
 // Get the pixel color RGBA
@@ -40,24 +40,31 @@ unsigned int	pixel_alpha(int color, float alpha)
 }
 
 // Scale the pixel from an image to another image
-void	pixel_scale(t_img *src, t_img *dst, int scale)
+void	pixel_scale(t_img *old, t_img *new, int scale)
 {
-	int	x, y, dx, dy;
-	unsigned int	color;
+	int	x;
+	int	y;
+	int	scaled_x;
+	int	scaled_y;
 
-	for (y = 0; y < src->h; y++)
+	if (scale < 0)
+		return ;
+	scaled_x = old->w * scale;
+	scaled_y = old->h * scale;
+	y = 0;
+	while (y < scaled_y)
 	{
-		for (x = 0; x < src->w; x++)
+		x = 0;
+		while (x < scaled_x)
 		{
-			color = get_pixel(src, x, y);
-			for (dy = 0; dy < scale; dy++)
-				for (dx = 0; dx < scale; dx++)
-					pixel_put(dst, x * scale + dx, y * scale + dy, color);
+			pixel_put(new, x, y, get_pixel(old, x / scale, y / scale));
+			x++;
 		}
+		y++;
 	}
 }
 
-void clear_buffer(t_img *buffer, unsigned int color)
+void	clear_buffer(t_img *buffer, unsigned int color)
 {
 	int	x;
 	int	y;

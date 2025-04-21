@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:15:59 by achu              #+#    #+#             */
-/*   Updated: 2025/04/18 17:04:49 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/21 20:55:23 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ typedef struct s_spike
 	t_rect		collider;
 }	t_spike;
 
-t_solid	*init_solid(t_display window, t_map grid);
-t_berry	*init_berry(t_display window, t_map grid);
 t_heart	init_heart(t_display window, t_map grid);
+t_berry	*init_berry(t_display window, t_map grid);
+t_solid	*init_solid(t_display window, t_map grid);
+t_spike	*init_spike(t_display window, t_map grid);
 
 #endif

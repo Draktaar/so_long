@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 19:14:10 by achu              #+#    #+#             */
-/*   Updated: 2025/04/18 16:32:04 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/21 20:40:23 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ static t_map	init_map(void)
 	grid.max_player = 0;
 	grid.heart_pos = (t_vec2){0, 0};
 	grid.max_heart = 0;
-	grid.solid_pos = NULL;
-	grid.max_solid = 0;
 	grid.berry_pos = NULL;
 	grid.max_berry = 0;
+	grid.solid_pos = NULL;
+	grid.max_solid = 0;
+	grid.spike_pos = NULL;
+	grid.max_spike = 0;
 	grid.found_exit = 0;
 	grid.found_berry = 0;
 	return (grid);
@@ -38,8 +40,9 @@ void	clean_map(t_map *grid)
 {
 	free_arr((void **)grid->grid);
 	free_arr((void **)grid->visited);
-	free_ptr((void *)grid->solid_pos);
 	free_ptr((void *)grid->berry_pos);
+	free_ptr((void *)grid->solid_pos);
+	free_ptr((void *)grid->spike_pos);
 }
 
 int	setup_map(t_map *grid, int argc, char **argv)

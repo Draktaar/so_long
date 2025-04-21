@@ -52,6 +52,7 @@ SRC =	test/banner.c \
 		graphic/image.c \
 		graphic/pixel.c \
 		graphic/render.c \
+		graphic/animation.c \
 		object/player/player_controller.c \
 		object/player/player_collision.c \
 		object/player/player_movement.c \

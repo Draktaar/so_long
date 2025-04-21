@@ -6,18 +6,35 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:00:41 by achu              #+#    #+#             */
-/*   Updated: 2025/04/18 17:04:31 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/21 20:23:21 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "common.h"
 #include "object.h"
 
+static t_animation	init_anim(void)
+{
+	t_animation	anim;
+
+	anim.col = 4;
+	anim.row = 1;
+	anim.width = PIXEL_SIZE * 2;
+	anim.height = PIXEL_SIZE * 2;
+	anim.current_frame = 0;
+	anim.frame_count = 7;
+	anim.frame_duration = 0.1f;
+	anim.frame_timer = 0.0f;
+	anim.loop = true;
+	return (anim);
+}
+
 static t_berry	new_berry(t_display window, float x, float y)
 {
 	t_berry	strawberry;
 
 	strawberry.is_collected = false;
+	strawberry.sprite.anim = init_anim();
 	strawberry.sprite.img = new_xpm(window, IMG_BERRY);
 	strawberry.pos = (t_vec2){x * PIXEL_SIZE, y * PIXEL_SIZE};
 	strawberry.collider = (t_rect){

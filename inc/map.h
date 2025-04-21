@@ -22,6 +22,7 @@ typedef enum e_tile
 	WALL = '1',
 	COIN = 'C',
 	EXIT = 'E',
+	SPIKE = 'S',
 	PLAYER = 'P',
 }	t_tile;
 
@@ -37,12 +38,15 @@ typedef struct s_map
 
 	t_vec2		heart_pos;
 	int32_t		max_heart;
-	
-	t_vec2		*solid_pos;
-	int32_t		max_solid;
 
 	t_vec2		*berry_pos;
 	int32_t		max_berry;
+
+	t_vec2		*solid_pos;
+	int32_t		max_solid;
+
+	t_vec2		*spike_pos;
+	int32_t		max_spike;
 
 	int32_t		found_exit;
 	int32_t		found_berry;

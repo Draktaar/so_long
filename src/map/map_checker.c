@@ -16,7 +16,7 @@
 // Check if the character is a usable char for the map
 static bool	is_valid_char(char c)
 {
-	if (c == WALL || c == EMPTY || c == COIN || c == EXIT || c == PLAYER)
+	if (c == WALL || c == EMPTY || c == COIN || c == EXIT || c == PLAYER || c == SPIKE)
 		return (true);
 	return (false);
 }
@@ -69,10 +69,12 @@ static bool	is_valid_tile(t_map *manager, int x, int y)
 		manager->heart_pos.x = x;
 		manager->heart_pos.y = y;
 	}
-	else if (manager->grid[y][x] == WALL)
-		add_object(&manager->solid_pos, &manager->max_solid, x, y);
 	else if (manager->grid[y][x] == COIN)
 		add_object(&manager->berry_pos, &manager->max_berry, x, y);
+	else if (manager->grid[y][x] == WALL)
+		add_object(&manager->solid_pos, &manager->max_solid, x, y);
+	else if (manager->grid[y][x] == SPIKE)
+		add_object(&manager->spike_pos, &manager->max_spike, x, y);
 	return (true);
 }
 
