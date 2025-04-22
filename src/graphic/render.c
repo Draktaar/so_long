@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 01:03:52 by achu              #+#    #+#             */
-/*   Updated: 2025/04/22 03:28:54 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 03:32:26 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,5 +229,6 @@ void	render(t_system *sys)
 	pixel_scale(&sys->buffer, &sys->scale, 4);
 	mlx_put_image_to_window(sys->window.mlx, sys->window.win, sys->scale.ptr, 0, 0);
 	mlx_string_put(sys->window.mlx, sys->window.win, game->player.position.x * 4 + 2, game->player.position.y * 4 - 15, WHITE, time);
+	free(time);
 	mlx_do_sync(sys->window.mlx);
 }

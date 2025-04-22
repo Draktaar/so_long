@@ -59,9 +59,9 @@ static int32_t	start(t_system *sys)
 	sys->game->bg0 = new_xpm(sys->window, IMG_BG0);
 	sys->last = get_frame();
 	mlx_loop_hook(sys->window.mlx, update, sys);
-	mlx_hook(sys->window.win, ON_KEYPRESS, MASK_KEYPRESS, input_press, sys->input);
-	mlx_hook(sys->window.win, ON_KEYRELEASE, MASK_KEYRELEASE, input_release, sys->input);
-	mlx_hook(sys->window.win, ON_DESTROY, MASK_DESTROY, destroy_system, sys);
+	mlx_hook(sys->window.win, ON_KEYPRESS, 1L<<0, input_press, sys->input);
+	mlx_hook(sys->window.win, ON_KEYRELEASE, 1L<<1, input_release, sys->input);
+	mlx_hook(sys->window.win, ON_DESTROY, 1L<<17, destroy_system, sys);
 	mlx_loop(sys->window.mlx);
 	return (0);
 }

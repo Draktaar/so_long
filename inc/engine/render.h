@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 00:05:24 by achu              #+#    #+#             */
-/*   Updated: 2025/04/22 03:15:48 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 03:35:01 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void	render(t_system *game);
 void	draw_bg(t_img *game);
 void	draw_square(t_img *image, t_rect rect, unsigned int color);
 void	draw_rect(t_img *image, t_rect rect, unsigned int color);
-void    name_banner(void);
+void	name_banner(void);
 
 #endif

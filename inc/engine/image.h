@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 23:23:26 by achu              #+#    #+#             */
-/*   Updated: 2025/04/22 01:50:47 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 03:37:15 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,8 @@ void			pixel_scale(t_img *src, t_img *dst, int scale);
 void			pixel_put(t_img *img, int x, int y, unsigned int color);
 unsigned int	pixel_alpha(int color, float alpha);
 uint32_t		get_pixel(t_img *img, int x, int y);
-void 			clear_buffer(t_img *buffer, unsigned int color);
+void			clear_buffer(t_img *buffer, unsigned int color);
 
 void			update_frame(t_animation *anim, double delta);
-
 
 #endif
