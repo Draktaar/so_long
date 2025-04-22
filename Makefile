@@ -77,6 +77,8 @@ $(SRCDIR)/%.o: $(SRCDIR)/%.c
 
 $(OBJS): $(HEADERS)
 
+bonus: all
+
 clean:
 	@$(MAKE) clean -C $(LIBFT)
 	@$(MAKE) clean -C $(STDIO42)

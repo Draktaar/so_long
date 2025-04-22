@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:09:45 by achu              #+#    #+#             */
-/*   Updated: 2025/04/20 13:09:56 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 02:52:50 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_player
 	float		coyote_time;
 }	t_player;
 
-t_player	init_player(t_display window, t_map grid);
+t_player	init_player(t_map grid);
 void		check_ground(t_player *player, t_rect wall);
 void    	update_player(t_player *player, t_keybind *keybind, double delta);
 void		update_collision(t_player *player, t_solid *solids, double delta);

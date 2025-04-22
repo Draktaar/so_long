@@ -14,6 +14,10 @@
 INC	=%%%%
 
 UNAME = $(shell uname)
+CC	= gcc
+ifeq ($(UNAME),FreeBSD)
+	CC = clang
+endif
 
 NAME		= libmlx.a
 NAME_UNAME	= libmlx_$(UNAME).a

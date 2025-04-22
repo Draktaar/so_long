@@ -10,26 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <time.h>
 #include "engine/render.h"
 #include "engine/input.h"
 #include "common.h"
 #include "system.h"
 #include "game.h"
 #include "map.h"
-
-static	int32_t	destroy_this(t_system *sys)
-{
-	return (destroy_window(sys->window));
-}
-
-static double	get_frame(void)
-{
-	struct timespec	ts;
-
-	clock_gettime(CLOCK_MONOTONIC, &ts);
-	return (ts.tv_sec + (ts.tv_nsec / 1.0e9));
-}
 
 static void	delta(t_system *sys)
 {
@@ -43,8 +29,12 @@ static void	delta(t_system *sys)
 static int32_t	update(t_system *sys)
 {
 	delta(sys);
+	sys->game->timer_elapsed = get_frame();
+	if (sys->game->is_gameover == true || sys->input[ESC].pressed)
+		destroy_system(sys);
 	update_berry(sys->game);
 	update_heart(sys->game);
+	update_spike(sys->game);
 	sys->game->player.is_grounded = false;
 	t_rect	bottom = sys->game->player.ground_col;
 	bottom.size.y += 1;
@@ -61,31 +51,32 @@ static int32_t	update(t_system *sys)
 	return (0);
 }
 
-static int32_t	start(t_system *sys, t_map *grid)
+static int32_t	start(t_system *sys)
 {
-	sys = init_system();
-	sys->game = init_game(sys->window, grid);
+	sys->game = init_game(sys->window, sys->grid);
+	sys->game->timer_start = get_frame();
 	sys->game->bg1 = new_xpm(sys->window, IMG_BG);
 	sys->game->bg0 = new_xpm(sys->window, IMG_BG0);
 	sys->last = get_frame();
 	mlx_loop_hook(sys->window.mlx, update, sys);
 	mlx_hook(sys->window.win, ON_KEYPRESS, MASK_KEYPRESS, input_press, sys->input);
 	mlx_hook(sys->window.win, ON_KEYRELEASE, MASK_KEYRELEASE, input_release, sys->input);
-	mlx_hook(sys->window.win, ON_DESTROY, MASK_DESTROY, destroy_this, sys);
+	mlx_hook(sys->window.win, ON_DESTROY, MASK_DESTROY, destroy_system, sys);
 	mlx_loop(sys->window.mlx);
 	return (0);
 }
 
 int32_t	main(int32_t argc, char **argv)
 {
-	t_system	sys;
+	t_system	*sys;
 	t_map		grid;
 
 	name_banner();
 	if (!setup_map(&grid, argc, argv))
 		return (1);
-	start(&sys, &grid);
-	clean_map(&grid);
+	sys = init_system();
+	sys->grid = &grid;
+	start(sys);
 	return (0);
 }
 

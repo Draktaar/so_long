@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 23:23:23 by achu              #+#    #+#             */
-/*   Updated: 2025/04/15 01:25:05 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 02:20:32 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ typedef struct s_display
 }	t_display;
 
 t_display	init_window(void);
-int32_t		destroy_window(t_display window);
+void		destroy_window(t_display window);
 
 #endif

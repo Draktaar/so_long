@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 00:05:24 by achu              #+#    #+#             */
-/*   Updated: 2025/04/15 03:05:06 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 03:15:48 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "system.h"
 
 # define WHITE		    0xFFFFFFFF
+# define BLACK		    0x00000000
 # define RED		    0xFFFF0000
 # define GREEN		    0xFF00
 # define BLUE		    0x0000FF

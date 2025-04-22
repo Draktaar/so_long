@@ -18,7 +18,7 @@ void	player_gravity(t_player *player, double delta);
 void	player_dash(t_player *player, double delta);
 void	player_jump(t_player *player, double delta);
 
-t_player	init_player(t_display window, t_map grid)
+t_player	init_player(t_map grid)
 {
 	t_player	player;
 

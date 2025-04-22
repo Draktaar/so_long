@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 23:20:11 by achu              #+#    #+#             */
-/*   Updated: 2025/04/17 14:21:40 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 03:04:55 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "engine/image.h"
 # include "engine/input.h"
 # include "game.h"
+# include "map.h"
 
 typedef struct s_system
 {
@@ -25,10 +26,13 @@ typedef struct s_system
 	t_img		buffer;
 	t_keybind	*input;
 	t_game		*game;
+	t_map		*grid;
 	double		last;
 	double		delta;
 }	t_system;
 
 t_system	*init_system(void);
+int32_t		destroy_system(t_system	*sys);
+double		get_frame(void);
 
 #endif

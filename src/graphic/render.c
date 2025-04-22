@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 01:03:52 by achu              #+#    #+#             */
-/*   Updated: 2025/04/21 21:07:29 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 03:28:54 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ static void	render_berry(t_img *buffer, t_berry strawberry, float alpha)
 	int			y;
 
 	y = 0;
+	if (strawberry.is_collected)
+		return ;
 	if (alpha < 0.0f)
 		return ;
 	while (y < PIXEL_SIZE * 2)
@@ -151,7 +153,7 @@ static void	render_heart(t_img *buffer, t_heart heart, float alpha)
 	}
 }
 
-static inline void	frame_anim(t_system *sys)
+static void	frame_anim(t_system *sys)
 {
 	uint32_t	i;
 
@@ -161,38 +163,71 @@ static inline void	frame_anim(t_system *sys)
 		update_frame(&sys->game->berries[i].sprite.anim, sys->delta);
 		i++;
 	}
-	update_frame(&sys->game->heart.sprite.anim, sys->delta);
+	if (sys->game->heart.is_opened)
+		update_frame(&sys->game->heart.sprite.anim, sys->delta);
+}
+
+static void	debug(t_system *sys)
+{
+	t_game	*game;
+
+	game = sys->game;
+	// for (size_t i = 0; i < game->solid_count; i++)
+	// 	draw_rect(&sys->buffer, game->solids[i].collider, RED);
+	// for (size_t i = 0; i < game->berry_count; i++)
+	// 	draw_rect(&sys->buffer, game->berries[i].collider, RED);
+	// for (size_t i = 0; i < game->spike_count; i++)
+	// 	draw_rect(&sys->buffer, game->spikes[i].collider, RED);
+	// draw_rect(&sys->buffer, game->heart.collider, RED);
+	draw_rect(&sys->buffer, game->player.collider, WHITE);
+	draw_rect(&sys->buffer, game->player.ground_col, RED);
+}
+
+static char	*timer(t_game *game)
+{
+	char	*str;
+	double	time;
+	int		min;
+	int		sec;
+
+	str = (char *)malloc(6 * sizeof(char));
+	if (!str)
+		return (NULL);
+	time = game->timer_elapsed - game->timer_start;
+	min = (int)time / 60;
+	sec = (int)time % 60;
+	str[0] = '0' + min / 10;
+	str[1] = '0' + min % 10;
+	str[2] = ':';
+	str[3] = '0' + sec / 10;
+	str[4] = '0' + sec % 10;
+	str[5] = '\0';
+	return (str);
 }
 
 void	render(t_system *sys)
 {
 	t_game	*game;
+	char	*time;
 
 	game = sys->game;
+	time = timer(game);
 	clear_buffer(&sys->buffer, 0x505CB2);
-
 	draw_bg(&sys->buffer);
 	frame_anim(sys);
-	render_bg(&sys->buffer, &sys->game->bg0, 1.0f);
-	render_bg(&sys->buffer, &sys->game->bg1, 1.0f);
-	render_heart(&sys->buffer, game->heart, 1.0f);
-	for (size_t i = 0; i < sys->game->berry_count; i++)
-		render_berry(&sys->buffer, sys->game->berries[i], 1.0f);
+	render_bg(&sys->buffer, &game->bg0, 1.0f);
+	render_bg(&sys->buffer, &game->bg1, 1.0f);
+	if (sys->game->heart.is_opened)
+		render_heart(&sys->buffer, game->heart, 1.0f);
+	for (size_t i = 0; i < game->berry_count; i++)
+		render_berry(&sys->buffer, game->berries[i], 1.0f);
 	for (size_t i = 0; i < sys->game->solid_count; i++)
-		render_solid(&sys->buffer, sys->game->solids[i], 1.0f);
+		render_solid(&sys->buffer, game->solids[i], 1.0f);
 	for (size_t i = 0; i < sys->game->spike_count; i++)
-		render_spike(&sys->buffer, sys->game->spikes[i], 1.0f);
-	//DEBUG
-	// for (size_t i = 0; i < sys->game->solid_count; i++)
-	// 	draw_rect(&sys->buffer, game->solids[i].collider, RED);
-	// for (size_t i = 0; i < sys->game->berry_count; i++)
-	// 	draw_rect(&sys->buffer, game->berries[i].collider, RED);
-	// for (size_t i = 0; i < sys->game->spike_count; i++)
-	// 	draw_rect(&sys->buffer, game->spikes[i].collider, RED);
-	// draw_rect(&sys->buffer, game->heart.collider, RED);
-	draw_rect(&sys->buffer, game->player.collider, WHITE);
-	draw_rect(&sys->buffer, game->player.ground_col, RED);
+		render_spike(&sys->buffer, game->spikes[i], 1.0f);
+	debug(sys);
 	pixel_scale(&sys->buffer, &sys->scale, 4);
 	mlx_put_image_to_window(sys->window.mlx, sys->window.win, sys->scale.ptr, 0, 0);
+	mlx_string_put(sys->window.mlx, sys->window.win, game->player.position.x * 4 + 2, game->player.position.y * 4 - 15, WHITE, time);
 	mlx_do_sync(sys->window.mlx);
 }

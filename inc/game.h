@@ -32,13 +32,16 @@ typedef struct s_game
 	t_spike		*spikes;
 	uint32_t	spike_count;
 
-	uint32_t	timer;
-	uint32_t	score;
+	bool		is_gameover;
 	uint32_t	collect;
+	double		timer_start;
+	double		timer_elapsed;
 }	t_game;
 
 t_game	*init_game(t_display window, t_map *grid);
 void	update_berry(t_game *game);
 void	update_heart(t_game *game);
+void	update_spike(t_game *game);
+void	destroy_game(t_game *game);
 
 #endif

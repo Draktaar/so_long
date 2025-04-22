@@ -11,7 +11,7 @@ NAME= mlx-test
 SRC = main.c
 OBJ = $(SRC:%.c=%.o)
 
-LFLAGS = -L.. -lmlx -L$(INCLIB) -I.. -lXext -lX11 -lXrender -lm
+LFLAGS = -L.. -lmlx -L$(INCLIB) -lXext -lX11 -lm
 
 ifeq ($(UNAME), Darwin)
 	# mac
@@ -21,7 +21,8 @@ else ifeq ($(UNAME), FreeBSD)
 	CC = clang
 else
 	#Linux and others...
-	CC	= cc
+	CC	= gcc
+	LFLAGS += -lbsd
 endif
 
 all: $(NAME)

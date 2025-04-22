@@ -12,6 +12,7 @@
 
 #include <unistd.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include "engine/window.h"
 
 // Setup window of the game, and store it inside display
@@ -34,9 +35,14 @@ t_display	init_window(void)
 	return (display);
 }
 
-int32_t	destroy_window(t_display window)
+void	destroy_window(t_display window)
 {
-	mlx_destroy_window(window.mlx, window.win);
-	window.win = NULL;
-	return (0);
+	if (window.mlx && window.win)
+		mlx_destroy_window(window.mlx, window.win);
+	if (window.mlx)
+	{
+		mlx_destroy_display(window.mlx);
+		free(window.mlx);
+	}
+	window.mlx = NULL;
 }
