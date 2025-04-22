@@ -26,7 +26,7 @@ t_system	*init_system(void)
 {
 	t_system	*sys;
 
-	sys = (t_system*)malloc(sizeof(t_system));
+	sys = (t_system *)malloc(sizeof(t_system));
 	if (!sys)
 		return (NULL);
 	sys->window = init_window();
@@ -41,11 +41,11 @@ t_system	*init_system(void)
 int32_t	destroy_system(t_system	*sys)
 {
 	destroy_game(sys->game);
-	clean_map(sys->grid);
 	destroy_img(sys->buffer);
 	destroy_img(sys->scale);
+	destroy_window(&sys->window);
+	clean_map(sys->grid);
 	free(sys->game);
-	destroy_window(sys->window);
 	free(sys);
 	exit(0);
 }

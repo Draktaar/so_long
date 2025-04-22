@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 03:39:42 by achu              #+#    #+#             */
-/*   Updated: 2025/04/22 00:58:46 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 15:36:12 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ t_heart	init_heart(t_display window, t_map grid)
 	heart.is_opened = false;
 	heart.sprite.anim = init_anim();
 	heart.sprite.img = new_xpm(window, IMG_HEART);
-	heart.pos = (t_vec2){grid.heart_pos.x * PIXEL_SIZE, grid.heart_pos.y * PIXEL_SIZE};
+	heart.pos = (t_vec2){
+		grid.heart_pos.x * PIXEL_SIZE,
+		grid.heart_pos.y * PIXEL_SIZE
+	};
 	heart.collider = (t_rect){
 		.pos = {grid.heart_pos.x * PIXEL_SIZE, grid.heart_pos.y * PIXEL_SIZE},
 		.size = {PIXEL_SIZE * 2, PIXEL_SIZE * 2}

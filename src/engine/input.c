@@ -16,7 +16,7 @@
 t_keybind	*init_input(void)
 {
 	static t_keybind	button[MAX_ACTION];
-	int				i;
+	int					i;
 
 	i = 0;
 	while (i < MAX_ACTION)

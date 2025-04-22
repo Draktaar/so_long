@@ -13,7 +13,7 @@
 #include "engine/image.h"
 
 // Copy pixel from an image to another image
-void	pixel_put(t_img *img, int x, int y, unsigned int color)
+void	put_pixel(t_img *img, int x, int y, unsigned int color)
 {
 	char	*pixel;
 
@@ -57,7 +57,7 @@ void	pixel_scale(t_img *old, t_img *new, int scale)
 		x = 0;
 		while (x < scaled_x)
 		{
-			pixel_put(new, x, y, get_pixel(old, x / scale, y / scale));
+			put_pixel(new, x, y, get_pixel(old, x / scale, y / scale));
 			x++;
 		}
 		y++;
@@ -75,7 +75,7 @@ void	clear_buffer(t_img *buffer, unsigned int color)
 		x = 0;
 		while (x < buffer->w)
 		{
-			pixel_put(buffer, x, y, color | 0xFF000000);
+			put_pixel(buffer, x, y, color | 0xFF000000);
 			x++;
 		}
 		y++;

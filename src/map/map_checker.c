@@ -16,7 +16,8 @@
 // Check if the character is a usable char for the map
 static bool	is_valid_char(char c)
 {
-	if (c == WALL || c == EMPTY || c == COIN || c == EXIT || c == PLAYER || c == SPIKE)
+	if (c == WALL || c == EMPTY || c == COIN
+		|| c == EXIT || c == PLAYER || c == SPIKE)
 		return (true);
 	return (false);
 }
@@ -41,7 +42,8 @@ static	int32_t	add_object(t_vec2 **pos, int32_t *size, int x, int y)
 	size_t	new_size;
 
 	new_size = *size + 1;
-	new_pos = ft_realloc(*pos, *size * sizeof(t_vec2), new_size * sizeof(t_vec2));
+	new_pos = ft_realloc(*pos, *size * sizeof(t_vec2),
+			new_size * sizeof(t_vec2));
 	if (!new_pos)
 		return (0);
 	new_pos[*size] = (t_vec2){x, y};

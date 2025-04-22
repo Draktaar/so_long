@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 22:38:51 by achu              #+#    #+#             */
-/*   Updated: 2025/04/17 02:00:49 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 15:17:00 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	player_direction(t_player *player, double delta)
 	else if (player->controller.move.x >= 0 && player->velocity.x < 0)
 		player->velocity.x = ft_approach(player->velocity.x, 0, turn * delta);
 	else
-		player->velocity.x = ft_approach(player->velocity.x, player->controller.move.x * MAX_SPEED, accel * delta);
+		player->velocity.x = ft_approach(player->velocity.x,
+				player->controller.move.x * MAX_SPEED, accel * delta);
 }
 
 void	player_gravity(t_player *player, double delta)
@@ -58,7 +59,8 @@ void	player_gravity(t_player *player, double delta)
 	{
 		if (!player->controller.jump_hold && player->velocity.y < 0)
 			mult = 3;
-		player->velocity.y = ft_approach(player->velocity.y, MAX_FALL, GRAVITY * mult * delta);
+		player->velocity.y = ft_approach(player->velocity.y,
+				MAX_FALL, GRAVITY * mult * delta);
 	}
 }
 
@@ -84,7 +86,8 @@ void	player_dash(t_player *player, double delta)
 		player->velocity.y = player->controller.move.y * DASH_POW;
 		player->dash_duration -= delta;
 	}
-	if (player->controller.dash_pressed && player->dash_cooldown <= 0.0f && player->dash_limit > 0)
+	if (player->controller.dash_pressed
+		&& player->dash_cooldown <= 0.0f && player->dash_limit > 0)
 	{
 		player->dash_cooldown = DASH_CDR;
 		player->dash_duration = DASH_TIME;

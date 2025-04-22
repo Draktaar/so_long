@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 01:03:52 by achu              #+#    #+#             */
-/*   Updated: 2025/04/22 03:32:26 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 15:25:31 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	render_bg(t_img *buffer, t_img *bg, float alpha)
 			if ((color & 0x00FFFFFF) != 0)
 			{
 				faded = pixel_alpha(color, alpha);
-				pixel_put(buffer, x, y, faded);
+				put_pixel(buffer, x, y, faded);
 			}
 			x++;
 		}
@@ -62,7 +62,7 @@ static void	render_solid(t_img *buffer, t_solid solid, float alpha)
 			if ((color & 0x00FFFFFF) != 0)
 			{
 				faded = pixel_alpha(color, alpha);
-				pixel_put(buffer, x + solid.pos.x, y + solid.pos.y, faded);
+				put_pixel(buffer, x + solid.pos.x, y + solid.pos.y, faded);
 			}
 			x++;
 		}
@@ -89,7 +89,7 @@ static void	render_spike(t_img *buffer, t_spike spike, float alpha)
 			if ((color & 0x00FFFFFF) != 0)
 			{
 				faded = pixel_alpha(color, alpha);
-				pixel_put(buffer, x + spike.pos.x, y + spike.pos.y, faded);
+				put_pixel(buffer, x + spike.pos.x, y + spike.pos.y, faded);
 			}
 			x++;
 		}
@@ -118,7 +118,7 @@ static void	render_berry(t_img *buffer, t_berry strawberry, float alpha)
 			if ((color & 0x00FFFFFF) != 0)
 			{
 				faded = pixel_alpha(color, alpha);
-				pixel_put(buffer, x + strawberry.pos.x, y + strawberry.pos.y, faded);
+				put_pixel(buffer, x + strawberry.pos.x, y + strawberry.pos.y, faded);
 			}
 			x++;
 		}
@@ -145,7 +145,7 @@ static void	render_heart(t_img *buffer, t_heart heart, float alpha)
 			if ((color & 0x00FFFFFF) != 0)
 			{
 				faded = pixel_alpha(color, alpha);
-				pixel_put(buffer, x + heart.pos.x - 2, y + heart.pos.y - 2, faded);
+				put_pixel(buffer, x + heart.pos.x - 2, y + heart.pos.y - 2, faded);
 			}
 			x++;
 		}

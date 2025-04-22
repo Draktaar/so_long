@@ -35,14 +35,15 @@ t_display	init_window(void)
 	return (display);
 }
 
-void	destroy_window(t_display window)
+void	destroy_window(t_display *window)
 {
-	if (window.mlx && window.win)
-		mlx_destroy_window(window.mlx, window.win);
-	if (window.mlx)
+	if (window->mlx && window->win)
+		mlx_destroy_window(window->mlx, window->win);
+	if (window->mlx)
 	{
-		mlx_destroy_display(window.mlx);
-		free(window.mlx);
+		mlx_destroy_display(window->mlx);
+		free(window->mlx);
 	}
-	window.mlx = NULL;
+	window->mlx = NULL;
+	window->win = NULL;
 }

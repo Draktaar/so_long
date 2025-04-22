@@ -6,29 +6,12 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 19:13:16 by achu              #+#    #+#             */
-/*   Updated: 2025/04/18 02:05:54 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 15:37:27 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <math.h>
 #include "player.h"
-
-void	check_ground(t_player *player, t_rect wall)
-{
-	if (!player->is_grounded && is_collided(player->ground_col, wall))
-	{
-		player->is_grounded = true;
-	}
-	else if (player->is_grounded && !is_collided(player->ground_col,  wall))
-	{
-		player->is_grounded = false;
-	}
-}
-
-static int ft_sign(int x)
-{
-	return ((x > 0) - (x < 0));
-}
 
 static bool	is_solid(t_solid *solids, t_rect player)
 {
@@ -44,14 +27,20 @@ static bool	is_solid(t_solid *solids, t_rect player)
 	return (false);
 }
 
-static void	move_x(float *remainder, float amount, t_player *player, t_solid *solid)
+static int	ft_sign(int x)
+{
+	return ((x > 0) - (x < 0));
+}
+
+static void	move_x(float *remainder, float vel,
+	t_player *player, t_solid *solid)
 {
 	int		move;
 	int		sign;
 	t_rect	col;
 
 	col = player->collider;
-	*remainder += amount;
+	*remainder += vel;
 	move = (int)roundf(*remainder);
 	if (move != 0)
 	{
@@ -70,19 +59,20 @@ static void	move_x(float *remainder, float amount, t_player *player, t_solid *so
 			else
 			{
 				player->velocity.x = 0;
-				break;
+				break ;
 			}
 		}
 	}
 }
 
-static void	move_y(float *remainder, float amount, t_player *player, t_solid *solid)
+static void	move_y(float *remainder, float vel,
+	t_player *player, t_solid *solid)
 {
 	int		move;
 	int		sign;
 	t_rect	col;
 
-	*remainder += amount;
+	*remainder += vel;
 	move = (int)roundf(*remainder);
 	if (move != 0)
 	{
@@ -96,13 +86,14 @@ static void	move_y(float *remainder, float amount, t_player *player, t_solid *so
 			{
 				player->position.y += sign;
 				player->collider.pos.y = player->position.y;
-				player->ground_col.pos.y = player->collider.pos.y + player->collider.size.y - 3;
+				player->ground_col.pos.y = player->collider.pos.y
+					+ player->collider.size.y - 3;
 				move -= sign;
 			}
 			else
 			{
 				player->velocity.y = 0;
-				break;
+				break ;
 			}
 		}
 	}

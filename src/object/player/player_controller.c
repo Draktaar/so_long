@@ -27,7 +27,7 @@ t_player	init_player(t_map grid)
 	player.controller.jump_pressed = 0;
 	player.controller.move = (t_vec2){.x = 0.0f, .y = 0.0f,};
 	player.position = (t_vec2){
-		.x = grid.player_pos.x * PIXEL_SIZE, 
+		.x = grid.player_pos.x * PIXEL_SIZE,
 		.y = grid.player_pos.y * PIXEL_SIZE,
 	};
 	player.velocity = (t_vec2){.x = 0.0f, .y = 0.0f,};
@@ -71,4 +71,16 @@ void	update_player(t_player *player, t_keybind *keybind, double delta)
 	player_dash(player, delta);
 	player_jump(player, delta);
 	player_gravity(player, delta);
+}
+
+void	check_ground(t_player *player, t_rect wall)
+{
+	if (!player->is_grounded && is_collided(player->ground_col, wall))
+	{
+		player->is_grounded = true;
+	}
+	else if (player->is_grounded && !is_collided(player->ground_col, wall))
+	{
+		player->is_grounded = false;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:00:41 by achu              #+#    #+#             */
-/*   Updated: 2025/04/22 01:00:21 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 15:35:39 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ t_berry	*init_berry(t_display window, t_map grid)
 	int32_t	i;
 
 	i = 0;
-	berries = (t_berry*)malloc(grid.max_solid * sizeof(t_berry));
+	berries = (t_berry *)malloc(grid.max_solid * sizeof(t_berry));
 	if (!berries)
 		return (NULL);
 	while (i < grid.max_berry)
 	{
-		berries[i] = new_berry(window, grid.berry_pos[i].x, grid.berry_pos[i].y);
+		berries[i] = new_berry(window,
+				grid.berry_pos[i].x, grid.berry_pos[i].y);
 		i++;
 	}
 	return (berries);

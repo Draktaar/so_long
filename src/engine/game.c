@@ -6,7 +6,7 @@
 /*   By: achu <achu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 17:19:52 by achu              #+#    #+#             */
-/*   Updated: 2025/04/22 03:08:48 by achu             ###   ########.fr       */
+/*   Updated: 2025/04/22 15:34:31 by achu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	update_berry(t_game *game)
 	i = 0;
 	while (i < game->berry_count)
 	{
-		if (is_collided(game->berries[i].collider, game->player.collider) && game->berries[i].is_collected == false)
+		if (is_collided(game->berries[i].collider, game->player.collider)
+			&& game->berries[i].is_collected == false)
 		{
 			game->berries[i].is_collected = true;
 			game->collect += 1;
@@ -34,7 +35,8 @@ void	update_berry(t_game *game)
 
 void	update_heart(t_game *game)
 {
-	if (is_collided(game->heart.collider, game->player.collider) && game->collect == game->berry_count)
+	if (is_collided(game->heart.collider, game->player.collider)
+		&& game->collect == game->berry_count)
 		game->is_gameover = true;
 }
 
@@ -57,22 +59,13 @@ void	destroy_game(t_game *game)
 
 	i = 0;
 	while (i < game->berry_count)
-	{
-		destroy_img(game->berries[i].sprite.img);
-		i++;
-	}
+		destroy_img(game->berries[i++].sprite.img);
 	i = 0;
 	while (i < game->solid_count)
-	{
-		destroy_img(game->solids[i].sprite.img);
-		i++;	
-	}
+		destroy_img(game->solids[i++].sprite.img);
 	i = 0;
 	while (i < game->spike_count)
-	{
-		destroy_img(game->spikes[i].sprite.img);
-		i++;
-	}
+		destroy_img(game->spikes[i++].sprite.img);
 	destroy_img(game->heart.sprite.img);
 	destroy_img(game->bg0);
 	destroy_img(game->bg1);
@@ -80,13 +73,12 @@ void	destroy_game(t_game *game)
 	free(game->solids);
 	free(game->spikes);
 }
-	
 
 t_game	*init_game(t_display window, t_map *grid)
 {
 	t_game	*game;
 
-	game = (t_game*)malloc(sizeof(t_game));
+	game = (t_game *)malloc(sizeof(t_game));
 	if (!game)
 		return (NULL);
 	game->player = init_player(*grid);
